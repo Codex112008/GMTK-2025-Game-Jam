@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=11 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
-[ext_resource type="PackedScene" uid="uid://de5all3ajrwck" path="res://Scenes/ThrownNut.tscn" id="2_dewec"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
+[ext_resource type="PackedScene" path="res://Scenes/ThrownNut.tscn" id="2_nn08x"]
 [ext_resource type="Texture2D" uid="uid://c7x3ukwuxcs7o" path="res://Sprites/Particles/drunk_particles.png" id="3_gntrk"]
 [ext_resource type="Script" uid="uid://babpw2llhagpv" path="res://addons/TimeRewinder/rewinder.gd" id="4_5ixxa"]
 [ext_resource type="Script" uid="uid://25uq6brcn0fn" path="res://addons/TimeRewinder/rewind_property.gd" id="5_nn08x"]
@@ -40,11 +40,18 @@ speed = 260.0
 acceleration = 7.0
 friction = 4.0
 max_nut_count = 5
+thrown_nut = ExtResource("2_nn08x")
 coyote_timer = NodePath("Timers/CoyoteTimer")
 jump_buffer_timer = NodePath("Timers/JumpBufferTimer")
 short_jump_timer = NodePath("Timers/ShortJumpTimer")
 my_sprite = NodePath("AnimatedSprite2D")
 drunk_particles = NodePath("DrunkParticles")
+time_rewinder = NodePath("Rewinder")
+
+[node name="Rewinder" type="Node" parent="."]
+script = ExtResource("4_5ixxa")
+rewind_resources = Array[ExtResource("5_nn08x")]([SubResource("Resource_52ee3")])
+metadata/_custom_type_script = "uid://babpw2llhagpv"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4.5)

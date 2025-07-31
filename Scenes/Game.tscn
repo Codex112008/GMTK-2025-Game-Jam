@@ -23,12 +23,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Player" parent="." node_paths=PackedStringArray("instantiated_nodes", "curve_effect_rect", "camera") instance=ExtResource("3_j5yw3")]
+[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes") instance=ExtResource("3_j5yw3")]
 position = Vector2(-24, -119)
 collision_layer = 2
-instantiated_nodes = NodePath("../InstantiatedNodes")
 curve_effect_rect = NodePath("../postproc_layer/curve_effect")
 camera = NodePath("camera2d")
+instantiated_nodes = NodePath("../InstantiatedNodes")
 
 [node name="camera2d" type="Camera2D" parent="Player"]
 position = Vector2(0, -16)

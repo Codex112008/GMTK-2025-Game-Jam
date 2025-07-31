@@ -17,16 +17,20 @@ var curve_shader_radius : float
 @export var beer_needed : int = 6
 var beer_collected : int = 0
 
+@export var thrown_nut : PackedScene
+
 @export_group("References")
 @export var coyote_timer : Timer
 @export var jump_buffer_timer : Timer
 @export var short_jump_timer : Timer
 @export var my_sprite : AnimatedSprite2D
 @export var drunk_particles : CPUParticles2D
+@export var time_rewinder : Rewinder
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
 @export var camera : Camera2D
+@export var instantiated_nodes : Node2D
 
 func _ready():
 	curve_shader_radius = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("radius")
