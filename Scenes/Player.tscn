@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://mp02sd1fj3d4" path="res://Sprites/Player/Spin/hamster_spin3.png" id="8_1iu4k"]
 [ext_resource type="Texture2D" uid="uid://tnn0gkor7klf" path="res://Sprites/Player/Walk/hamster_walk3.png" id="8_ksbbd"]
 [ext_resource type="Texture2D" uid="uid://cyyppdj7e3k4" path="res://Sprites/Player/Spin/hamster_spin4.png" id="9_m0x7a"]
-[ext_resource type="Script" path="res://Scripts/AnimationManager.gd" id="9_yoq75"]
+[ext_resource type="Script" uid="uid://b6c0hiphk1ohy" path="res://Scripts/AnimationManager.gd" id="9_yoq75"]
 [ext_resource type="Texture2D" uid="uid://cf71ik4tqc4p5" path="res://Sprites/Player/Spin/hamster_spin5.png" id="10_5v66d"]
 [ext_resource type="Texture2D" uid="uid://bm2kysin1c7xe" path="res://Sprites/Player/Spin/hamster_spin6.png" id="11_x63xi"]
 [ext_resource type="Texture2D" uid="uid://bst30fcex8vyg" path="res://Sprites/Player/Spin/hamster_spin7.png" id="12_i2e8t"]
