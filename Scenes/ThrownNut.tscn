@@ -58,6 +58,7 @@ my_sprite = NodePath("AnimatedSprite2D")
 shape = SubResource("CircleShape2D_hs7na")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_hc5b4")
 animation = &"destroy"
 
