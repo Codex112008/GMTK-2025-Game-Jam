@@ -100,7 +100,7 @@ func _physics_process(delta : float) -> void:
 		remove_oldest_nut()
 
 		# Throw nut downward for visual feedback
-		var new_nut : Node2D = thrown_nut.instantiate()
+		var new_nut : ThrownNutScript = thrown_nut.instantiate()
 		new_nut.global_position = global_position
 		instantiated_nodes.add_child(new_nut)
 	
@@ -122,7 +122,6 @@ func _physics_process(delta : float) -> void:
 		motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 		position = lerp(position, starting_point, delta * rewindAcceleration)
 		if position.distance_squared_to(starting_point) < 4.0:
-			print("help")
 			motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
 			collision_shape.disabled = false
 			rewinding = false

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name ThrownNutScript
 
 @export var spin_speed : float = 10
 @export var gravity : float = 900
@@ -29,6 +30,8 @@ func _process(delta: float) -> void:
 		do_spin = false
 		my_sprite.rotation = 0
 		my_sprite.play("destroy")
+		
+	
 
 
 func _on_alive_timer_timeout() -> void:
