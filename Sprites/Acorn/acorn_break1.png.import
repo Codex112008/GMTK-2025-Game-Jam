@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmiiqcw3hcgfp"
-path="res://.godot/imported/acorn.png-9232a3dcc24ccd9b6a8ba3e4914af5d7.ctex"
+uid="uid://650ppxntye7t"
+path="res://.godot/imported/acorn_break1.png-71999a8d79181c9c8b1eb2d4f3744b7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/acorn.png"
-dest_files=["res://.godot/imported/acorn.png-9232a3dcc24ccd9b6a8ba3e4914af5d7.ctex"]
+source_file="res://Sprites/Acorn/acorn_break1.png"
+dest_files=["res://.godot/imported/acorn_break1.png-71999a8d79181c9c8b1eb2d4f3744b7c.ctex"]
 
 [params]
 

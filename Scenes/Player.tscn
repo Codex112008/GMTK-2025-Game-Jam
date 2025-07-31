@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=8 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
+[ext_resource type="PackedScene" uid="uid://de5all3ajrwck" path="res://Scenes/ThrownNut.tscn" id="2_dewec"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://c7x3ukwuxcs7o" path="res://Sprites/Particles/drunk_particles.png" id="3_gntrk"]
 
@@ -28,7 +29,6 @@ particles_anim_loop = false
 script = ExtResource("1_kyqiw")
 speed = 260.0
 acceleration = 7.0
-jump_strength = 500.0
 friction = 4.0
 max_nut_count = 5
 coyote_timer = NodePath("Timers/CoyoteTimer")
@@ -36,6 +36,7 @@ jump_buffer_timer = NodePath("Timers/JumpBufferTimer")
 short_jump_timer = NodePath("Timers/ShortJumpTimer")
 my_sprite = NodePath("AnimatedSprite2D")
 drunk_particles = NodePath("DrunkParticles")
+thrown_nut = ExtResource("2_dewec")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4.5)

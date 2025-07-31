@@ -23,6 +23,9 @@ var beer_collected : int = 0
 @export var short_jump_timer : Timer
 @export var my_sprite : AnimatedSprite2D
 @export var drunk_particles : CPUParticles2D
+@export var instantiated_nodes : Node2D
+@export_subgroup("Thrown Nut")
+@export var thrown_nut : PackedScene
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
@@ -78,9 +81,15 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_just_released("jump") && short_jump_timer.time_left != 0:
 		velocity.y += jump_strength / 2 # this value can be tweaked
 	
-	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote && velocity.y > 0:
+	# double jump
+	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote:
 		jump()
 		remove_oldest_nut()
+
+		# throw nut downward for visual feedback
+		var new_nut : Node2D = thrown_nut.instantiate()
+		new_nut.global_position = global_position
+		instantiated_nodes.add_child(new_nut)
 	
 	
 	# Get the input direction and handle the movement/deceleration.
