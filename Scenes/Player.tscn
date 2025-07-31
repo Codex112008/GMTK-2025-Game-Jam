@@ -1,16 +1,31 @@
 [gd_scene load_steps=4 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
-[ext_resource type="Texture2D" uid="uid://d4l3mrcdbvkxm" path="res://icon.svg" id="2_gntrk"]
+[ext_resource type="Texture2D" uid="uid://yhmgk1skw6ix" path="res://Sprites/Collectable.png" id="2_kyqiw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dewec"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "prejump_timer")]
 script = ExtResource("1_kyqiw")
+coyote_timer = NodePath("Timers/CoyoteTimer")
+prejump_timer = NodePath("Timers/PreJumpTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dewec")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_gntrk")
+texture = ExtResource("2_kyqiw")
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="PreJumpTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpTimer" type="Timer" parent="Timers"]
+wait_time = 0.8
+one_shot = true
