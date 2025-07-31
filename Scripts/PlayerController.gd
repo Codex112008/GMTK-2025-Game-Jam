@@ -21,6 +21,8 @@ var beer_collected : int = 0
 @export var coyote_timer : Timer
 @export var jump_buffer_timer : Timer
 @export var short_jump_timer : Timer
+@export var my_sprite : AnimatedSprite2D
+@export var drunk_particles : CPUParticles2D
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
@@ -36,6 +38,11 @@ func _process(delta : float) -> void:
 	
 	if beer_collected >= 6:
 		pass_out()
+
+	# drunk particles
+	if drunk_particles.amount != 1 + beer_collected:
+		drunk_particles.amount = 1 + beer_collected
+		drunk_particles.speed_scale = 0.5 + (0.5 * beer_collected)
 
 func _physics_process(delta : float) -> void:
 	# Add the gravity.
@@ -71,7 +78,7 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_just_released("jump") && short_jump_timer.time_left != 0:
 		velocity.y += jump_strength / 2 # this value can be tweaked
 	
-	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote:
+	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote && velocity.y > 0:
 		jump()
 		remove_oldest_nut()
 	
@@ -80,6 +87,7 @@ func _physics_process(delta : float) -> void:
 	var direction := Input.get_axis("left", "right")
 	if direction:
 		velocity.x = lerpf(velocity.x, direction * speed, delta * acceleration)
+		my_sprite.flip_h = direction != 1 # flip sprite
 	else:
 		velocity.x = lerpf(velocity.x, 0, delta * friction)
 	
