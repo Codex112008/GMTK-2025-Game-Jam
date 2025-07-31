@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=4 uid="uid://bfn2b364eucoc"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://PlanetCurve.gdshader" id="1_iukft"]
-[ext_resource type="PackedScene" uid="uid://buh3hglxkhrvf" path="res://Scenes/Beer.tscn" id="2_b2bpf"]
+[ext_resource type="PackedScene" uid="uid://dmrchrx1v38ud" path="res://Scenes/Beer.tscn" id="2_b2bpf"]
 [ext_resource type="TileSet" uid="uid://b5nmyyj2chinl" path="res://BaseTileSet.tres" id="2_gl6un"]
 [ext_resource type="PackedScene" uid="uid://d3mqa3yxkbmot" path="res://Scenes/Player.tscn" id="3_j5yw3"]
-[ext_resource type="PackedScene" path="res://Scenes/Tree.tscn" id="4_kldst"]
+[ext_resource type="PackedScene" uid="uid://cvd7pmhx8p1pm" path="res://Scenes/Tree.tscn" id="4_kldst"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
 resource_local_to_scene = true
@@ -23,10 +23,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="base_tile_map" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD3/wMAAAACAAAAAAD4/wMAAAACAAAAAAD5/wMAAAACAAAAAAD6/wMAAAACAAAAAAD7/wMAAAACAAAAAAD8/wMAAAACAAAAAAD9/wMAAAACAAAAAAD+/wMAAAACAAAAAAD//wMAAAACAAAAAAAAAAMAAAACAAAAAAABAAMAAAACAAAAAAACAAMAAAACAAAAAAADAAMAAAACAAAAAAAEAAMAAAACAAAAAAAFAAMAAAACAAAAAAAGAAMAAAACAAAAAAAHAAMAAAACAAAAAAAIAAMAAAACAAAAAAAIAAQAAAACAAIAAAAHAAQAAAACAAIAAAAGAAQAAAACAAIAAAAFAAQAAAACAAIAAAAEAAQAAAACAAIAAAADAAQAAAACAAIAAAACAAQAAAACAAIAAAABAAQAAAACAAIAAAAAAAQAAAACAAIAAAD//wQAAAACAAIAAAD+/wQAAAACAAIAAAD9/wQAAAACAAIAAAD8/wQAAAACAAIAAAD7/wQAAAACAAIAAAD6/wQAAAACAAIAAAD5/wQAAAACAAIAAAD4/wQAAAACAAIAAAD3/wQAAAACAAIAAAAPAAQAAAADAAIAAAAPAAMAAAADAAAAAAAOAAQAAAACAAIAAAAOAAMAAAACAAAAAAANAAQAAAACAAIAAAANAAMAAAACAAAAAAAMAAQAAAACAAIAAAAMAAMAAAACAAAAAAALAAQAAAACAAIAAAALAAMAAAACAAAAAAAKAAQAAAACAAIAAAAKAAMAAAACAAAAAAAJAAQAAAACAAIAAAAJAAMAAAACAAAAAAD2/wQAAAACAAIAAAD2/wMAAAACAAAAAAD1/wQAAAACAAIAAAD1/wMAAAABAAQAAAD0/wQAAAACAAIAAAD0/wMAAAACAAEAAADz/wQAAAACAAIAAADz/wMAAAACAAEAAADy/wQAAAACAAIAAADy/wMAAAACAAQAAADx/wQAAAACAAIAAADx/wMAAAACAAAAAADw/wQAAAABAAIAAADw/wMAAAABAAAAAAD1/wIAAAADAAEAAAD1/wEAAAADAAAAAAD0/wIAAAACAAEAAAD0/wEAAAABAAQAAADz/wIAAAACAAEAAADz/wEAAAACAAEAAADz/wAAAAACAAAAAADy/wIAAAABAAEAAADy/wEAAAABAAEAAADy/wAAAAABAAAAAAD0/wAAAAADAAAAAAD7////AAACAAAAAAD6////AAABAAcAAAD6/wAAAAACAAIAAAD5/wAAAAABAAIAAAD7/wAAAAACAAIAAAD8////AAACAAAAAAD9////AAACAAAAAAD9/wAAAAACAAIAAAD8/wAAAAACAAIAAAD5////AAAAAAcAAAD+/wAAAAACAAIAAAD//wAAAAADAAIAAAD+////AAACAAcAAAD/////AAADAAcAAAA=")
-tile_set = ExtResource("2_gl6un")
-
 [node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera") instance=ExtResource("3_j5yw3")]
 position = Vector2(-24, -119)
 collision_layer = 2
@@ -37,26 +33,39 @@ camera = NodePath("camera2d")
 position = Vector2(0, -16)
 position_smoothing_enabled = true
 
-[node name="Tree" parent="." instance=ExtResource("4_kldst")]
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Trees" type="Node2D" parent="Environment"]
+
+[node name="Tree" parent="Environment/Trees" instance=ExtResource("4_kldst")]
 position = Vector2(151, 64)
 
-[node name="Tree2" parent="." instance=ExtResource("4_kldst")]
+[node name="Tree2" parent="Environment/Trees" instance=ExtResource("4_kldst")]
 position = Vector2(270, 64)
 
-[node name="Tree3" parent="." instance=ExtResource("4_kldst")]
-position = Vector2(414, 65)
+[node name="Tree3" parent="Environment/Trees" instance=ExtResource("4_kldst")]
+position = Vector2(413, 64)
 
-[node name="Beer" parent="." instance=ExtResource("2_b2bpf")]
+[node name="Beers" type="Node2D" parent="Environment"]
+
+[node name="Beer" parent="Environment/Beers" instance=ExtResource("2_b2bpf")]
 position = Vector2(-128, -47)
 
-[node name="Beer2" parent="." instance=ExtResource("2_b2bpf")]
+[node name="Beer2" parent="Environment/Beers" instance=ExtResource("2_b2bpf")]
 position = Vector2(-279, 78)
 
-[node name="Beer3" parent="." instance=ExtResource("2_b2bpf")]
+[node name="Beer3" parent="Environment/Beers" instance=ExtResource("2_b2bpf")]
 position = Vector2(-46, 80)
 
-[node name="Beer4" parent="." instance=ExtResource("2_b2bpf")]
+[node name="Beer4" parent="Environment/Beers" instance=ExtResource("2_b2bpf")]
 position = Vector2(-397, -18)
 
-[node name="Beer5" parent="." instance=ExtResource("2_b2bpf")]
+[node name="Beer5" parent="Environment/Beers" instance=ExtResource("2_b2bpf")]
 position = Vector2(-483, 77)
+
+[node name="Beer6" parent="Environment/Beers" instance=ExtResource("2_b2bpf")]
+position = Vector2(415, 17)
+
+[node name="base_tile_map" type="TileMapLayer" parent="Environment"]
+tile_map_data = PackedByteArray("AAD3/wMAAAACAAAAAAD4/wMAAAACAAAAAAD5/wMAAAACAAAAAAD6/wMAAAACAAAAAAD7/wMAAAACAAAAAAD8/wMAAAACAAAAAAD9/wMAAAACAAAAAAD+/wMAAAACAAAAAAD//wMAAAACAAAAAAAAAAMAAAACAAAAAAABAAMAAAACAAAAAAACAAMAAAACAAAAAAADAAMAAAACAAAAAAAEAAMAAAACAAAAAAAFAAMAAAACAAAAAAAGAAMAAAACAAAAAAAHAAMAAAACAAAAAAAIAAMAAAACAAAAAAAIAAQAAAACAAIAAAAHAAQAAAACAAIAAAAGAAQAAAACAAIAAAAFAAQAAAACAAIAAAAEAAQAAAACAAIAAAADAAQAAAACAAIAAAACAAQAAAACAAIAAAABAAQAAAACAAIAAAAAAAQAAAACAAIAAAD//wQAAAACAAIAAAD+/wQAAAACAAIAAAD9/wQAAAACAAIAAAD8/wQAAAACAAIAAAD7/wQAAAACAAIAAAD6/wQAAAACAAIAAAD5/wQAAAACAAIAAAD4/wQAAAACAAIAAAD3/wQAAAACAAIAAAAPAAQAAAADAAIAAAAPAAMAAAADAAAAAAAOAAQAAAACAAIAAAAOAAMAAAACAAAAAAANAAQAAAACAAIAAAANAAMAAAACAAAAAAAMAAQAAAACAAIAAAAMAAMAAAACAAAAAAALAAQAAAACAAIAAAALAAMAAAACAAAAAAAKAAQAAAACAAIAAAAKAAMAAAACAAAAAAAJAAQAAAACAAIAAAAJAAMAAAACAAAAAAD2/wQAAAACAAIAAAD2/wMAAAACAAAAAAD1/wQAAAACAAIAAAD1/wMAAAABAAQAAAD0/wQAAAACAAIAAAD0/wMAAAACAAEAAADz/wQAAAACAAIAAADz/wMAAAACAAEAAADy/wQAAAACAAIAAADy/wMAAAACAAQAAADx/wQAAAACAAIAAADx/wMAAAACAAAAAADw/wQAAAABAAIAAADw/wMAAAABAAAAAAD1/wIAAAADAAEAAAD1/wEAAAADAAAAAAD0/wIAAAACAAEAAAD0/wEAAAABAAQAAADz/wIAAAACAAEAAADz/wEAAAACAAEAAADz/wAAAAACAAAAAADy/wIAAAABAAEAAADy/wEAAAABAAEAAADy/wAAAAABAAAAAAD0/wAAAAADAAAAAAD7////AAACAAAAAAD6////AAABAAcAAAD6/wAAAAACAAIAAAD5/wAAAAABAAIAAAD7/wAAAAACAAIAAAD8////AAACAAAAAAD9////AAACAAAAAAD9/wAAAAACAAIAAAD8/wAAAAACAAIAAAD5////AAAAAAcAAAD+/wAAAAACAAIAAAD//wAAAAADAAIAAAD+////AAACAAcAAAD/////AAADAAcAAAA=")
+tile_set = ExtResource("2_gl6un")

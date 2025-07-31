@@ -14,6 +14,9 @@ var nutted_trees : Array[TreeNode] = []
 @export var curve_speed : float = 5.0
 var curve_shader_radius : float
 
+@export var beer_needed : int = 6
+var beer_collected : int = 0
+
 @export_group("References")
 @export var coyote_timer : Timer
 @export var jump_buffer_timer : Timer
@@ -30,6 +33,9 @@ func _process(delta : float) -> void:
 	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
 	if shader_material != null:
 		shader_material.set_shader_parameter("radius", max(0, lerpf(shader_material.get_shader_parameter("radius"), curve_shader_radius, curve_speed * delta)))
+	
+	if beer_collected >= 6:
+		pass_out()
 
 func _physics_process(delta : float) -> void:
 	# Add the gravity.
@@ -37,7 +43,7 @@ func _physics_process(delta : float) -> void:
 		if velocity.y < 0:
 			velocity += Vector2.DOWN * gravity * delta
 		else: # Fast gravity if already moving down
-			velocity += Vector2.DOWN * gravity * 2 * delta
+			velocity += Vector2.DOWN * gravity * 1.5 * delta
 	
 	
 	# Start coyote time before walking off edges and buffer timer if jump is clicked before landing
@@ -46,10 +52,16 @@ func _physics_process(delta : float) -> void:
 	elif Input.is_action_just_pressed("jump"):
 		jump_buffer_timer.start()
 	
-	# Still jump if have cyote time or buffered jump
-	if coyote_timer.time_left != 0 and Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") && is_on_floor():
 		jump()
 		coyote_timer.stop()
+	
+	# Still jump if have cyote time or buffered jump
+	var did_coyote : bool = false
+	if coyote_timer.time_left != 0 and Input.is_action_just_pressed("jump") && !is_on_floor():
+		jump()
+		coyote_timer.stop()
+		did_coyote = true
 	if jump_buffer_timer.time_left != 0 and is_on_floor():
 		jump()
 		jump_buffer_timer.stop()
@@ -59,21 +71,18 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_just_released("jump") && short_jump_timer.time_left != 0:
 		velocity.y += jump_strength / 2 # this value can be tweaked
 	
-	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump"):
+	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote:
 		jump()
-		nutted_trees[0].has_nut = true
-		nutted_trees.remove_at(0)
-		nut_count -= 1
+		remove_oldest_nut()
 	
-
-
+	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
 	if direction:
 		velocity.x = lerpf(velocity.x, direction * speed, delta * acceleration)
 	else:
 		velocity.x = lerpf(velocity.x, 0, delta * friction)
-		
+	
 	
 	# Drop down one way platforms
 	if Input.is_action_pressed("down") && is_on_floor():
@@ -94,3 +103,13 @@ func jump():
 	short_jump_timer.start()
 	velocity.y = -jump_strength;
 	# velocity.y = -jump_strength
+	
+func remove_oldest_nut():
+	nutted_trees[0].has_nut = true
+	nutted_trees.remove_at(0)
+	nut_count -= 1
+	
+
+func pass_out():
+	print("LMAO good job drunkard")
+	# win screen anims

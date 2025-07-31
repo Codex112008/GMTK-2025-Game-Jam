@@ -6,6 +6,7 @@ extends Area2D
 func _on_body_entered(body):
 	var player : PlayerController = body as PlayerController
 	if player != null:
+		player.beer_collected += 1
 		player.curve_shader_radius -= beer_strength
 		player.camera.offset += Vector2.UP * camera_offset_amount
 		queue_free()
