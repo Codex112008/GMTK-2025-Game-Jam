@@ -98,7 +98,7 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_just_released("jump") && short_jump_timer.time_left != 0:
 		velocity.y += jump_strength / 2 # this value can be tweaked
 	
-	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote && velocity.y > 0:
+	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote:
 		spin_timer.start()
 		jump()
 		remove_oldest_nut()
