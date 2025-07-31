@@ -30,9 +30,14 @@ var last_frame_on_floor : bool
 @export var short_jump_timer : Timer
 @export var spin_timer : Timer
 @export var my_sprite : AnimatedSprite2D
-@export var drunk_particles : CPUParticles2D
 @export var time_rewinder : Rewinder
 @export var collision_shape : CollisionShape2D
+
+@export_subgroup("Particles")
+@export var drunk_particles : CPUParticles2D
+@export var jump_particles : CPUParticles2D
+@export var land_particles : CPUParticles2D
+@export var run_particles : CPUParticles2D
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
@@ -94,7 +99,7 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_just_released("jump") && short_jump_timer.time_left != 0:
 		velocity.y += jump_strength / 2 # this value can be tweaked
 	
-	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote && velocity.y > 0:
+	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote:
 		spin_timer.start()
 		jump()
 		remove_oldest_nut()
@@ -109,6 +114,7 @@ func _physics_process(delta : float) -> void:
 	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
+	run_particles.emitting = direction && is_on_floor() # if moving have running particles
 	if direction:
 		velocity.x = lerpf(velocity.x, direction * speed, delta * acceleration)
 		my_sprite.flip_h = direction != 1 # flip sprite
@@ -138,6 +144,8 @@ func _physics_process(delta : float) -> void:
 		scale = scale.lerp(Vector2.ONE, delta * 5)
 	if (!last_frame_on_floor && is_on_floor()):
 		scale = Vector2(1.25, 0.75)
+		land_particles.restart()
+		land_particles.emitting = true
 	if (!is_on_floor() && absf(velocity.y) > 500):
 		scale = Vector2(0.75, 1.25)
 	if (is_on_floor() && Input.is_action_pressed("down")):
@@ -155,12 +163,14 @@ func _physics_process(delta : float) -> void:
 			nutted_trees.append(collidingTree)
 
 func jump():
+	jump_particles.restart()
+	jump_particles.emitting = true
 	short_jump_timer.start()
 	velocity.y = -jump_strength;
 	# velocity.y = -jump_strength
 	
 func remove_oldest_nut():
-	nutted_trees[0].has_nut = true
+	nutted_trees[0].grow()
 	nutted_trees.remove_at(0)
 	nut_count -= 1
 

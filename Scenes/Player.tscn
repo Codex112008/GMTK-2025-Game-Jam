@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=28 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
@@ -106,7 +106,23 @@ particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "my_sprite", "drunk_particles", "time_rewinder", "collision_shape")]
+[sub_resource type="Curve" id="Curve_1iu4k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.362352, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_m0x7a"]
+offsets = PackedFloat32Array(0.63, 0.996667)
+colors = PackedColorArray(1, 1, 1, 0.741176, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_m0x7a"]
+_data = [Vector2(0, 0.515392), 0.0, 0.0, 0, 0, Vector2(0.20339, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_1iu4k"]
+offsets = PackedFloat32Array(0.01, 1)
+colors = PackedColorArray(1, 1, 1, 0.607843, 1, 1, 1, 0)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "my_sprite", "time_rewinder", "collision_shape", "drunk_particles", "jump_particles", "land_particles", "run_particles")]
 script = ExtResource("1_kyqiw")
 speed = 260.0
 acceleration = 7.0
@@ -124,9 +140,12 @@ jump_buffer_timer = NodePath("Timers/JumpBufferTimer")
 short_jump_timer = NodePath("Timers/ShortJumpTimer")
 spin_timer = NodePath("Timers/SpinTimer")
 my_sprite = NodePath("AnimatedSprite2D")
-drunk_particles = NodePath("DrunkParticles")
 time_rewinder = NodePath("Rewinder")
 collision_shape = NodePath("CollisionShape2D")
+drunk_particles = NodePath("Particles/DrunkParticles")
+jump_particles = NodePath("Particles/JumpParticles")
+land_particles = NodePath("Particles/LandParticles")
+run_particles = NodePath("Particles/RunParticles")
 
 [node name="Rewinder" type="Node" parent="."]
 script = ExtResource("4_5ixxa")
@@ -163,9 +182,12 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="DrunkParticles" type="CPUParticles2D" parent="."]
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="DrunkParticles" type="CPUParticles2D" parent="Particles"]
 z_index = -1
 material = SubResource("CanvasItemMaterial_dewec")
+position = Vector2(0, -25)
 amount = 4
 texture = ExtResource("3_gntrk")
 speed_scale = 0.5
@@ -174,3 +196,43 @@ emission_sphere_radius = 10.0
 gravity = Vector2(0, -100)
 anim_speed_min = 1.0
 anim_speed_max = 1.0
+
+[node name="JumpParticles" type="CPUParticles2D" parent="Particles"]
+emitting = false
+amount = 10
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 400)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+scale_amount_min = 6.0
+scale_amount_max = 12.0
+scale_amount_curve = SubResource("Curve_1iu4k")
+color_ramp = SubResource("Gradient_m0x7a")
+
+[node name="LandParticles" type="CPUParticles2D" parent="Particles"]
+emitting = false
+amount = 10
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
+scale_amount_min = 2.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_1iu4k")
+color_ramp = SubResource("Gradient_m0x7a")
+
+[node name="RunParticles" type="CPUParticles2D" parent="Particles"]
+emitting = false
+amount = 12
+speed_scale = 2.0
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 16.0
+scale_amount_curve = SubResource("Curve_m0x7a")
+color_ramp = SubResource("Gradient_1iu4k")
