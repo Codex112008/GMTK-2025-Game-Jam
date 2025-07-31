@@ -28,6 +28,7 @@ var last_frame_on_floor : bool
 @export var coyote_timer : Timer
 @export var jump_buffer_timer : Timer
 @export var short_jump_timer : Timer
+@export var spin_timer : Timer
 @export var my_sprite : AnimatedSprite2D
 @export var drunk_particles : CPUParticles2D
 @export var time_rewinder : Rewinder
@@ -94,6 +95,7 @@ func _physics_process(delta : float) -> void:
 		velocity.y += jump_strength / 2 # this value can be tweaked
 	
 	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote && velocity.y > 0:
+		spin_timer.start()
 		jump()
 		remove_oldest_nut()
 
@@ -102,6 +104,7 @@ func _physics_process(delta : float) -> void:
 		new_nut.global_position = global_position
 		instantiated_nodes.add_child(new_nut)
 	
+	velocity = Vector2(clamp(velocity.x, -1000, 1000), clamp(velocity.y, -5000, 750))
 	
 	
 	# Get the input direction and handle the movement/deceleration.

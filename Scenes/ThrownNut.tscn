@@ -43,12 +43,13 @@ animations = [{
 }],
 "loop": false,
 "name": &"destroy",
-"speed": 12.0
+"speed": 24.0
 }]
 
 [node name="ThrownNut" type="CharacterBody2D" node_paths=PackedStringArray("my_sprite")]
 collision_layer = 0
 script = ExtResource("1_hc5b4")
+spin_speed = 20.0
 gravity = 400.0
 start_fall_speed = 200.0
 my_sprite = NodePath("AnimatedSprite2D")

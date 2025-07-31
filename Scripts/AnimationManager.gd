@@ -8,7 +8,10 @@ func _process(delta: float) -> void:
 	elif player.is_on_floor():
 		play("idle")
 	elif !player.is_on_floor():
-		if player.velocity.y > 0:
-			play("fall")
+		if player.spin_timer.time_left != 0:
+			play("spin")
 		else:
-			play("rise")
+			if player.velocity.y > 0:
+				play("fall")
+			else:
+				play("rise")
