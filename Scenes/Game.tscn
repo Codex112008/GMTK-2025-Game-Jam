@@ -31,3 +31,4 @@ jump_strength = 600.0
 
 [node name="camera2d" type="Camera2D" parent="Player"]
 position = Vector2(0, -16)
+position_smoothing_enabled = true
