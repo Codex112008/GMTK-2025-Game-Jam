@@ -131,16 +131,18 @@ func _physics_process(delta : float) -> void:
 	# Drop down one way platforms
 	if Input.is_action_pressed("down") && is_on_floor():
 		position.y += 1
-
-	
-	
-	scale = scale.lerp(Vector2.ONE, delta * 5)
+		
+	# SQUISH
+	if scale.x > 1.25 && scale.y < 0.75:
+		scale = scale.lerp(Vector2.ONE, delta * 15)
+	else:
+		scale = scale.lerp(Vector2.ONE, delta * 5)
 	if (!last_frame_on_floor && is_on_floor()):
 		scale = Vector2(1.25, 0.75)
-	
 	if (!is_on_floor() && absf(velocity.y) > 500):
 		scale = Vector2(0.75, 1.25)
-	
+	if (is_on_floor() && Input.is_action_pressed("down")):
+		scale = Vector2(1.5, 0.5)
 	last_frame_on_floor = is_on_floor()
 
 	move_and_slide()

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dmrchrx1v38ud" path="res://Scenes/Beer.tscn" id="2_b2bpf"]
 [ext_resource type="TileSet" uid="uid://b5nmyyj2chinl" path="res://BaseTileSet.tres" id="2_gl6un"]
 [ext_resource type="PackedScene" uid="uid://d3mqa3yxkbmot" path="res://Scenes/Player.tscn" id="3_j5yw3"]
-[ext_resource type="PackedScene" uid="uid://ixuxl7rgjg2u" path="res://Scenes/Tree.tscn" id="4_kldst"]
+[ext_resource type="PackedScene" uid="uid://cvd7pmhx8p1pm" path="res://Scenes/Tree.tscn" id="4_kldst"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
 resource_local_to_scene = true
