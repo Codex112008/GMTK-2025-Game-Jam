@@ -10,6 +10,7 @@ class_name PlayerController
 @export var max_nut_count : int = 2
 @export var nut_count : int = 0
 @export var nutted_trees : Array[TreeNode] = []
+@export var thrown_nut : PackedScene
 
 @export var curve_speed : float = 5.0
 var curve_shader_strength : float
@@ -17,7 +18,11 @@ var curve_shader_strength : float
 @export var beer_needed : int = 6
 var beer_collected : int = 0
 
-@export var thrown_nut : PackedScene
+var rewinding : bool = false
+@export var rewindAcceleration : float = 10
+var starting_point : Vector2
+
+var last_frame_on_floor : bool
 
 @export_group("References")
 @export var coyote_timer : Timer
@@ -26,6 +31,7 @@ var beer_collected : int = 0
 @export var my_sprite : AnimatedSprite2D
 @export var drunk_particles : CPUParticles2D
 @export var time_rewinder : Rewinder
+@export var collision_shape : CollisionShape2D
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
@@ -36,6 +42,8 @@ func _ready():
 	curve_shader_strength = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("distortion_strength")
 	
 	time_rewinder.done_rewinding.connect(enable_inputs)
+	
+	starting_point = position
 
 func _process(delta : float) -> void:
 	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
@@ -52,7 +60,7 @@ func _process(delta : float) -> void:
 
 func _physics_process(delta : float) -> void:
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() && !rewinding:
 		if velocity.y < 0:
 			velocity += Vector2.DOWN * gravity * delta
 		else: # Fast gravity if already moving down
@@ -95,6 +103,7 @@ func _physics_process(delta : float) -> void:
 		instantiated_nodes.add_child(new_nut)
 	
 	
+	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
 	if direction:
@@ -103,14 +112,33 @@ func _physics_process(delta : float) -> void:
 	else:
 		velocity.x = lerpf(velocity.x, 0, delta * friction)
 	
+	# Rewind
+	if rewinding:
+		velocity = Vector2.ZERO
+		collision_shape.disabled = true
+		motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+		position = lerp(position, starting_point, delta * rewindAcceleration)
+		if position.distance_squared_to(starting_point) < 4.0:
+			print("help")
+			motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
+			collision_shape.disabled = false
+			rewinding = false
+			enable_inputs()
 	
 	# Drop down one way platforms
 	if Input.is_action_pressed("down") && is_on_floor():
 		position.y += 1
 
-
-	if Input.is_action_just_pressed("debug_hotkey"):
-		start_rewind()
+	
+	
+	scale = scale.lerp(Vector2.ONE, delta * 5)
+	if (!last_frame_on_floor && is_on_floor()):
+		scale = Vector2(1.25, 0.75)
+	
+	if (!is_on_floor() && absf(velocity.y) > 500):
+		scale = Vector2(0.75, 1.25)
+	
+	last_frame_on_floor = is_on_floor()
 
 	move_and_slide()
 	
@@ -131,13 +159,15 @@ func remove_oldest_nut():
 	nutted_trees[0].has_nut = true
 	nutted_trees.remove_at(0)
 	nut_count -= 1
-	
+
 func start_rewind():
 	set_process_input(false)
 	set_process_unhandled_input(false)
 	for tree : TreeNode in nutted_trees:
 		remove_oldest_nut()
-	time_rewinder.rewind()
+	#time_rewinder.rewind()
+	
+	rewinding = true
 	
 func enable_inputs():
 	set_process_input(true)
