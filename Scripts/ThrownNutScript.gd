@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 
 	# destroy on collision
-	if get_slide_collision_count() > 0:
+	if get_slide_collision_count() > 0 && do_spin:
 		do_spin = false
 		my_sprite.rotation = 0
 		my_sprite.play("destroy")

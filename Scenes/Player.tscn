@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=15 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://c7x3ukwuxcs7o" path="res://Sprites/Particles/drunk_particles.png" id="3_gntrk"]
 [ext_resource type="Script" uid="uid://babpw2llhagpv" path="res://addons/TimeRewinder/rewinder.gd" id="4_5ixxa"]
 [ext_resource type="Script" uid="uid://25uq6brcn0fn" path="res://addons/TimeRewinder/rewind_property.gd" id="5_nn08x"]
+[ext_resource type="Texture2D" uid="uid://mnlxh8a5slfa" path="res://Sprites/Player/Walk/hamster_walk1.png" id="6_megsn"]
+[ext_resource type="Texture2D" uid="uid://bqovdvenwlycr" path="res://Sprites/Player/Walk/hamster_walk2.png" id="7_yoq75"]
+[ext_resource type="Texture2D" uid="uid://tnn0gkor7klf" path="res://Sprites/Player/Walk/hamster_walk3.png" id="8_ksbbd"]
+[ext_resource type="Script" uid="uid://b6c0hiphk1ohy" path="res://Scripts/AnimationManager.gd" id="9_yoq75"]
 
 [sub_resource type="Resource" id="Resource_52ee3"]
 script = ExtResource("5_nn08x")
@@ -24,8 +28,25 @@ animations = [{
 "texture": ExtResource("2_kyqiw")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
+"name": &"idle",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_megsn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yoq75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ksbbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yoq75")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
 }]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dewec"]
@@ -57,8 +78,12 @@ metadata/_custom_type_script = "uid://babpw2llhagpv"
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_kyqiw")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
 sprite_frames = SubResource("SpriteFrames_gntrk")
+animation = &"walk"
+frame_progress = 0.893595
+script = ExtResource("9_yoq75")
+player = NodePath("..")
 
 [node name="Timers" type="Node2D" parent="."]
 
@@ -84,4 +109,4 @@ emission_shape = 1
 emission_sphere_radius = 10.0
 gravity = Vector2(0, -100)
 anim_speed_min = 1.0
-anim_speed_max = 2.0
+anim_speed_max = 1.0
