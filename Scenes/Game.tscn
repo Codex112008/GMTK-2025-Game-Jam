@@ -10,6 +10,7 @@
 resource_local_to_scene = true
 shader = ExtResource("1_iukft")
 shader_parameter/radius = 3.0
+shader_parameter/distortion_strength = 1.0
 
 [node name="game" type="Node2D"]
 
