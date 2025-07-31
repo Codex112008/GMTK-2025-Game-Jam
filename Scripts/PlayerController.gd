@@ -37,7 +37,7 @@ func _physics_process(delta : float) -> void:
 		if velocity.y < 0:
 			velocity += Vector2.DOWN * gravity * delta
 		else: # Fast gravity if already moving down
-			velocity += Vector2.DOWN * gravity * 2 * delta
+			velocity += Vector2.DOWN * gravity * 1.5 * delta
 	
 	
 	# Start coyote time before walking off edges and buffer timer if jump is clicked before landing
