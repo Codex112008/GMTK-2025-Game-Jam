@@ -160,6 +160,7 @@ func _physics_process(delta : float) -> void:
 		if collidingTree != null && collidingTree.has_nut && nutted_trees.size() < max_nut_count:
 			nut_count = mini(nut_count + 1, max_nut_count)
 			collidingTree.has_nut = false
+			collidingTree.empty = true
 			nutted_trees.append(collidingTree)
 
 func jump():

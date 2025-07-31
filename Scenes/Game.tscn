@@ -3,10 +3,10 @@
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://PlanetCurve.gdshader" id="1_iukft"]
 [ext_resource type="PackedScene" uid="uid://dmrchrx1v38ud" path="res://Scenes/Beer.tscn" id="2_b2bpf"]
 [ext_resource type="TileSet" uid="uid://b5nmyyj2chinl" path="res://BaseTileSet.tres" id="2_gl6un"]
-[ext_resource type="Script" uid="uid://ct6kj2yoa2g00" path="res://Scripts/CameraFollow.gd" id="3_fgofq"]
+[ext_resource type="Script" path="res://Scripts/CameraFollow.gd" id="3_fgofq"]
 [ext_resource type="PackedScene" uid="uid://d3mqa3yxkbmot" path="res://Scenes/Player.tscn" id="3_j5yw3"]
 [ext_resource type="PackedScene" uid="uid://ixuxl7rgjg2u" path="res://Scenes/Tree.tscn" id="4_kldst"]
-[ext_resource type="Script" uid="uid://b5opwn1b3r0fj" path="res://Scripts/MainTileMap.gd" id="6_7lihs"]
+[ext_resource type="Script" path="res://Scripts/MainTileMap.gd" id="6_7lihs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
 resource_local_to_scene = true
@@ -34,6 +34,12 @@ target = NodePath("../Player")
 [node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes") instance=ExtResource("3_j5yw3")]
 position = Vector2(-24, -119)
 collision_layer = 2
+jump_strength = 600.0
+gravity = 1600.0
+nut_count = 0
+curve_speed = 5.0
+beer_needed = 6
+rewindAcceleration = 10.0
 curve_effect_rect = NodePath("../postproc_layer/curve_effect")
 camera = NodePath("../camera2d")
 instantiated_nodes = NodePath("../InstantiatedNodes")
