@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
-height = 26.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
+size = Vector2(20, 23)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gntrk"]
 animations = [{
@@ -26,8 +26,8 @@ jump_buffer_timer = NodePath("Timers/JumpBufferTimer")
 short_jump_timer = NodePath("Timers/ShortJumpTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
-shape = SubResource("CapsuleShape2D_kyqiw")
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_kyqiw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gntrk")
