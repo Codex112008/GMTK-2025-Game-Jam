@@ -5,10 +5,11 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dewec"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "prejump_timer")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer")]
 script = ExtResource("1_kyqiw")
 coyote_timer = NodePath("Timers/CoyoteTimer")
-prejump_timer = NodePath("Timers/PreJumpTimer")
+jump_buffer_timer = NodePath("Timers/JumpBufferTimer")
+short_jump_timer = NodePath("Timers/ShortJumpTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dewec")
@@ -22,10 +23,10 @@ texture = ExtResource("2_kyqiw")
 wait_time = 0.2
 one_shot = true
 
-[node name="PreJumpTimer" type="Timer" parent="Timers"]
+[node name="JumpBufferTimer" type="Timer" parent="Timers"]
 wait_time = 0.1
 one_shot = true
 
-[node name="JumpTimer" type="Timer" parent="Timers"]
-wait_time = 0.8
+[node name="ShortJumpTimer" type="Timer" parent="Timers"]
+wait_time = 0.3
 one_shot = true
