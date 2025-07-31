@@ -1,19 +1,11 @@
 extends Area2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
+@export var beer_strength : float = 0.5
+@export var camera_offset_amount : float = 1
 
 func _on_body_entered(body):
-	print("HGaeuygrfa")
-	var player = body as PlayerController
+	var player : PlayerController = body as PlayerController
 	if player != null:
-		player.increase_curve_effect(0.5)
+		player.curve_shader_radius -= beer_strength
+		player.camera.offset += Vector2.UP * camera_offset_amount
+		queue_free()

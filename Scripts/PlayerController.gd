@@ -3,13 +3,16 @@ class_name PlayerController
 
 @export var speed : float = 300.0
 @export var acceleration : float = 10.0
-@export var jump_strength : float = 400.0
+@export var jump_strength : float = 600.0
 @export var gravity : float = 1600.0
 @export var friction : float = 20.0 # Basically deceleration
 
 @export var max_nut_count : int = 2
 var nut_count : int = 0
 var nutted_trees : Array[TreeNode] = []
+
+@export var curve_speed : float = 5.0
+var curve_shader_radius : float
 
 @export_group("References")
 @export var coyote_timer : Timer
@@ -18,8 +21,17 @@ var nutted_trees : Array[TreeNode] = []
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
+@export var camera : Camera2D
 
-func _physics_process(delta: float) -> void:
+func _ready():
+	curve_shader_radius = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("radius")
+
+func _process(delta : float) -> void:
+	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
+	if shader_material != null:
+		shader_material.set_shader_parameter("radius", max(0, lerpf(shader_material.get_shader_parameter("radius"), curve_shader_radius, curve_speed * delta)))
+
+func _physics_process(delta : float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		if velocity.y < 0:
@@ -82,7 +94,3 @@ func jump():
 	short_jump_timer.start()
 	velocity.y = -jump_strength;
 	# velocity.y = -jump_strength
-	
-func increase_curve_effect(amount : float):
-	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
-	shader_material.set_shader_parameter("Radius", max(0, shader_material.get_shader_parameter("Radius") - amount))

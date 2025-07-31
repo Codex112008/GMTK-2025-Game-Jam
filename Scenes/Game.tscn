@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cvd7pmhx8p1pm" path="res://Scenes/Tree.tscn" id="4_kldst"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
+resource_local_to_scene = true
 shader = ExtResource("1_iukft")
 shader_parameter/radius = 5.0
 
@@ -26,10 +27,11 @@ grow_vertical = 2
 tile_map_data = PackedByteArray("AAD3/wMAAAACAAAAAAD4/wMAAAACAAAAAAD5/wMAAAACAAAAAAD6/wMAAAACAAAAAAD7/wMAAAACAAAAAAD8/wMAAAACAAAAAAD9/wMAAAACAAAAAAD+/wMAAAACAAAAAAD//wMAAAACAAAAAAAAAAMAAAACAAAAAAABAAMAAAACAAAAAAACAAMAAAACAAAAAAADAAMAAAACAAAAAAAEAAMAAAACAAAAAAAFAAMAAAACAAAAAAAGAAMAAAACAAAAAAAHAAMAAAACAAAAAAAIAAMAAAACAAAAAAAIAAQAAAACAAIAAAAHAAQAAAACAAIAAAAGAAQAAAACAAIAAAAFAAQAAAACAAIAAAAEAAQAAAACAAIAAAADAAQAAAACAAIAAAACAAQAAAACAAIAAAABAAQAAAACAAIAAAAAAAQAAAACAAIAAAD//wQAAAACAAIAAAD+/wQAAAACAAIAAAD9/wQAAAACAAIAAAD8/wQAAAACAAIAAAD7/wQAAAACAAIAAAD6/wQAAAACAAIAAAD5/wQAAAACAAIAAAD4/wQAAAACAAIAAAD3/wQAAAACAAIAAAAPAAQAAAADAAIAAAAPAAMAAAADAAAAAAAOAAQAAAACAAIAAAAOAAMAAAACAAAAAAANAAQAAAACAAIAAAANAAMAAAACAAAAAAAMAAQAAAACAAIAAAAMAAMAAAACAAAAAAALAAQAAAACAAIAAAALAAMAAAACAAAAAAAKAAQAAAACAAIAAAAKAAMAAAACAAAAAAAJAAQAAAACAAIAAAAJAAMAAAACAAAAAAD2/wQAAAACAAIAAAD2/wMAAAACAAAAAAD1/wQAAAACAAIAAAD1/wMAAAABAAQAAAD0/wQAAAACAAIAAAD0/wMAAAACAAEAAADz/wQAAAACAAIAAADz/wMAAAACAAEAAADy/wQAAAACAAIAAADy/wMAAAACAAQAAADx/wQAAAACAAIAAADx/wMAAAACAAAAAADw/wQAAAABAAIAAADw/wMAAAABAAAAAAD1/wIAAAADAAEAAAD1/wEAAAADAAAAAAD0/wIAAAACAAEAAAD0/wEAAAABAAQAAADz/wIAAAACAAEAAADz/wEAAAACAAEAAADz/wAAAAACAAAAAADy/wIAAAABAAEAAADy/wEAAAABAAEAAADy/wAAAAABAAAAAAD0/wAAAAADAAAAAAD7////AAACAAAAAAD6////AAABAAcAAAD6/wAAAAACAAIAAAD5/wAAAAABAAIAAAD7/wAAAAACAAIAAAD8////AAACAAAAAAD9////AAACAAAAAAD9/wAAAAACAAIAAAD8/wAAAAACAAIAAAD5////AAAAAAcAAAD+/wAAAAACAAIAAAD//wAAAAADAAIAAAD+////AAACAAcAAAD/////AAADAAcAAAA=")
 tile_set = ExtResource("2_gl6un")
 
-[node name="Player" parent="." instance=ExtResource("3_j5yw3")]
+[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera") instance=ExtResource("3_j5yw3")]
 position = Vector2(-24, -119)
 collision_layer = 2
-jump_strength = 600.0
+curve_effect_rect = NodePath("../postproc_layer/curve_effect")
+camera = NodePath("camera2d")
 
 [node name="camera2d" type="Camera2D" parent="Player"]
 position = Vector2(0, -16)
@@ -45,13 +47,16 @@ position = Vector2(270, 64)
 position = Vector2(414, 65)
 
 [node name="Beer" parent="." instance=ExtResource("2_b2bpf")]
-position = Vector2(-23, 83)
+position = Vector2(-128, -47)
 
 [node name="Beer2" parent="." instance=ExtResource("2_b2bpf")]
-position = Vector2(-111, -45)
+position = Vector2(-279, 78)
 
 [node name="Beer3" parent="." instance=ExtResource("2_b2bpf")]
-position = Vector2(-482, 83)
+position = Vector2(-46, 80)
 
 [node name="Beer4" parent="." instance=ExtResource("2_b2bpf")]
-position = Vector2(-378, -14)
+position = Vector2(-397, -18)
+
+[node name="Beer5" parent="." instance=ExtResource("2_b2bpf")]
+position = Vector2(-483, 77)
