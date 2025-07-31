@@ -1,9 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=5 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
-[ext_resource type="Texture2D" uid="uid://yhmgk1skw6ix" path="res://Sprites/Collectable.png" id="2_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dewec"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
+height = 26.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gntrk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kyqiw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer")]
 script = ExtResource("1_kyqiw")
@@ -14,10 +26,11 @@ jump_buffer_timer = NodePath("Timers/JumpBufferTimer")
 short_jump_timer = NodePath("Timers/ShortJumpTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_dewec")
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_kyqiw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_kyqiw")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gntrk")
 
 [node name="Timers" type="Node2D" parent="."]
 
