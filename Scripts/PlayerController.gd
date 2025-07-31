@@ -12,7 +12,7 @@ class_name PlayerController
 @export var nutted_trees : Array[TreeNode] = []
 
 @export var curve_speed : float = 5.0
-var curve_shader_radius : float
+var curve_shader_strength : float
 
 @export var beer_needed : int = 6
 var beer_collected : int = 0
@@ -33,14 +33,14 @@ var beer_collected : int = 0
 @export var instantiated_nodes : Node2D
 
 func _ready():
-	curve_shader_radius = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("radius")
+	curve_shader_strength = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("distortion_strength")
 	
 	time_rewinder.done_rewinding.connect(enable_inputs)
 
 func _process(delta : float) -> void:
 	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
 	if shader_material != null:
-		shader_material.set_shader_parameter("radius", max(0, lerpf(shader_material.get_shader_parameter("radius"), curve_shader_radius, curve_speed * delta)))
+		shader_material.set_shader_parameter("distortion_strength", max(0, lerpf(shader_material.get_shader_parameter("distortion_strength"), curve_shader_strength, curve_speed * delta)))
 	
 	if beer_collected >= 6:
 		pass_out()
@@ -89,7 +89,7 @@ func _physics_process(delta : float) -> void:
 		jump()
 		remove_oldest_nut()
 
-		# throw nut downward for visual feedback
+		# Throw nut downward for visual feedback
 		var new_nut : Node2D = thrown_nut.instantiate()
 		new_nut.global_position = global_position
 		instantiated_nodes.add_child(new_nut)
