@@ -10,7 +10,7 @@ func _process(delta):
 	if !anim_player.current_animation == "grow":
 		if (has_nut):
 			anim_player.play("swing")
-		else:
+		elif (!has_nut && anim_player.current_animation != "empty"):
 			anim_player.play("empty")
 
 func grow():
