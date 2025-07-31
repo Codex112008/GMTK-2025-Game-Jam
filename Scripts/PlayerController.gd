@@ -36,6 +36,7 @@ var last_frame_on_floor : bool
 @export_subgroup("Particles")
 @export var drunk_particles : CPUParticles2D
 @export var jump_particles : CPUParticles2D
+@export var land_particles : CPUParticles2D
 @export var run_particles : CPUParticles2D
 
 @export_group("OOC References")
@@ -144,6 +145,8 @@ func _physics_process(delta : float) -> void:
 		scale = scale.lerp(Vector2.ONE, delta * 5)
 	if (!last_frame_on_floor && is_on_floor()):
 		scale = Vector2(1.25, 0.75)
+		land_particles.restart()
+		land_particles.emitting = true
 	if (!is_on_floor() && absf(velocity.y) > 500):
 		scale = Vector2(0.75, 1.25)
 	if (is_on_floor() && Input.is_action_pressed("down")):
