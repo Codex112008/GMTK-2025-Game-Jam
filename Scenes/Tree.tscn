@@ -1,21 +1,176 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvd7pmhx8p1pm"]
+[gd_scene load_steps=10 format=3 uid="uid://ixuxl7rgjg2u"]
 
 [ext_resource type="Texture2D" uid="uid://blyjavtgbk1sj" path="res://Sprites/Tree/tree_without.png" id="1_gtca3"]
 [ext_resource type="Script" uid="uid://bv02nq23a15lo" path="res://Scripts/Tree.gd" id="2_itkj8"]
-[ext_resource type="Texture2D" uid="uid://cqjvg4ky1tgvg" path="res://Sprites/Tree/tree_with_acorn.png" id="3_0suky"]
+[ext_resource type="Texture2D" uid="uid://bmiiqcw3hcgfp" path="res://Sprites/Acorn/acorn.png" id="3_0suky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_itkj8"]
 size = Vector2(64, 2)
 
-[node name="Tree" type="StaticBody2D" groups=["Tree"]]
-script = ExtResource("2_itkj8")
-nutSprite = ExtResource("3_0suky")
-noNutSprite = ExtResource("1_gtca3")
+[sub_resource type="Animation" id="Animation_0e63j"]
+resource_name = "swing"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotatePoint/Nut:visible")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RotatePoint:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533, -0.174533]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RotatePoint/Nut:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[sub_resource type="Animation" id="Animation_cb0yx"]
+resource_name = "empty"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotatePoint/Nut:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rtd5e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotatePoint/Nut:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RotatePoint:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.174533]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RotatePoint/Nut:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_0suky"]
+resource_name = "grow"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotatePoint/Nut:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RotatePoint:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RotatePoint/Nut:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1s7xt"]
+_data = {
+&"RESET": SubResource("Animation_rtd5e"),
+&"empty": SubResource("Animation_cb0yx"),
+&"grow": SubResource("Animation_0suky"),
+&"swing": SubResource("Animation_0e63j")
+}
+
+[node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("anim_player") groups=["Tree"]]
+script = ExtResource("2_itkj8")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="Tree" type="Sprite2D" parent="."]
+texture = ExtResource("1_gtca3")
+
+[node name="RotatePoint" type="Node2D" parent="."]
+position = Vector2(0, -22)
+rotation = -0.174533
+
+[node name="Nut" type="Sprite2D" parent="RotatePoint"]
+visible = false
+position = Vector2(0, 11)
+scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_0suky")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -30)
 shape = SubResource("RectangleShape2D_itkj8")
 one_way_collision = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1s7xt")
+}

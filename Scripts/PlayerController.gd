@@ -168,7 +168,7 @@ func jump():
 	# velocity.y = -jump_strength
 	
 func remove_oldest_nut():
-	nutted_trees[0].has_nut = true
+	nutted_trees[0].grow()
 	nutted_trees.remove_at(0)
 	nut_count -= 1
 
