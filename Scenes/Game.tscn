@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=4 uid="uid://bfn2b364eucoc"]
+
+[ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://PlanetCurve.gdshader" id="1_iukft"]
+[ext_resource type="TileSet" uid="uid://b5nmyyj2chinl" path="res://BaseTileSet.tres" id="2_gl6un"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
+shader = ExtResource("1_iukft")
+shader_parameter/radius = 0.5
+
+[node name="game" type="Node2D"]
+
+[node name="camera2d" type="Camera2D" parent="."]
+
+[node name="postproc_layer" type="CanvasLayer" parent="."]
+
+[node name="curve_effect" type="ColorRect" parent="postproc_layer"]
+material = SubResource("ShaderMaterial_gl6un")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="base_tile_map" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD3/wMAAQAAAAAAAAD4/wMAAQAAAAAAAAD5/wMAAQAAAAAAAAD6/wMAAQAAAAAAAAD7/wMAAQAAAAAAAAD8/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD//wMAAQAAAAAAAAAAAAMAAQAAAAAAAAABAAMAAQAAAAAAAAACAAMAAQAAAAAAAAADAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAAHAAMAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAQAAQAAAAAAAAAHAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAFAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAADAAQAAQAAAAAAAAACAAQAAQAAAAAAAAABAAQAAQAAAAAAAAAAAAQAAQAAAAAAAAD//wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD8/wQAAQAAAAAAAAD7/wQAAQAAAAAAAAD6/wQAAQAAAAAAAAD5/wQAAQAAAAAAAAD4/wQAAQAAAAAAAAD3/wQAAQAAAAAAAAA=")
+tile_set = ExtResource("2_gl6un")
