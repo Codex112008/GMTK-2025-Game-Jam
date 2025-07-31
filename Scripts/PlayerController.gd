@@ -30,9 +30,13 @@ var last_frame_on_floor : bool
 @export var short_jump_timer : Timer
 @export var spin_timer : Timer
 @export var my_sprite : AnimatedSprite2D
-@export var drunk_particles : CPUParticles2D
 @export var time_rewinder : Rewinder
 @export var collision_shape : CollisionShape2D
+
+@export_subgroup("Particles")
+@export var drunk_particles : CPUParticles2D
+@export var jump_particles : CPUParticles2D
+@export var run_particles : CPUParticles2D
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
@@ -109,6 +113,7 @@ func _physics_process(delta : float) -> void:
 	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
+	run_particles.emitting = direction && is_on_floor() # if moving have running particles
 	if direction:
 		velocity.x = lerpf(velocity.x, direction * speed, delta * acceleration)
 		my_sprite.flip_h = direction != 1 # flip sprite
@@ -154,6 +159,8 @@ func _physics_process(delta : float) -> void:
 			nutted_trees.append(collidingTree)
 
 func jump():
+	jump_particles.restart()
+	jump_particles.emitting = true
 	short_jump_timer.start()
 	velocity.y = -jump_strength;
 	# velocity.y = -jump_strength
