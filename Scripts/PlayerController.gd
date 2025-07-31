@@ -8,8 +8,8 @@ class_name PlayerController
 @export var friction : float = 20.0 # Basically deceleration
 
 @export var max_nut_count : int = 2
-var nut_count : int = 0
-var nutted_trees : Array[TreeNode] = []
+@export var nut_count : int = 0
+@export var nutted_trees : Array[TreeNode] = []
 
 @export var curve_speed : float = 5.0
 var curve_shader_radius : float
@@ -23,6 +23,7 @@ var beer_collected : int = 0
 @export var short_jump_timer : Timer
 @export var my_sprite : AnimatedSprite2D
 @export var drunk_particles : CPUParticles2D
+@export var time_rewinder : Rewinder
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
@@ -30,6 +31,8 @@ var beer_collected : int = 0
 
 func _ready():
 	curve_shader_radius = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("radius")
+	
+	time_rewinder.done_rewinding.connect(enable_inputs)
 
 func _process(delta : float) -> void:
 	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
@@ -59,6 +62,7 @@ func _physics_process(delta : float) -> void:
 	elif Input.is_action_just_pressed("jump"):
 		jump_buffer_timer.start()
 	
+	# Normal jump
 	if Input.is_action_just_pressed("jump") && is_on_floor():
 		jump()
 		coyote_timer.stop()
@@ -78,6 +82,7 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_just_released("jump") && short_jump_timer.time_left != 0:
 		velocity.y += jump_strength / 2 # this value can be tweaked
 	
+	# Nut jump logic
 	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote && velocity.y > 0:
 		jump()
 		remove_oldest_nut()
@@ -96,6 +101,9 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_pressed("down") && is_on_floor():
 		position.y += 1
 
+
+	if Input.is_action_just_pressed("debug_hotkey"):
+		start_rewind()
 
 	move_and_slide()
 	
@@ -117,6 +125,16 @@ func remove_oldest_nut():
 	nutted_trees.remove_at(0)
 	nut_count -= 1
 	
+func start_rewind():
+	set_process_input(false)
+	set_process_unhandled_input(false)
+	for tree : TreeNode in nutted_trees:
+		remove_oldest_nut()
+	time_rewinder.rewind()
+	
+func enable_inputs():
+	set_process_input(true)
+	set_process_unhandled_input(true)
 
 func pass_out():
 	print("LMAO good job drunkard")
