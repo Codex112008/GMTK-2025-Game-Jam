@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://ct6kj2yoa2g00" path="res://Scripts/CameraFollow.gd" id="3_fgofq"]
 [ext_resource type="PackedScene" uid="uid://d3mqa3yxkbmot" path="res://Scenes/Player.tscn" id="3_j5yw3"]
 [ext_resource type="PackedScene" uid="uid://ixuxl7rgjg2u" path="res://Scenes/Tree.tscn" id="4_kldst"]
+[ext_resource type="Script" uid="uid://b5opwn1b3r0fj" path="res://Scripts/MainTileMap.gd" id="6_7lihs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
 resource_local_to_scene = true
