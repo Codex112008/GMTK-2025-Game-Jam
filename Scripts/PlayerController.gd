@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name PlayerController
 
 @export var speed : float = 300.0
 @export var acceleration : float = 10.0
@@ -7,10 +7,17 @@ extends CharacterBody2D
 @export var gravity : float = 1600.0
 @export var friction : float = 20.0 # Basically deceleration
 
+@export var max_nut_count : int = 2
+var nut_count : int = 0
+var nutted_trees : Array[TreeNode] = []
+
 @export_group("References")
 @export var coyote_timer : Timer
 @export var jump_buffer_timer : Timer
 @export var short_jump_timer : Timer
+
+@export_group("OOC References")
+@export var curve_effect_rect : CanvasItem
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -37,8 +44,15 @@ func _physics_process(delta: float) -> void:
 	
 	# If release jump quiclky then add downward force for variable jump height
 	# mark brown told me to do this i did the platformer toolkit thingie
-	if (Input.is_action_just_released("jump") && short_jump_timer.time_left != 0):
+	if Input.is_action_just_released("jump") && short_jump_timer.time_left != 0:
 		velocity.y += jump_strength / 2 # this value can be tweaked
+	
+	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump"):
+		jump()
+		nutted_trees[0].has_nut = true
+		nutted_trees.remove_at(0)
+		nut_count -= 1
+	
 
 
 	# Get the input direction and handle the movement/deceleration.
@@ -47,10 +61,28 @@ func _physics_process(delta: float) -> void:
 		velocity.x = lerpf(velocity.x, direction * speed, delta * acceleration)
 	else:
 		velocity.x = lerpf(velocity.x, 0, delta * friction)
+		
+	
+	# Drop down one way platforms
+	if Input.is_action_pressed("down") && is_on_floor():
+		position.y += 1
+
 
 	move_and_slide()
+	
+	# Gets nuts from trees
+	for i in get_slide_collision_count():
+		var collidingTree : TreeNode = get_slide_collision(i).get_collider() as TreeNode
+		if collidingTree != null && collidingTree.has_nut && nutted_trees.size() < max_nut_count:
+			nut_count = mini(nut_count + 1, max_nut_count)
+			collidingTree.has_nut = false
+			nutted_trees.append(collidingTree)
 
 func jump():
 	short_jump_timer.start()
 	velocity.y = -jump_strength;
 	# velocity.y = -jump_strength
+	
+func increase_curve_effect(amount : float):
+	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
+	shader_material.set_shader_parameter("Radius", max(0, shader_material.get_shader_parameter("Radius") - amount))

@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmrchrx1v38ud"]
+
+[ext_resource type="Script" uid="uid://cruextbjjjn8p" path="res://Scripts/Beer.gd" id="1_d2pg4"]
+[ext_resource type="Texture2D" uid="uid://bl5trdjup45rg" path="res://Sprites/Beer/beer2.png" id="1_hniy1"]
+[ext_resource type="Texture2D" uid="uid://c4aopnk1rb7c4" path="res://Sprites/Beer/beer1.png" id="2_d2pg4"]
+[ext_resource type="Texture2D" uid="uid://crx1pmrgg78a1" path="res://Sprites/Beer/beer3.png" id="3_07ujs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hv7xx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hniy1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_d2pg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_07ujs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_d2pg4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1okyp"]
+
+[node name="Beer" type="Area2D" groups=["Beer"]]
+priority = 1
+script = ExtResource("1_d2pg4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hv7xx")
+autoplay = "default"
+frame_progress = 0.397417
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_1okyp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

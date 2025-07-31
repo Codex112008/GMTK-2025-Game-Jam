@@ -15,10 +15,6 @@ run/main_scene="uid://bfn2b364eucoc"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-NutManager="*res://Scripts/NutManager.gd"
-
 [display]
 
 window/size/viewport_width=640
@@ -31,6 +27,11 @@ window/stretch/scale_mode="integer"
 [dotnet]
 
 project/assembly_name="New Game Project"
+
+[global_group]
+
+Tree=""
+Beer=""
 
 [input]
 

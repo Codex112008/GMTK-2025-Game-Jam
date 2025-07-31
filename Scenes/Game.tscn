@@ -1,18 +1,16 @@
-[gd_scene load_steps=6 format=4 uid="uid://bfn2b364eucoc"]
+[gd_scene load_steps=7 format=4 uid="uid://bfn2b364eucoc"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://PlanetCurve.gdshader" id="1_iukft"]
-[ext_resource type="Script" uid="uid://begc6vubb515t" path="res://Scripts/NutManager.gd" id="1_kldst"]
+[ext_resource type="PackedScene" uid="uid://dmrchrx1v38ud" path="res://Scenes/Beer.tscn" id="2_b2bpf"]
 [ext_resource type="TileSet" uid="uid://b5nmyyj2chinl" path="res://BaseTileSet.tres" id="2_gl6un"]
 [ext_resource type="PackedScene" uid="uid://d3mqa3yxkbmot" path="res://Scenes/Player.tscn" id="3_j5yw3"]
+[ext_resource type="PackedScene" uid="uid://cvd7pmhx8p1pm" path="res://Scenes/Tree.tscn" id="4_kldst"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
 shader = ExtResource("1_iukft")
 shader_parameter/radius = 5.0
 
 [node name="game" type="Node2D"]
-
-[node name="NutManager" type="Node" parent="."]
-script = ExtResource("1_kldst")
 
 [node name="postproc_layer" type="CanvasLayer" parent="."]
 
@@ -36,3 +34,24 @@ jump_strength = 600.0
 [node name="camera2d" type="Camera2D" parent="Player"]
 position = Vector2(0, -16)
 position_smoothing_enabled = true
+
+[node name="Tree" parent="." instance=ExtResource("4_kldst")]
+position = Vector2(151, 64)
+
+[node name="Tree2" parent="." instance=ExtResource("4_kldst")]
+position = Vector2(270, 64)
+
+[node name="Tree3" parent="." instance=ExtResource("4_kldst")]
+position = Vector2(414, 65)
+
+[node name="Beer" parent="." instance=ExtResource("2_b2bpf")]
+position = Vector2(-23, 83)
+
+[node name="Beer2" parent="." instance=ExtResource("2_b2bpf")]
+position = Vector2(-111, -45)
+
+[node name="Beer3" parent="." instance=ExtResource("2_b2bpf")]
+position = Vector2(-482, 83)
+
+[node name="Beer4" parent="." instance=ExtResource("2_b2bpf")]
+position = Vector2(-378, -14)
