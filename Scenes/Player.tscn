@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=31 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
@@ -19,6 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://cf71ik4tqc4p5" path="res://Sprites/Player/Spin/hamster_spin5.png" id="10_5v66d"]
 [ext_resource type="Texture2D" uid="uid://bm2kysin1c7xe" path="res://Sprites/Player/Spin/hamster_spin6.png" id="11_x63xi"]
 [ext_resource type="Texture2D" uid="uid://bst30fcex8vyg" path="res://Sprites/Player/Spin/hamster_spin7.png" id="12_i2e8t"]
+[ext_resource type="Texture2D" uid="uid://c65634ac06im1" path="res://Sprites/Player/Walk/hamster_walk4.png" id="18_x63xi"]
+[ext_resource type="Texture2D" uid="uid://bwykemji501wp" path="res://Sprites/Player/Walk/hamster_walk5.png" id="19_i2e8t"]
+[ext_resource type="Texture2D" uid="uid://bjrltanv0vut6" path="res://Sprites/Player/hamster_cheeks.png" id="19_m0x7a"]
 
 [sub_resource type="Resource" id="Resource_52ee3"]
 script = ExtResource("5_nn08x")
@@ -93,11 +96,23 @@ animations = [{
 "texture": ExtResource("8_ksbbd")
 }, {
 "duration": 1.0,
+"texture": ExtResource("18_x63xi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_i2e8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_x63xi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ksbbd")
+}, {
+"duration": 1.0,
 "texture": ExtResource("7_yoq75")
 }],
 "loop": true,
 "name": &"walk",
-"speed": 10.0
+"speed": 24.0
 }]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dewec"]
@@ -151,12 +166,19 @@ metadata/_custom_type_script = "uid://babpw2llhagpv"
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_kyqiw")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player", "cheeks")]
 sprite_frames = SubResource("SpriteFrames_gntrk")
-animation = &"rise"
+animation = &"walk"
+frame = 2
+frame_progress = 0.232959
 offset = Vector2(0, -16)
 script = ExtResource("9_yoq75")
 player = NodePath("..")
+cheeks = NodePath("Cheeks")
+
+[node name="Cheeks" type="Sprite2D" parent="AnimatedSprite2D"]
+position = Vector2(0, -18)
+texture = ExtResource("19_m0x7a")
 
 [node name="Timers" type="Node2D" parent="."]
 

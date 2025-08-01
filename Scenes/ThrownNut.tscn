@@ -50,7 +50,7 @@ animations = [{
 collision_layer = 0
 script = ExtResource("1_hc5b4")
 spin_speed = 20.0
-gravity = 400.0
+gravity = 650.0
 start_fall_speed = 200.0
 my_sprite = NodePath("AnimatedSprite2D")
 

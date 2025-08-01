@@ -3,6 +3,11 @@ extends Area2D
 @export var beer_strength : float = 0.5
 @export var camera_offset_amount : float = 1
 
+@export var anim_player : AnimationPlayer
+
+func _ready():
+	anim_player.play("sine")
+
 func _on_body_entered(body):
 	var player : PlayerController = body as PlayerController
 	if player != null:

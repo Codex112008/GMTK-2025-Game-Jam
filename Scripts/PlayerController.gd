@@ -24,6 +24,8 @@ var starting_point : Vector2
 
 var last_frame_on_floor : bool
 
+var dir : int
+
 @export_group("References")
 @export var coyote_timer : Timer
 @export var jump_buffer_timer : Timer
@@ -116,8 +118,8 @@ func _physics_process(delta : float) -> void:
 	var direction := Input.get_axis("left", "right")
 	run_particles.emitting = direction && is_on_floor() # if moving have running particles
 	if direction:
+		dir = direction
 		velocity.x = lerpf(velocity.x, direction * speed, delta * acceleration)
-		my_sprite.flip_h = direction != 1 # flip sprite
 	else:
 		velocity.x = lerpf(velocity.x, 0, delta * friction)
 	
@@ -178,10 +180,11 @@ func remove_oldest_nut():
 func start_rewind():
 	set_process_input(false)
 	set_process_unhandled_input(false)
-	for tree : TreeNode in nutted_trees:
-		remove_oldest_nut()
-	#time_rewinder.rewind()
-	
+
+	# reset number of nuts
+	nutted_trees.clear()
+	nut_count = 0
+		
 	rewinding = true
 	
 func enable_inputs():
