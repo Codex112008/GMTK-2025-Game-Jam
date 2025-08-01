@@ -92,6 +92,7 @@ process_callback = 0
 script = ExtResource("3_fgofq")
 target = NodePath("../Player")
 level = NodePath("../Environment/base_tile_map")
+shakeFade = 15.0
 
 [node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_text") instance=ExtResource("3_j5yw3")]
 z_index = 1
