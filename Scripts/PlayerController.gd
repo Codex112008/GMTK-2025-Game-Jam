@@ -185,7 +185,7 @@ func _physics_process(delta : float) -> void:
 				var tile_coords : Vector2i = colliding_tilemap.local_to_map(colliding_tilemap.to_local(collision_point))
 				var tile_data : TileData = colliding_tilemap.get_cell_tile_data(tile_coords)
 				if tile_data != null && tile_data.get_custom_data("IsSpike") == true:
-					take_damage()
+					take_damage(tile_coords * 32 + Vector2i(16, 16))
 
 func jump():
 	jump_particles.restart()
@@ -216,7 +216,7 @@ func enable_inputs():
 	set_process_input(true)
 	set_process_unhandled_input(true)
 	
-func take_damage():
+func take_damage(spike_pos : Vector2):
 	i_frame_timer.start()
 	current_health -= 1
 	health_ui_text.text = str(current_health)
@@ -225,7 +225,9 @@ func take_damage():
 		current_health = max_health
 		health_ui_text.text = str(current_health)
 	else:
-		jump()
+		var dir : Vector2 = -global_position.direction_to(spike_pos)
+		print(":player pos: " + str(global_position) + " Spike pos: " + str(spike_pos))
+		velocity = dir * jump_strength * 1.5
 
 func pass_out():
 	print("LMAO good job drunkard")
