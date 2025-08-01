@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqf61c8lc2tff"
-path="res://.godot/imported/acorn_ui.png-9b0e52f94bfed4816a29e1fb5b2b8075.ctex"
+uid="uid://cix5ooltd72bh"
+path="res://.godot/imported/Loop_ui.png-129b5b7a7b97bb2ac1c3b587379ad06b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/acorn_ui.png"
-dest_files=["res://.godot/imported/acorn_ui.png-9b0e52f94bfed4816a29e1fb5b2b8075.ctex"]
+source_file="res://Sprites/UI/Loop_ui.png"
+dest_files=["res://.godot/imported/Loop_ui.png-129b5b7a7b97bb2ac1c3b587379ad06b.ctex"]
 
 [params]
 

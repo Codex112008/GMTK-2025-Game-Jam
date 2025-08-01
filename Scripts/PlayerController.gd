@@ -47,7 +47,7 @@ var current_health : int
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
-@export var camera : Camera2D
+@export var camera : CameraFollow
 @export var instantiated_nodes : Node2D
 @export var health_ui_text : RichTextLabel
 
@@ -114,6 +114,8 @@ func _physics_process(delta : float) -> void:
 		spin_timer.start()
 		jump()
 		remove_oldest_nut()
+
+		camera.apply_shake(0.4)
 
 		# Throw nut downward for visual feedback
 		var new_nut : ThrownNutScript = thrown_nut.instantiate()
@@ -219,17 +221,19 @@ func enable_inputs():
 	set_process_unhandled_input(true)
 	
 func take_damage(spike_pos : Vector2):
+	camera.apply_shake(1.5)
+
 	i_frame_timer.start()
 	current_health -= 1
-	health_ui_text.text = str(current_health)
+	health_ui_text.text = ": " + str(current_health)
 	if current_health <= 0:
 		start_rewind()
 		current_health = max_health
-		health_ui_text.text = str(current_health)
+		health_ui_text.text = ": " + str(current_health)
 	else:
 		var dir : Vector2 = -global_position.direction_to(spike_pos)
-		print(":player pos: " + str(global_position) + " Spike pos: " + str(spike_pos))
-		velocity = dir * jump_strength * 1.5
+		#print(":player pos: " + str(global_position) + " Spike pos: " + str(spike_pos))
+		velocity = dir * jump_strength
 
 func pass_out():
 	print("LMAO good job drunkard")
