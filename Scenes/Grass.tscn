@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuypo3w6dc0of"]
+
+[ext_resource type="Script" uid="uid://cki48mjud8tmb" path="res://Scripts/grass.gd" id="1_w34vg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_543xm"]
+
+[node name="Grass" type="Area2D" node_paths=PackedStringArray("anim_sprite")]
+script = ExtResource("1_w34vg")
+anim_sprite = NodePath("Pivot/AnimatedSprite2D")
+
+[node name="Pivot" type="Marker2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_543xm")

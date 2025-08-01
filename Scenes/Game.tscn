@@ -32,7 +32,7 @@ shader_parameter/distortion_strength = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_raj38"]
 shader = ExtResource("2_lbihj")
-shader_parameter/overlay = false
+shader_parameter/overlay = true
 shader_parameter/resolution = Vector2(320, 180)
 shader_parameter/brightness = 1.4
 shader_parameter/scanlines_opacity = 0.4

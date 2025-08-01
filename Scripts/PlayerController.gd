@@ -168,7 +168,6 @@ func _physics_process(delta : float) -> void:
 	
 	# Juice when hitting ground fast
 	if !last_frame_on_floor && is_on_floor() && last_frame_y_velocity >= 1100:
-		print(last_frame_y_velocity)
 		camera.apply_shake(0.3)
 	
 	# Flashing red
@@ -177,7 +176,7 @@ func _physics_process(delta : float) -> void:
 	
 	last_frame_on_floor = is_on_floor()
 	last_frame_y_velocity = velocity.y
-
+	
 	move_and_slide()
 	
 	# Gets nuts from trees
