@@ -166,7 +166,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_1iu4k"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.172316, 1), 0.0, 0.0, 0, 0, Vector2(0.799435, 0), -0.362352, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.299435, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.08764, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_70hv0"]
@@ -186,7 +186,7 @@ _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0.787398), 0.0, 1.97426, 0, 0, Vector2(0.144068, 1.44348), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "i_frame_timer", "my_sprite", "time_rewinder", "collision_shape", "animation_player", "drunk_particles", "jump_particles", "land_particles", "run_particles")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "i_frame_timer", "my_sprite", "time_rewinder", "collision_shape", "animation_player", "drunk_particles", "jump_particles", "land_particles", "run_particles", "hit_particles")]
 collision_layer = 2
 script = ExtResource("1_kyqiw")
 speed = 260.0
@@ -207,6 +207,7 @@ drunk_particles = NodePath("Particles/DrunkParticles")
 jump_particles = NodePath("Particles/JumpParticles")
 land_particles = NodePath("Particles/LandParticles")
 run_particles = NodePath("Particles/RunParticles")
+hit_particles = NodePath("Particles/HitParticles")
 
 [node name="Rewinder" type="Node" parent="."]
 script = ExtResource("4_5ixxa")
@@ -291,6 +292,26 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_1iu4k")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
+
+[node name="HitParticles" type="CPUParticles2D" parent="Particles"]
+material = SubResource("CanvasItemMaterial_qidb7")
+emitting = false
+amount = 20
+texture = ExtResource("23_i2e8t")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.1
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 75.0
+damping_min = 5.0
+damping_max = 5.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_1iu4k")
+anim_speed_min = 0.5
+anim_speed_max = 0.5
 
 [node name="LandParticles" type="CPUParticles2D" parent="Particles"]
 material = SubResource("CanvasItemMaterial_70hv0")
