@@ -45,6 +45,7 @@ var current_health : int
 @export var jump_particles : CPUParticles2D
 @export var land_particles : CPUParticles2D
 @export var run_particles : CPUParticles2D
+@export var hit_particles : CPUParticles2D
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
@@ -227,7 +228,10 @@ func enable_inputs():
 	set_process_unhandled_input(true)
 	
 func take_damage(spike_pos : Vector2):
+	# juice
 	camera.apply_shake(1.5)
+	hit_particles.restart()
+	hit_particles.emitting = true
 
 	i_frame_timer.start()
 	current_health -= 1
