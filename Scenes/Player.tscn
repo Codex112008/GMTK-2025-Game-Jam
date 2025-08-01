@@ -150,6 +150,7 @@ _data = [Vector2(0, 0.787398), 0.0, 1.97426, 0, 0, Vector2(0.144068, 1.44348), 0
 point_count = 3
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "my_sprite", "time_rewinder", "collision_shape", "drunk_particles", "jump_particles", "land_particles", "run_particles")]
+collision_layer = 2
 script = ExtResource("1_kyqiw")
 speed = 260.0
 acceleration = 7.0
