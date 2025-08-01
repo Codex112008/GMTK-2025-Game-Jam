@@ -11,27 +11,22 @@ extends CanvasLayer
 @export_group("References")
 @export var frontmost : Parallax2D
 @export var midground : Parallax2D
-@export var backmost : Parallax2D
 
 var ran : RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	for i in range(0, foreground_stars):
-		var new_star = create_star()
+		var new_star = create_star(ran.randi_range(-380, 380))
 		frontmost.add_child(new_star)
 
 	for i in range(0, midground_stars):
-		var new_star = create_star()
+		var new_star = create_star(ran.randi_range(-280, 280))
 		midground.add_child(new_star)
-		
-	for i in range(0, background_stars):
-		var new_star = create_star()
-		backmost.add_child(new_star)
 
 
-func create_star() -> Sprite2D:
+func create_star(pos_x : float) -> Sprite2D:
 	var new_star : Sprite2D = star_scene.instantiate()
-	new_star.position = Vector2(ran.randi_range(-440, 1240), ran.randi_range(-360, 360))
+	new_star.position = Vector2(pos_x, ran.randi_range(-360, 360))
 	new_star.texture = star_types.pick_random()
 	new_star.z_index = -1
 
