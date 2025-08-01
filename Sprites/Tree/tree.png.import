@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqjvg4ky1tgvg"
-path="res://.godot/imported/tree_with_acorn.png-9f5bd114ef59094edcb7bb13ca65d537.ctex"
+uid="uid://blyjavtgbk1sj"
+path="res://.godot/imported/tree.png-ef056cb6ae7d6e220eeae26c4133100e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tree/tree_with_acorn.png"
-dest_files=["res://.godot/imported/tree_with_acorn.png-9f5bd114ef59094edcb7bb13ca65d537.ctex"]
+source_file="res://Sprites/Tree/tree.png"
+dest_files=["res://.godot/imported/tree.png-ef056cb6ae7d6e220eeae26c4133100e.ctex"]
 
 [params]
 

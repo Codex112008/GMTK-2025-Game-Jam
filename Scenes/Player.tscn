@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=33 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://c65634ac06im1" path="res://Sprites/Player/Walk/hamster_walk4.png" id="18_x63xi"]
 [ext_resource type="Texture2D" uid="uid://bwykemji501wp" path="res://Sprites/Player/Walk/hamster_walk5.png" id="19_i2e8t"]
 [ext_resource type="Texture2D" uid="uid://bjrltanv0vut6" path="res://Sprites/Player/hamster_cheeks.png" id="19_m0x7a"]
+[ext_resource type="Texture2D" uid="uid://dlg6nqg80rju3" path="res://Sprites/Particles/dustparticles.png" id="23_i2e8t"]
 
 [sub_resource type="Resource" id="Resource_52ee3"]
 script = ExtResource("5_nn08x")
@@ -121,21 +122,32 @@ particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qidb7"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [sub_resource type="Curve" id="Curve_1iu4k"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.362352, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_m0x7a"]
-offsets = PackedFloat32Array(0.63, 0.996667)
-colors = PackedColorArray(1, 1, 1, 0.741176, 1, 1, 1, 0)
-
-[sub_resource type="Curve" id="Curve_m0x7a"]
-_data = [Vector2(0, 0.515392), 0.0, 0.0, 0, 0, Vector2(0.20339, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.172316, 1), 0.0, 0.0, 0, 0, Vector2(0.799435, 0), -0.362352, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_1iu4k"]
-offsets = PackedFloat32Array(0.01, 1)
-colors = PackedColorArray(1, 1, 1, 0.607843, 1, 1, 1, 0)
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_70hv0"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i2e8t"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_m0x7a"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.787398), 0.0, 1.97426, 0, 0, Vector2(0.144068, 1.44348), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "my_sprite", "time_rewinder", "collision_shape", "drunk_particles", "jump_particles", "land_particles", "run_particles")]
 script = ExtResource("1_kyqiw")
@@ -214,45 +226,53 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 
 [node name="JumpParticles" type="CPUParticles2D" parent="Particles"]
+material = SubResource("CanvasItemMaterial_qidb7")
 emitting = false
-amount = 10
-lifetime = 0.3
+texture = ExtResource("23_i2e8t")
+lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 direction = Vector2(0, -1)
-spread = 180.0
+spread = 90.0
 gravity = Vector2(0, 400)
-initial_velocity_min = 100.0
-initial_velocity_max = 150.0
-scale_amount_min = 6.0
-scale_amount_max = 12.0
+initial_velocity_min = 75.0
+initial_velocity_max = 175.0
+damping_min = 5.0
+damping_max = 5.0
+scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_1iu4k")
-color_ramp = SubResource("Gradient_m0x7a")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="LandParticles" type="CPUParticles2D" parent="Particles"]
+material = SubResource("CanvasItemMaterial_70hv0")
+position = Vector2(0, 11)
 emitting = false
-amount = 10
+amount = 4
+texture = ExtResource("23_i2e8t")
 lifetime = 0.7
 one_shot = true
-speed_scale = 2.0
+speed_scale = 1.2
 explosiveness = 1.0
 direction = Vector2(0, -1)
-spread = 25.0
-initial_velocity_min = 250.0
-initial_velocity_max = 300.0
+gravity = Vector2(0, 400)
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
 damping_min = 1.0
 damping_max = 5.0
-scale_amount_min = 4.0
-scale_amount_max = 8.0
+scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_1iu4k")
-color_ramp = SubResource("Gradient_m0x7a")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="RunParticles" type="CPUParticles2D" parent="Particles"]
+material = SubResource("CanvasItemMaterial_i2e8t")
 emitting = false
-amount = 12
+amount = 6
+texture = ExtResource("23_i2e8t")
 speed_scale = 2.0
 gravity = Vector2(0, 0)
-scale_amount_min = 2.0
-scale_amount_max = 16.0
+scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_m0x7a")
-color_ramp = SubResource("Gradient_1iu4k")
+anim_speed_min = 1.0
+anim_speed_max = 1.0

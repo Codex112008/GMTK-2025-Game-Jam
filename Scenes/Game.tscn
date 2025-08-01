@@ -42,7 +42,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_2irst")
 player = NodePath("../../../Player")
-offset = Vector2(20, 0)
+offset = Vector2(14, -24)
 nut_icon = ExtResource("3_bf53h")
 
 [node name="camera2d" type="Camera2D" parent="." node_paths=PackedStringArray("target", "level")]

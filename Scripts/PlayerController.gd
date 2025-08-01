@@ -182,9 +182,12 @@ func start_rewind():
 	set_process_unhandled_input(false)
 
 	# reset number of nuts
+	for tree in nutted_trees:
+		var current_tree : TreeNode = tree as TreeNode
+		current_tree.grow()
 	nutted_trees.clear()
 	nut_count = 0
-		
+
 	rewinding = true
 	
 func enable_inputs():

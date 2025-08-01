@@ -4,7 +4,7 @@ extends Control
 @export var offset : Vector2
 @export var nut_icon : PackedScene
 
-const NUTSIZE : float = 24
+const NUTSIZE : float = 12
 
 var num_nuts = 0
 

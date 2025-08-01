@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blyjavtgbk1sj"
-path="res://.godot/imported/tree_without.png-52e0173d94bedf8b3bf33f5518b9b584.ctex"
+uid="uid://dlg6nqg80rju3"
+path="res://.godot/imported/dustparticles.png-d858585e4c58cf3ac36dfe3d2184cc1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tree/tree_without.png"
-dest_files=["res://.godot/imported/tree_without.png-52e0173d94bedf8b3bf33f5518b9b584.ctex"]
+source_file="res://Sprites/Particles/dustparticles.png"
+dest_files=["res://.godot/imported/dustparticles.png-d858585e4c58cf3ac36dfe3d2184cc1b.ctex"]
 
 [params]
 
