@@ -1,18 +1,18 @@
 extends TileMapLayer
+class_name MainTliemap
 
-@export var tilemap_parent : Node2D
+@export var instantiated_nodes : Node2D
 @export var player : PlayerController
 
-# @export_group("Background")
-# @export var parallax_background : ParallaxBackground
-# @export var parallax_parent : CanvasLayer
+@export_group("Background")
+@export var parallax_background : CanvasLayer
 
 var camera : Camera2D
 var left_tilemap_clone : TileMapLayer
 var right_tilemap_clone : TileMapLayer
 
-# var left_parallax_clone : ParallaxBackground
-# var right_parallax_clone : ParallaxBackground
+var left_parallax_clone : CanvasLayer
+var right_parallax_clone : CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,23 +22,21 @@ func _ready():
 	left_tilemap_clone = duplicate()
 	left_tilemap_clone.position.x -= get_rect_world_pos_x()
 	left_tilemap_clone.set_script(null)
-	tilemap_parent.add_child(left_tilemap_clone)
+	instantiated_nodes.add_child(left_tilemap_clone)
 	
 	right_tilemap_clone = duplicate()
 	right_tilemap_clone.position.x += get_rect_world_pos_x()
 	right_tilemap_clone.set_script(null)
-	tilemap_parent.add_child(right_tilemap_clone)
+	instantiated_nodes.add_child(right_tilemap_clone)
 
 	# duplicate background
-	# left_parallax_clone = parallax_background.duplicate()
-	# left_parallax_clone.offset.x -= get_rect_world_pos_x()
-	# parallax_parent.add_child(left_parallax_clone)
-
-	# right_parallax_clone = parallax_background.duplicate()
-	# right_parallax_clone.offset.x += get_rect_world_pos_x()
-	# parallax_parent.add_child(right_parallax_clone)
-
-	# print(parallax_parent.get_children())
+	#left_parallax_clone = parallax_background.duplicate()
+	#left_parallax_clone.offset.x -= get_rect_world_pos_x()
+	#instantiated_nodes.add_child(left_parallax_clone)
+#
+	#right_parallax_clone = parallax_background.duplicate()
+	#right_parallax_clone.offset.x += get_rect_world_pos_x()
+	#instantiated_nodes.add_child(right_parallax_clone)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
