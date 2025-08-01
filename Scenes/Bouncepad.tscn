@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://0w6vrkdn8ins" path="res://Sprites/Mushroom/mushroom3.png" id="4_nn62f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07hla"]
-size = Vector2(32, 26)
+size = Vector2(32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b2nac"]
 animations = [{
@@ -20,9 +20,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_nn62f")
 }],
-"loop": true,
+"loop": false,
 "name": &"bounce",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [node name="Bouncepad" type="Area2D" node_paths=PackedStringArray("my_sprite")]
@@ -32,11 +32,9 @@ script = ExtResource("1_8yv2l")
 my_sprite = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_07hla")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.25, 0.15)
 sprite_frames = SubResource("SpriteFrames_b2nac")
 animation = &"bounce"
 

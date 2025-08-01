@@ -18,12 +18,13 @@ curve = SubResource("Curve2D_cbc1i")
 script = ExtResource("1_5olv3")
 path_follow = NodePath("PathFollow2D")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+collision_mask = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
 texture = ExtResource("2_5olv3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 shape = SubResource("RectangleShape2D_fl5gg")
 one_way_collision = true
 
@@ -32,4 +33,4 @@ rotates = false
 loop = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
-remote_path = NodePath("../../StaticBody2D")
+remote_path = NodePath("../../AnimatableBody2D")
