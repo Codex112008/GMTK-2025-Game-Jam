@@ -20,6 +20,7 @@ var rewinding : bool = false
 var starting_point : Vector2
 
 var last_frame_on_floor : bool
+var last_frame_y_velocity : float
 
 var dir : int
 
@@ -115,14 +116,14 @@ func _physics_process(delta : float) -> void:
 		jump()
 		remove_oldest_nut()
 
-		camera.apply_shake(0.4)
+		camera.apply_shake(0.1)
 
 		# Throw nut downward for visual feedback
 		var new_nut : ThrownNutScript = thrown_nut.instantiate()
 		new_nut.global_position = global_position
 		instantiated_nodes.add_child(new_nut)
 	
-	velocity = Vector2(clamp(velocity.x, -1000, 1000), clamp(velocity.y, -5000, 750))
+	velocity = Vector2(clamp(velocity.x, -1000, 1000), clamp(velocity.y, -5000, 1250))
 	
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -163,13 +164,18 @@ func _physics_process(delta : float) -> void:
 		scale = Vector2(0.75, 1.25)
 	if (is_on_floor() && Input.is_action_pressed("down")):
 		scale = Vector2(1.5, 0.5)
-	last_frame_on_floor = is_on_floor()
+	
+	# Juice when hitting ground fast
+	if !last_frame_on_floor && is_on_floor() && last_frame_y_velocity >= 1100:
+		print(last_frame_y_velocity)
+		camera.apply_shake(0.3)
 	
 	# Flashing red
 	if i_frame_timer.time_left != 0:
 		animation_player.play("damage_flash")
 	
-	
+	last_frame_on_floor = is_on_floor()
+	last_frame_y_velocity = velocity.y
 
 	move_and_slide()
 	
