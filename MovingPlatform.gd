@@ -1,15 +1,16 @@
 extends Path2D
 
-@export var path_curve : Curve
-var path_follow : PathFollow2D
-var target_ratio : int = 1
+@export var movespeed : float = 10
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	path_follow = get_child(1)
+@export_group("References")
+@export var path_follow : PathFollow2D
 
+var timesincestart : float = 0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	if abs(path_follow.progress_ratio - target_ratio) < 0.1:
-		target_ratio = (target_ratio + 1) % 2
+func _process(delta):
+	timesincestart += movespeed * delta
+	
+	path_follow.progress_ratio = (sin(timesincestart + ((3 * PI) / 2)) + 1) / 2
+
+	if timesincestart >= 2 * PI:
+		timesincestart = 0

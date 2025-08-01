@@ -38,6 +38,8 @@ point_count = 2
 
 [node name="game" type="Node2D"]
 
+[node name="InstantiatedNodes" type="Node2D" parent="."]
+
 [node name="postproc_layer" type="CanvasLayer" parent="."]
 
 [node name="curve_effect" type="ColorRect" parent="postproc_layer"]
@@ -199,11 +201,6 @@ follow_viewport = false
 [node name="Planets1" type="Sprite2D" parent="ParallaxBackground/Backmost"]
 position = Vector2(107, 208)
 texture = ExtResource("14_alh3a")
-
-[node name="InstantiatedNodes" type="Node2D" parent="."]
-
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(-959, 90)
 
 [node name="Bouncepad" parent="." instance=ExtResource("20_tfod6")]
 position = Vector2(592, 88)
