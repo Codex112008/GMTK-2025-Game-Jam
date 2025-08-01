@@ -19,6 +19,12 @@ func _process(delta: float) -> void:
 		create_nuts()
 	num_nuts = player.nut_count
 
+	# make nuts swing
+	for nut in range(0, nuts.size()):
+		var current : TextureRect = nuts[nut]
+		current.position = Vector2(clamp((-player.velocity.x / 50) * nut, -pow(nut, 2), pow(nut, 2)) - player.velocity.x / 50, current.position.y)
+
+
 func create_nuts():
 	for nut in nuts:
 		var my_nut : Control = nut
@@ -28,9 +34,8 @@ func create_nuts():
 
 	for nut_on in range(0, player.nut_count):
 		var new_icon : TextureRect = nut_icon.instantiate()
-		var offset_num : int = nut_on - player.nut_count
 
-		new_icon.position = Vector2(0, offset_num * NUTSIZE)
+		new_icon.position = Vector2(0, -nut_on * NUTSIZE)
 
 		nuts.append(new_icon)
 		add_child(new_icon)

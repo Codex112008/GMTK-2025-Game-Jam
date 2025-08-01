@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://5s4lfwvulyvp"]
+
+[ext_resource type="Script" uid="uid://bdg12am1can0j" path="res://Scripts/Bouncepad.gd" id="1_8yv2l"]
+[ext_resource type="Texture2D" uid="uid://ctgjoplr3snvf" path="res://icon.svg" id="2_ecg2y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07hla"]
+size = Vector2(32, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b2nac"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ecg2y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bouncepad" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_8yv2l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_07hla")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.15)
+sprite_frames = SubResource("SpriteFrames_b2nac")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

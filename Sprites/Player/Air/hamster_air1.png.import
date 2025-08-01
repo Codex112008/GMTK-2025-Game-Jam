@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q0fcqc5xdny2"
-path="res://.godot/imported/hamster_fall.png-59d741d1bb2aa0ace57c337340447824.ctex"
+uid="uid://cxqqrjmhla05v"
+path="res://.godot/imported/hamster_air1.png-6bcaf28500437f096abddf8f5a522beb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Air/hamster_fall.png"
-dest_files=["res://.godot/imported/hamster_fall.png-59d741d1bb2aa0ace57c337340447824.ctex"]
+source_file="res://Sprites/Player/Air/hamster_air1.png"
+dest_files=["res://.godot/imported/hamster_air1.png-6bcaf28500437f096abddf8f5a522beb.ctex"]
 
 [params]
 
