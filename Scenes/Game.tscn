@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=4 uid="uid://bfn2b364eucoc"]
+[gd_scene load_steps=27 format=4 uid="uid://bfn2b364eucoc"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://Shaders/PlanetCurve.gdshader" id="1_iukft"]
 [ext_resource type="Script" uid="uid://b35p01h4jxnjb" path="res://Scripts/UI/NutUI.gd" id="2_2irst"]
 [ext_resource type="PackedScene" uid="uid://dmrchrx1v38ud" path="res://Scenes/Beer.tscn" id="2_b2bpf"]
 [ext_resource type="TileSet" uid="uid://b5nmyyj2chinl" path="res://BaseTileSet.tres" id="2_gl6un"]
+[ext_resource type="Shader" uid="uid://cevmp4tcq0ml4" path="res://Shaders/CRT.gdshader" id="2_lbihj"]
 [ext_resource type="PackedScene" uid="uid://b2yrh30mqxkuc" path="res://Scenes/NutUIElement.tscn" id="3_bf53h"]
 [ext_resource type="Script" uid="uid://ct6kj2yoa2g00" path="res://Scripts/CameraFollow.gd" id="3_fgofq"]
 [ext_resource type="PackedScene" uid="uid://d3mqa3yxkbmot" path="res://Scenes/Player.tscn" id="3_j5yw3"]
@@ -29,6 +30,30 @@ shader = ExtResource("1_iukft")
 shader_parameter/radius = 10.0
 shader_parameter/distortion_strength = 2.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_raj38"]
+shader = ExtResource("2_lbihj")
+shader_parameter/overlay = false
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/brightness = 1.4
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/roll = true
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/aberration = 0.03
+shader_parameter/noise_opacity = 0.0
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/pixelate = true
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
 [sub_resource type="Curve2D" id="Curve2D_lbihj"]
 resource_local_to_scene = true
 _data = {
@@ -44,6 +69,15 @@ point_count = 2
 
 [node name="curve_effect" type="ColorRect" parent="postproc_layer"]
 material = SubResource("ShaderMaterial_gl6un")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="crt_effect" type="ColorRect" parent="postproc_layer"]
+visible = false
+material = SubResource("ShaderMaterial_raj38")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
