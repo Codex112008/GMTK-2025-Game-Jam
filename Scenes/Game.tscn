@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bfn2b364eucoc"]
+[gd_scene load_steps=25 format=4 uid="uid://bfn2b364eucoc"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://Shaders/PlanetCurve.gdshader" id="1_iukft"]
 [ext_resource type="Script" uid="uid://b35p01h4jxnjb" path="res://Scripts/UI/NutUI.gd" id="2_2irst"]
@@ -21,12 +21,20 @@
 [ext_resource type="Texture2D" uid="uid://cedc8lmp8c2ay" path="res://Sprites/BG/Planets/planets1.png" id="14_alh3a"]
 [ext_resource type="PackedScene" uid="uid://6w67bm40rsos" path="res://Scenes/Star.tscn" id="14_vvhu1"]
 [ext_resource type="PackedScene" uid="uid://5s4lfwvulyvp" path="res://Scenes/Bouncepad.tscn" id="20_tfod6"]
+[ext_resource type="PackedScene" uid="uid://44epf0df578d" path="res://Scenes/MovingPlatform.tscn" id="22_vvhu1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
 resource_local_to_scene = true
 shader = ExtResource("1_iukft")
 shader_parameter/radius = 10.0
 shader_parameter/distortion_strength = 2.0
+
+[sub_resource type="Curve2D" id="Curve2D_lbihj"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107.96, 0)
+}
+point_count = 2
 
 [node name="game" type="Node2D"]
 
@@ -199,3 +207,7 @@ position = Vector2(-959, 90)
 
 [node name="Bouncepad" parent="." instance=ExtResource("20_tfod6")]
 position = Vector2(592, 88)
+
+[node name="MovingPlatform" parent="." instance=ExtResource("22_vvhu1")]
+position = Vector2(-322, -136)
+curve = SubResource("Curve2D_lbihj")
