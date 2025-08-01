@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bfn2b364eucoc"]
+[gd_scene load_steps=23 format=4 uid="uid://bfn2b364eucoc"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://Shaders/PlanetCurve.gdshader" id="1_iukft"]
 [ext_resource type="Script" uid="uid://b35p01h4jxnjb" path="res://Scripts/UI/NutUI.gd" id="2_2irst"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ct6kj2yoa2g00" path="res://Scripts/CameraFollow.gd" id="3_fgofq"]
 [ext_resource type="PackedScene" uid="uid://d3mqa3yxkbmot" path="res://Scenes/Player.tscn" id="3_j5yw3"]
 [ext_resource type="PackedScene" uid="uid://ixuxl7rgjg2u" path="res://Scenes/Tree.tscn" id="4_kldst"]
+[ext_resource type="Texture2D" uid="uid://yhmgk1skw6ix" path="res://Sprites/Collectable.png" id="4_rajel"]
 [ext_resource type="Script" uid="uid://b5opwn1b3r0fj" path="res://Scripts/MainTileMap.gd" id="6_7lihs"]
 [ext_resource type="Texture2D" uid="uid://cp7cxs0ao8pah" path="res://Sprites/BG/BGmain.png" id="10_71axn"]
 [ext_resource type="Script" uid="uid://cxkj141c3q8gk" path="res://Scripts/GenerateStars.gd" id="10_acvyw"]
@@ -19,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dbow5kj34ww11" path="res://Sprites/BG/Stars/star_small.png" id="13_rajel"]
 [ext_resource type="Texture2D" uid="uid://cedc8lmp8c2ay" path="res://Sprites/BG/Planets/planets1.png" id="14_alh3a"]
 [ext_resource type="PackedScene" uid="uid://6w67bm40rsos" path="res://Scenes/Star.tscn" id="14_vvhu1"]
-[ext_resource type="PackedScene" path="res://Scenes/Bouncepad.tscn" id="20_tfod6"]
+[ext_resource type="PackedScene" uid="uid://5s4lfwvulyvp" path="res://Scenes/Bouncepad.tscn" id="20_tfod6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
 resource_local_to_scene = true
@@ -56,6 +57,25 @@ player = NodePath("../../../Player")
 offset = Vector2(-16, -48)
 nut_icon = ExtResource("3_bf53h")
 
+[node name="HealthUI" type="HBoxContainer" parent="UI/UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/UI/HealthUI"]
+layout_mode = 2
+texture = ExtResource("4_rajel")
+expand_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/UI/HealthUI"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+text = "5"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="camera2d" type="Camera2D" parent="." node_paths=PackedStringArray("target", "level")]
 position = Vector2(-24, -135)
 process_callback = 0
@@ -63,12 +83,13 @@ script = ExtResource("3_fgofq")
 target = NodePath("../Player")
 level = NodePath("../Environment/base_tile_map")
 
-[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes") instance=ExtResource("3_j5yw3")]
+[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_text") instance=ExtResource("3_j5yw3")]
 z_index = 1
 position = Vector2(-24, -119)
 curve_effect_rect = NodePath("../postproc_layer/curve_effect")
 camera = NodePath("../camera2d")
 instantiated_nodes = NodePath("../InstantiatedNodes")
+health_ui_text = NodePath("../UI/UI/HealthUI/RichTextLabel")
 
 [node name="Environment" type="Node2D" parent="."]
 

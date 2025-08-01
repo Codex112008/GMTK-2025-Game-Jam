@@ -26,6 +26,7 @@ var last_frame_on_floor : bool
 
 var dir : int
 
+@export var flash_color : Color
 @export var max_health : int = 5
 var current_health : int
 
@@ -38,6 +39,7 @@ var current_health : int
 @export var my_sprite : AnimatedSprite2D
 @export var time_rewinder : Rewinder
 @export var collision_shape : CollisionShape2D
+@export var animation_player : AnimationPlayer
 
 @export_subgroup("Particles")
 @export var drunk_particles : CPUParticles2D
@@ -49,6 +51,7 @@ var current_health : int
 @export var curve_effect_rect : CanvasItem
 @export var camera : Camera2D
 @export var instantiated_nodes : Node2D
+@export var health_ui_text : RichTextLabel
 
 func _ready():
 	curve_shader_strength = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("distortion_strength")
@@ -159,6 +162,10 @@ func _physics_process(delta : float) -> void:
 	if (is_on_floor() && Input.is_action_pressed("down")):
 		scale = Vector2(1.5, 0.5)
 	last_frame_on_floor = is_on_floor()
+	
+	# Flashing red
+	if i_frame_timer.time_left != 0:
+		animation_player.play("damage_flash")
 
 	move_and_slide()
 	
@@ -210,12 +217,13 @@ func enable_inputs():
 	set_process_unhandled_input(true)
 	
 func take_damage():
-	print("Ouch!")
 	i_frame_timer.start()
 	current_health -= 1
+	health_ui_text.text = str(current_health)
 	if current_health <= 0:
 		start_rewind()
 		current_health = max_health
+		health_ui_text.text = str(current_health)
 	else:
 		jump()
 
