@@ -195,7 +195,7 @@ texture = ExtResource("19_m0x7a")
 [node name="Timers" type="Node2D" parent="."]
 
 [node name="CoyoteTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="JumpBufferTimer" type="Timer" parent="Timers"]
@@ -228,6 +228,7 @@ anim_speed_max = 1.0
 [node name="JumpParticles" type="CPUParticles2D" parent="Particles"]
 material = SubResource("CanvasItemMaterial_qidb7")
 emitting = false
+amount = 4
 texture = ExtResource("23_i2e8t")
 lifetime = 0.6
 one_shot = true
@@ -268,7 +269,7 @@ anim_speed_max = 1.0
 [node name="RunParticles" type="CPUParticles2D" parent="Particles"]
 material = SubResource("CanvasItemMaterial_i2e8t")
 emitting = false
-amount = 6
+amount = 4
 texture = ExtResource("23_i2e8t")
 speed_scale = 2.0
 gravity = Vector2(0, 0)

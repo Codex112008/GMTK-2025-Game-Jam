@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://6w67bm40rsos"]
+
+[node name="Star" type="Sprite2D"]
+z_as_relative = false

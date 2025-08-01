@@ -3,14 +3,22 @@ extends TileMapLayer
 @export var tilemap_parent : Node2D
 @export var player : PlayerController
 
+# @export_group("Background")
+# @export var parallax_background : ParallaxBackground
+# @export var parallax_parent : CanvasLayer
+
 var camera : Camera2D
 var left_tilemap_clone : TileMapLayer
 var right_tilemap_clone : TileMapLayer
+
+# var left_parallax_clone : ParallaxBackground
+# var right_parallax_clone : ParallaxBackground
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	camera = player.get_child(-1) as Camera2D
 	
+	# duplicate level
 	left_tilemap_clone = duplicate()
 	left_tilemap_clone.position.x -= get_rect_world_pos_x()
 	left_tilemap_clone.set_script(null)
@@ -20,6 +28,17 @@ func _ready():
 	right_tilemap_clone.position.x += get_rect_world_pos_x()
 	right_tilemap_clone.set_script(null)
 	tilemap_parent.add_child(right_tilemap_clone)
+
+	# duplicate background
+	# left_parallax_clone = parallax_background.duplicate()
+	# left_parallax_clone.offset.x -= get_rect_world_pos_x()
+	# parallax_parent.add_child(left_parallax_clone)
+
+	# right_parallax_clone = parallax_background.duplicate()
+	# right_parallax_clone.offset.x += get_rect_world_pos_x()
+	# parallax_parent.add_child(right_parallax_clone)
+
+	# print(parallax_parent.get_children())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
