@@ -115,6 +115,8 @@ func _physics_process(delta : float) -> void:
 		jump()
 		remove_oldest_nut()
 
+		camera.apply_shake(0.4)
+
 		# Throw nut downward for visual feedback
 		var new_nut : ThrownNutScript = thrown_nut.instantiate()
 		new_nut.global_position = global_position
@@ -221,11 +223,11 @@ func take_damage(spike_pos : Vector2):
 
 	i_frame_timer.start()
 	current_health -= 1
-	health_ui_text.text = str(current_health)
+	health_ui_text.text = ": " + str(current_health)
 	if current_health <= 0:
 		start_rewind()
 		current_health = max_health
-		health_ui_text.text = str(current_health)
+		health_ui_text.text = ": " + str(current_health)
 	else:
 		var dir : Vector2 = -global_position.direction_to(spike_pos)
 		#print(":player pos: " + str(global_position) + " Spike pos: " + str(spike_pos))

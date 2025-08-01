@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://ct6kj2yoa2g00" path="res://Scripts/CameraFollow.gd" id="3_fgofq"]
 [ext_resource type="PackedScene" uid="uid://d3mqa3yxkbmot" path="res://Scenes/Player.tscn" id="3_j5yw3"]
 [ext_resource type="PackedScene" uid="uid://ixuxl7rgjg2u" path="res://Scenes/Tree.tscn" id="4_kldst"]
-[ext_resource type="Texture2D" uid="uid://yhmgk1skw6ix" path="res://Sprites/Collectable.png" id="4_rajel"]
+[ext_resource type="Texture2D" uid="uid://cix5ooltd72bh" path="res://Sprites/UI/Loop_ui.png" id="4_vvhu1"]
 [ext_resource type="Script" uid="uid://b5opwn1b3r0fj" path="res://Scripts/MainTileMap.gd" id="6_7lihs"]
 [ext_resource type="Texture2D" uid="uid://cp7cxs0ao8pah" path="res://Sprites/BG/BGmain.png" id="10_71axn"]
 [ext_resource type="Script" uid="uid://cxkj141c3q8gk" path="res://Scripts/GenerateStars.gd" id="10_acvyw"]
@@ -74,13 +74,12 @@ offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/UI/HealthUI"]
 layout_mode = 2
-texture = ExtResource("4_rajel")
-expand_mode = 2
+texture = ExtResource("4_vvhu1")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/UI/HealthUI"]
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-text = "5"
+text = ": 5"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
@@ -172,7 +171,7 @@ texture = ExtResource("10_71axn")
 
 [node name="Frontmost" type="Parallax2D" parent="ParallaxBackground"]
 z_index = 1
-scroll_scale = Vector2(0.8, 0.8)
+scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(768.705, 0)
 follow_viewport = false
 
@@ -181,7 +180,7 @@ position = Vector2(102, 60)
 texture = ExtResource("11_dahhg")
 
 [node name="Midground" type="Parallax2D" parent="ParallaxBackground"]
-scroll_scale = Vector2(0.6, 0.6)
+scroll_scale = Vector2(0.4, 0.4)
 repeat_size = Vector2(1150.79, 0)
 follow_viewport = false
 
@@ -195,7 +194,7 @@ texture = ExtResource("13_acvyw")
 
 [node name="Backmost" type="Parallax2D" parent="ParallaxBackground"]
 z_index = -1
-scroll_scale = Vector2(0.5, 0.5)
+scroll_scale = Vector2(0.2, 0.2)
 repeat_size = Vector2(959.195, 0)
 follow_viewport = false
 
