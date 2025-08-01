@@ -15,9 +15,6 @@ class_name PlayerController
 @export var curve_speed : float = 5.0
 var curve_shader_strength : float = 1
 
-@export var beer_needed : int = 6
-var beer_collected : int = 0
-
 var rewinding : bool = false
 @export var rewindAcceleration : float = 10
 var starting_point : Vector2
@@ -27,7 +24,8 @@ var last_frame_on_floor : bool
 var dir : int
 
 @export var flash_color : Color
-@export var max_health : int = 5
+@export var starting_max_health : int = 6
+var max_health : int
 var current_health : int
 
 @export_group("References")
@@ -60,20 +58,22 @@ func _ready():
 	
 	starting_point = position
 	
+	max_health = starting_max_health
 	current_health = max_health
+	health_ui_text.text = str(current_health)
 
 func _process(delta : float) -> void:
 	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
 	if shader_material != null:
 		shader_material.set_shader_parameter("distortion_strength", max(0, lerpf(shader_material.get_shader_parameter("distortion_strength"), curve_shader_strength, curve_speed * delta)))
 	
-	if beer_collected >= 6:
+	if max_health <= 0:
 		pass_out()
 
 	# drunk particles
-	if drunk_particles.amount != 1 + beer_collected:
-		drunk_particles.amount = 1 + beer_collected
-		drunk_particles.speed_scale = 0.5 + (0.5 * beer_collected)
+	if drunk_particles.amount != 1 + starting_max_health - max_health:
+		drunk_particles.amount = 1 + starting_max_health - max_health
+		drunk_particles.speed_scale = 0.5 + (0.5 * (starting_max_health - max_health))
 
 func _physics_process(delta : float) -> void:
 	# Add the gravity.
@@ -166,6 +166,8 @@ func _physics_process(delta : float) -> void:
 	# Flashing red
 	if i_frame_timer.time_left != 0:
 		animation_player.play("damage_flash")
+	
+	
 
 	move_and_slide()
 	
