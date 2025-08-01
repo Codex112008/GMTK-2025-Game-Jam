@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=4 uid="uid://bfn2b364eucoc"]
 
-[ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://PlanetCurve.gdshader" id="1_iukft"]
+[ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://Shaders/PlanetCurve.gdshader" id="1_iukft"]
 [ext_resource type="Script" uid="uid://b35p01h4jxnjb" path="res://Scripts/UI/NutUI.gd" id="2_2irst"]
 [ext_resource type="PackedScene" uid="uid://dmrchrx1v38ud" path="res://Scenes/Beer.tscn" id="2_b2bpf"]
 [ext_resource type="TileSet" uid="uid://b5nmyyj2chinl" path="res://BaseTileSet.tres" id="2_gl6un"]
@@ -23,8 +23,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
 resource_local_to_scene = true
 shader = ExtResource("1_iukft")
-shader_parameter/radius = 5.0
-shader_parameter/distortion_strength = 1.0
+shader_parameter/radius = 10.0
+shader_parameter/distortion_strength = 2.0
 
 [node name="game" type="Node2D"]
 
@@ -52,7 +52,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_2irst")
 player = NodePath("../../../Player")
-offset = Vector2(-16, -40)
+offset = Vector2(-16, -48)
 nut_icon = ExtResource("3_bf53h")
 
 [node name="camera2d" type="Camera2D" parent="." node_paths=PackedStringArray("target", "level")]

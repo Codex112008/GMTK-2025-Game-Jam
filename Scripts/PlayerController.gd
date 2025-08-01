@@ -13,7 +13,7 @@ class_name PlayerController
 @export var thrown_nut : PackedScene
 
 @export var curve_speed : float = 5.0
-var curve_shader_strength : float
+var curve_shader_strength : float = 1
 
 @export var beer_needed : int = 6
 var beer_collected : int = 0
