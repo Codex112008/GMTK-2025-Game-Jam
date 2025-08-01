@@ -3,7 +3,7 @@ extends Camera2D
 @export var y_smooth_speed : float = 5.0
 @export var target : Node2D
 
-@export var level : TileMapLayer
+@export var level : MainTliemap
 
 const TILESIZE : float = 32
 
@@ -15,5 +15,5 @@ func _ready() -> void:
 
 	
 
-func _process(delta):
-	global_position = Vector2(target.global_position.x, lerpf(global_position.y, target.global_position.y, y_smooth_speed * delta))
+func _physics_process(delta):
+	global_position = global_position.lerp(target.global_position, y_smooth_speed * delta)

@@ -26,11 +26,15 @@ var last_frame_on_floor : bool
 
 var dir : int
 
+@export var max_health : int = 5
+var current_health : int
+
 @export_group("References")
 @export var coyote_timer : Timer
 @export var jump_buffer_timer : Timer
 @export var short_jump_timer : Timer
 @export var spin_timer : Timer
+@export var i_frame_timer : Timer
 @export var my_sprite : AnimatedSprite2D
 @export var time_rewinder : Rewinder
 @export var collision_shape : CollisionShape2D
@@ -52,6 +56,8 @@ func _ready():
 	time_rewinder.done_rewinding.connect(enable_inputs)
 	
 	starting_point = position
+	
+	current_health = max_health
 
 func _process(delta : float) -> void:
 	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
@@ -164,6 +170,15 @@ func _physics_process(delta : float) -> void:
 			collidingTree.has_nut = false
 			collidingTree.empty = true
 			nutted_trees.append(collidingTree)
+		
+		if i_frame_timer.time_left == 0:
+			var colliding_tilemap : MainTliemap = get_slide_collision(i).get_collider() as MainTliemap
+			if colliding_tilemap != null:
+				var collision_point : Vector2 = get_slide_collision(i).get_position()
+				var tile_coords : Vector2i = colliding_tilemap.local_to_map(colliding_tilemap.to_local(collision_point))
+				var tile_data : TileData = colliding_tilemap.get_cell_tile_data(tile_coords)
+				if tile_data != null && tile_data.get_custom_data("IsSpike") == true:
+					take_damage()
 
 func jump():
 	jump_particles.restart()
@@ -193,6 +208,16 @@ func start_rewind():
 func enable_inputs():
 	set_process_input(true)
 	set_process_unhandled_input(true)
+	
+func take_damage():
+	print("Ouch!")
+	i_frame_timer.start()
+	current_health -= 1
+	if current_health <= 0:
+		start_rewind()
+		current_health = max_health
+	else:
+		jump()
 
 func pass_out():
 	print("LMAO good job drunkard")
