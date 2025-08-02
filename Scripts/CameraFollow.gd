@@ -11,7 +11,6 @@ const TILESIZE : float = 32
 func _ready() -> void:
 	var level_rect : Rect2i = level.get_used_rect()
 	
-	limit_top = (level_rect.position.y * TILESIZE) + (3 * TILESIZE)
 	limit_bottom = ((level_rect.size.y + level_rect.position.y) * TILESIZE) - (2 * TILESIZE)
 
 	

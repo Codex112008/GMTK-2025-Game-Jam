@@ -28,14 +28,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if player.position.x > get_rect_world_pos_x() / 2:
-		player.position.x -= get_rect_world_pos_x()
-		camera.position.x -= get_rect_world_pos_x()
+	if player.global_position.x > get_rect_world_pos_x() / 2:
+		player.global_position.x -= get_rect_world_pos_x()
+		camera.global_position.x -= get_rect_world_pos_x()
 		camera.reset_physics_interpolation()
 		move_thrown_nuts(false)
-	elif player.position.x < -get_rect_world_pos_x() / 2:
-		player.position.x += get_rect_world_pos_x()
-		camera.position.x += get_rect_world_pos_x()
+	elif player.global_position.x < -get_rect_world_pos_x() / 2:
+		player.global_position.x += get_rect_world_pos_x()
+		camera.global_position.x += get_rect_world_pos_x()
 		camera.reset_physics_interpolation()
 		move_thrown_nuts(true)
 

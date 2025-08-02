@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://44epf0df578d"]
+[gd_scene load_steps=6 format=3 uid="uid://44epf0df578d"]
 
 [ext_resource type="Script" uid="uid://b03a7qus0f1tv" path="res://MovingPlatform.gd" id="1_5olv3"]
 [ext_resource type="Texture2D" uid="uid://cgufb1yjxivi" path="res://Sprites/Mushroom/movingmushroom.png" id="2_5olv3"]
@@ -12,6 +12,9 @@ point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fl5gg"]
 size = Vector2(128, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5olv3"]
+size = Vector2(128, 8)
 
 [node name="MovingPlatform" type="Path2D" node_paths=PackedStringArray("path_follow")]
 curve = SubResource("Curve2D_cbc1i")
@@ -28,9 +31,19 @@ texture = ExtResource("2_5olv3")
 shape = SubResource("RectangleShape2D_fl5gg")
 one_way_collision = true
 
+[node name="PlayerCheck" type="Area2D" parent="AnimatableBody2D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D/PlayerCheck"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_5olv3")
+
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false
 loop = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
 remote_path = NodePath("../../AnimatableBody2D")
+
+[connection signal="body_entered" from="AnimatableBody2D/PlayerCheck" to="." method="_on_player_check_body_entered"]
