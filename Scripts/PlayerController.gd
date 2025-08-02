@@ -52,6 +52,7 @@ var current_health : int
 @export var land_particles : CPUParticles2D
 @export var run_particles : CPUParticles2D
 @export var hit_particles : CPUParticles2D
+@export var afterimage_particles : GPUParticles2D
 
 @export_subgroup("Sounds")
 @export var footsteps_sound : SoundPlayer
@@ -126,6 +127,7 @@ func _physics_process(delta : float) -> void:
 		velocity.y += jump_strength / 2 # this value can be tweaked
 	
 	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote:
+		afterimage_particles.emitting = true
 		spin_timer.start()
 		jump()
 		remove_oldest_nut()
@@ -136,6 +138,9 @@ func _physics_process(delta : float) -> void:
 		var new_nut : ThrownNutScript = thrown_nut.instantiate()
 		new_nut.global_position = global_position
 		instantiated_nodes.add_child(new_nut)
+	
+	if spin_timer.time_left == 0 && not dashing:
+		afterimage_particles.emitting = false
 	
 	velocity = Vector2(clamp(velocity.x, -1000, 1000), clamp(velocity.y, -5000, 1250))
 	
@@ -148,6 +153,12 @@ func _physics_process(delta : float) -> void:
 		if is_on_floor(): # footstep sounds
 			footsteps_sound.play_sound()
 		velocity.x = lerpf(velocity.x, direction * speed, delta * acceleration)
+		
+		if direction  < 0:
+			afterimage_particles.scale.x = -1
+		else:
+			afterimage_particles.scale.x = 1
+		
 	else:
 		velocity.x = lerpf(velocity.x, 0, delta * friction)
 	
@@ -171,11 +182,13 @@ func _physics_process(delta : float) -> void:
 	
 	# Nut dash
 	if nut_count > 0 && Input.is_action_just_pressed("dash") && !rewinding && drink_timer.time_left == 0:
+		camera.apply_shake(0.2)
 		remove_oldest_nut()
 		dashing = true
 		velocity_before_dash = velocity.x
 		set_process_input(false)
 		set_process_unhandled_input(false)
+		afterimage_particles.emitting = true
 		dash_timer.start()
 		
 		var new_nut : ThrownNutScript = thrown_nut.instantiate()
@@ -185,17 +198,19 @@ func _physics_process(delta : float) -> void:
 			new_nut.velocity.x = -new_nut.start_fall_speed
 		else:
 			new_nut.velocity.x = new_nut.start_fall_speed
-	
-	if dash_timer.time_left == 0 && dashing:
-		velocity.x = velocity_before_dash
-		dashing = false
-	
-	if dashing:
-		enable_inputs()
+			
 		if !my_sprite.flip_h:
 			velocity.x = dash_strength
 		else:
 			velocity.x = -dash_strength
+	
+	if dash_timer.time_left == 0 && dashing:
+		velocity.x = velocity_before_dash
+		afterimage_particles.emitting = false
+		enable_inputs()
+		dashing = false
+	
+	if dashing:
 		velocity.y = 0
 	
 	# SQUISH
