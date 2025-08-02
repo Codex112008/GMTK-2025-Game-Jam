@@ -9,6 +9,8 @@ class_name PlayerController
 @export var friction : float = 20.0 # Basically deceleration
 var velocity_before_dash : float
 var dashing : bool = false
+@export var dash_spritesheet : Texture2D
+@export var jump_spritesheet : Texture2D
 
 @export var max_nut_count : int = 2
 @export var nut_count : int = 0
@@ -174,6 +176,7 @@ func _physics_process(delta : float) -> void:
 		instantiated_nodes.add_child(new_nut)
 	
 	if spin_timer.time_left == 0 && not dashing:
+		afterimage_particles.texture = dash_spritesheet
 		afterimage_particles.emitting = false
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -280,6 +283,7 @@ func jump():
 		print(str(velocity.x))
 		dash_timer.stop()
 		if spin_timer.time_left == 0:
+			afterimage_particles.texture = jump_spritesheet
 			afterimage_particles.emitting = true
 			spin_timer.start()
 	
