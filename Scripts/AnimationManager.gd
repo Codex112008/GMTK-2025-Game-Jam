@@ -17,8 +17,11 @@ func _process(delta: float) -> void:
 			play("idle")
 			show_cheeks = true;
 		elif !player.is_on_floor():
-			if player.spin_timer.time_left != 0 || player.dash_timer.time_left != 0:
+			if player.spin_timer.time_left != 0:
 				play("spin")
+				show_cheeks = false;
+			elif player.dash_timer.time_left != 0:
+				play("dash")
 				show_cheeks = false;
 			else:
 				if player.velocity.y > 0:

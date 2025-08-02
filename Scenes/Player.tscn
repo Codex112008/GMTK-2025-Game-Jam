@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=63 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
@@ -11,22 +11,30 @@
 [ext_resource type="Texture2D" uid="uid://d2l3syu5cfhmc" path="res://Sprites/Player/Drink/hamster_drink2.png" id="6_c43xd"]
 [ext_resource type="Texture2D" uid="uid://igvw0x0kirar" path="res://Sprites/Player/Spin/hamster_spin1.png" id="6_lslt6"]
 [ext_resource type="Texture2D" uid="uid://mnlxh8a5slfa" path="res://Sprites/Player/Walk/hamster_walk1.png" id="6_megsn"]
+[ext_resource type="Texture2D" uid="uid://bnhmiykmttgh2" path="res://Sprites/Player/Dash/hamster_dash_sheet.png" id="7_8p516"]
 [ext_resource type="Texture2D" uid="uid://clwb6fu0y7mqs" path="res://Sprites/Player/Drink/hamster_drink3.png" id="7_avx33"]
 [ext_resource type="Texture2D" uid="uid://cxqqrjmhla05v" path="res://Sprites/Player/Air/hamster_air1.png" id="7_qidb7"]
 [ext_resource type="Texture2D" uid="uid://c87ic3ueue0a4" path="res://Sprites/Player/Spin/hamster_spin2.png" id="7_ulo2v"]
-[ext_resource type="Texture2D" uid="uid://bwcl0jx83a66r" path="res://Sprites/Player/Spin/hamster_spin_sheet.png" id="7_wpo1r"]
 [ext_resource type="Texture2D" uid="uid://bqovdvenwlycr" path="res://Sprites/Player/Walk/hamster_walk2.png" id="7_yoq75"]
 [ext_resource type="Texture2D" uid="uid://mp02sd1fj3d4" path="res://Sprites/Player/Spin/hamster_spin3.png" id="8_1iu4k"]
+[ext_resource type="Texture2D" uid="uid://iyeot8p1ue8a" path="res://Sprites/Player/Dash/hamster_dash1.png" id="8_fvoow"]
 [ext_resource type="Texture2D" uid="uid://tnn0gkor7klf" path="res://Sprites/Player/Walk/hamster_walk3.png" id="8_ksbbd"]
 [ext_resource type="Texture2D" uid="uid://bls3hclv4kj7o" path="res://Sprites/Player/Drink/hamster_drink4.png" id="8_rxg2u"]
 [ext_resource type="Texture2D" uid="uid://cyyppdj7e3k4" path="res://Sprites/Player/Spin/hamster_spin4.png" id="9_m0x7a"]
+[ext_resource type="Texture2D" uid="uid://bcgo3ar8ry154" path="res://Sprites/Player/Dash/hamster_dash2.png" id="9_v5fqo"]
 [ext_resource type="Texture2D" uid="uid://ddmdyxepg5r6p" path="res://Sprites/Player/Drink/hamster_drink5.png" id="9_xixlo"]
 [ext_resource type="Script" uid="uid://b6c0hiphk1ohy" path="res://Scripts/AnimationManager.gd" id="9_yoq75"]
 [ext_resource type="Texture2D" uid="uid://cf71ik4tqc4p5" path="res://Sprites/Player/Spin/hamster_spin5.png" id="10_5v66d"]
 [ext_resource type="Texture2D" uid="uid://wuad7nd0k4h3" path="res://Sprites/Player/Drink/hamster_drink6.png" id="10_bfbt0"]
+[ext_resource type="Texture2D" uid="uid://cycvwesk6ue08" path="res://Sprites/Player/Dash/hamster_dash3.png" id="10_yf17c"]
+[ext_resource type="Texture2D" uid="uid://btwjuf7duxsko" path="res://Sprites/Player/Dash/hamster_dash4.png" id="11_awd2i"]
 [ext_resource type="Texture2D" uid="uid://hvld6lgbrdgk" path="res://Sprites/Player/Drink/hamster_drink7.png" id="11_wosd6"]
 [ext_resource type="Texture2D" uid="uid://bm2kysin1c7xe" path="res://Sprites/Player/Spin/hamster_spin6.png" id="11_x63xi"]
 [ext_resource type="Texture2D" uid="uid://bst30fcex8vyg" path="res://Sprites/Player/Spin/hamster_spin7.png" id="12_i2e8t"]
+[ext_resource type="Texture2D" uid="uid://c01wpqbusjb0p" path="res://Sprites/Player/Dash/hamster_dash5.png" id="12_o2sks"]
+[ext_resource type="Texture2D" uid="uid://bj56fyyajfynv" path="res://Sprites/Player/Dash/hamster_dash6.png" id="13_3rw25"]
+[ext_resource type="Texture2D" uid="uid://bgkfxh8puo6rq" path="res://Sprites/Player/Dash/hamster_dash7.png" id="14_u4y2r"]
+[ext_resource type="Texture2D" uid="uid://cf1ib325kaks8" path="res://Sprites/Player/Dash/hamster_dash8.png" id="15_tbv6f"]
 [ext_resource type="Texture2D" uid="uid://c65634ac06im1" path="res://Sprites/Player/Walk/hamster_walk4.png" id="18_x63xi"]
 [ext_resource type="Texture2D" uid="uid://bwykemji501wp" path="res://Sprites/Player/Walk/hamster_walk5.png" id="19_i2e8t"]
 [ext_resource type="Texture2D" uid="uid://bjrltanv0vut6" path="res://Sprites/Player/hamster_cheeks.png" id="19_m0x7a"]
@@ -84,7 +92,7 @@ point_count = 3
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pqity"]
 particles_animation = true
-particles_anim_h_frames = 7
+particles_anim_h_frames = 8
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
@@ -104,6 +112,35 @@ anim_speed_max = 2.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gntrk"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_fvoow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_v5fqo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_yf17c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_awd2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_o2sks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_3rw25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u4y2r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_tbv6f")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 24.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("5_lyrkg")
@@ -382,13 +419,15 @@ material = SubResource("CanvasItemMaterial_pqity")
 position = Vector2(0, -16)
 emitting = false
 amount = 16
-texture = ExtResource("7_wpo1r")
-lifetime = 0.5
+texture = ExtResource("7_8p516")
+lifetime = 0.25
 process_material = SubResource("ParticleProcessMaterial_6hr71")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player", "cheeks")]
 sprite_frames = SubResource("SpriteFrames_gntrk")
-animation = &"idle"
+animation = &"dash"
+frame = 2
+frame_progress = 0.798832
 offset = Vector2(0, -16)
 script = ExtResource("9_yoq75")
 player = NodePath("..")

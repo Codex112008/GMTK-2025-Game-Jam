@@ -161,7 +161,7 @@ func _physics_process(delta : float) -> void:
 	
 	# Nut jump
 	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote:
-		afterimage_particles.emitting = true
+		#afterimage_particles.emitting = true
 		spin_timer.start()
 		jump()
 		remove_oldest_nut()
