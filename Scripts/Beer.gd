@@ -15,8 +15,13 @@ func _on_body_entered(body):
 		player.camera.offset += Vector2.UP * camera_offset_amount
 		player.max_health -= 1
 		if player.current_health > player.max_health:
-			player.current_health = player.max_health
-			player.health_ui_text.text = str(player.current_health)
+			player.health_ui_container.get_child(-1).queue_free()
+		else:
+			for i in range(player.current_health, player.max_health):
+				var health_icon : TextureRect = player.health_ui_container.get_child(0).duplicate()
+				player.health_ui_container.add_child(health_icon)
+		player.current_health = player.max_health
+			
 		player.drink()
 		player.start_rewind()
 		queue_free()

@@ -133,15 +133,6 @@ offset_bottom = 40.0
 layout_mode = 2
 texture = ExtResource("4_vvhu1")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/UI/HealthUI"]
-layout_mode = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-text = ": 5"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="camera2d" type="Camera2D" parent="." node_paths=PackedStringArray("target", "level")]
 position = Vector2(-24, -135)
 process_callback = 0
@@ -150,14 +141,14 @@ target = NodePath("../Player")
 level = NodePath("../Environment/base_tile_map")
 shakeFade = 15.0
 
-[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_text", "crt_canvas_layer", "audio_manager") instance=ExtResource("3_j5yw3")]
+[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_container", "crt_canvas_layer", "audio_manager") instance=ExtResource("3_j5yw3")]
 z_index = 1
 position = Vector2(-24, -119)
 safe_margin = 0.1
 curve_effect_rect = NodePath("../Shaders/curve_layer/curve_effect")
 camera = NodePath("../camera2d")
 instantiated_nodes = NodePath("../InstantiatedNodes")
-health_ui_text = NodePath("../UI/UI/HealthUI/RichTextLabel")
+health_ui_container = NodePath("../UI/UI/HealthUI")
 crt_canvas_layer = NodePath("../Shaders/crt_layer")
 audio_manager = NodePath("AudioManager")
 

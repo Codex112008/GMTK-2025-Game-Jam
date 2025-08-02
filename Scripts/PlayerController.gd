@@ -64,7 +64,7 @@ var current_health : int
 @export var curve_effect_rect : CanvasItem
 @export var camera : CameraFollow
 @export var instantiated_nodes : Node2D
-@export var health_ui_text : RichTextLabel
+@export var health_ui_container : HBoxContainer
 @export var crt_canvas_layer : CanvasLayer
 @export var audio_manager : AudioManager
 
@@ -77,7 +77,9 @@ func _ready():
 	
 	max_health = starting_max_health
 	current_health = max_health
-	health_ui_text.text = str(current_health)
+	for i in range(1, starting_max_health):
+		var health_icon : TextureRect = health_ui_container.get_child(0).duplicate()
+		health_ui_container.add_child(health_icon)
 
 func _process(delta : float) -> void:
 	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
@@ -300,24 +302,27 @@ func enable_inputs():
 	set_process_unhandled_input(true)
 	
 func take_damage(spike_pos : Vector2):
-	# juice
-	hurt_sound.play_sound()
-	camera.apply_shake(3)
-	hit_particles.restart()
-	hit_particles.emitting = true
+	if i_frame_timer.time_left == 0:
+		# juice
+		hurt_sound.play_sound()
+		camera.apply_shake(3)
+		hit_particles.restart()
+		hit_particles.emitting = true
 
-	i_frame_timer.start()
-	current_health -= 1
-	health_ui_text.text = ": " + str(current_health)
-	if current_health <= 0:
-		start_rewind()
-		current_health = max_health
-		health_ui_text.text = ": " + str(current_health)
-	else:
-		var dir_to_spike : Vector2 = -global_position.direction_to(spike_pos)
-		var dir : Vector2i = Vector2i(roundi(dir_to_spike.x), roundi(dir_to_spike.y))
-		#print(":player pos: " + str(global_position) + " Spike pos: " + str(spike_pos))
-		velocity = dir * jump_strength
+		i_frame_timer.start()
+		current_health -= 1
+		if current_health <= 0:
+			for i in range(current_health + 1, max_health):
+				var health_icon : TextureRect = health_ui_container.get_child(0).duplicate()
+				health_ui_container.add_child(health_icon)
+			current_health = max_health
+			start_rewind()
+		else:
+			health_ui_container.get_child(-1).queue_free()
+			var dir_to_spike : Vector2 = -global_position.direction_to(spike_pos)
+			var dir : Vector2i = Vector2i(roundi(dir_to_spike.x), roundi(dir_to_spike.y))
+			#print(":player pos: " + str(global_position) + " Spike pos: " + str(spike_pos))
+			velocity = dir * jump_strength
 
 func drink():
 	drink_timer.start()
