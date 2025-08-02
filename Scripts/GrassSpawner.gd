@@ -16,7 +16,7 @@ func GenerateGrass():
 	
 	for tile : Vector2i in tilemaps[0].get_used_cells():
 		var cell_above : Vector2i = tilemaps[0].get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_TOP_SIDE)
-		if tilemaps[0].get_cell_source_id(cell_above) == -1:
+		if tilemaps[0].get_cell_source_id(cell_above) == -1 && tilemaps[0].get_cell_tile_data(tile).get_custom_data("IsGrassy"):
 			var sprite_frame : Array[int] = [rng.randi() % 6, rng.randi() % 6]
 			var wind_offset : Array[int] = [rng.randi() % 3, rng.randi() % 3]
 			for tilemap : TileMapLayer in tilemaps:

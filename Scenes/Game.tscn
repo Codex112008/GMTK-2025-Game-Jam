@@ -141,6 +141,7 @@ shakeFade = 15.0
 [node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_text", "crt_canvas_layer") instance=ExtResource("3_j5yw3")]
 z_index = 1
 position = Vector2(-24, -119)
+safe_margin = 0.1
 curve_effect_rect = NodePath("../Shaders/curve_layer/curve_effect")
 camera = NodePath("../camera2d")
 instantiated_nodes = NodePath("../InstantiatedNodes")

@@ -4,8 +4,11 @@ class_name PlayerController
 @export var speed : float = 300.0
 @export var acceleration : float = 10.0
 @export var jump_strength : float = 600.0
+@export var dash_strength : float = 1000.0
 @export var gravity : float = 1600.0
 @export var friction : float = 20.0 # Basically deceleration
+var velocity_before_dash : float
+var dashing : bool = false
 
 @export var max_nut_count : int = 2
 @export var nut_count : int = 0
@@ -37,6 +40,7 @@ var current_health : int
 @export var i_frame_timer : Timer
 @export var drink_timer : Timer
 @export var pre_rewind_timer : Timer
+@export var dash_timer : Timer
 @export var my_sprite : AnimatedSprite2D
 @export var time_rewinder : Rewinder
 @export var collision_shape : CollisionShape2D
@@ -156,7 +160,27 @@ func _physics_process(delta : float) -> void:
 	# Drop down one way platforms
 	if Input.is_action_pressed("down") && is_on_floor():
 		position.y += 1
+	
+	# Dash
+	if Input.is_action_just_pressed("dash") && !rewinding && drink_timer.time_left == 0:
+		dashing = true
+		velocity_before_dash = velocity.x
+		set_process_input(false)
+		set_process_unhandled_input(false)
+		dash_timer.start()
 		
+	if dash_timer.time_left == 0 && dashing:
+		velocity.x = velocity_before_dash
+		dashing = false
+	
+	if dashing:
+		enable_inputs()
+		if velocity.x > 0:
+			velocity.x = dash_strength
+		else:
+			velocity.x = -dash_strength
+		velocity.y = 0
+	
 	# SQUISH
 	if scale.x > 1.25 && scale.y < 0.75:
 		scale = scale.lerp(Vector2.ONE, delta * 15)
@@ -203,11 +227,11 @@ func _physics_process(delta : float) -> void:
 					take_damage(tile_coords * 32 + Vector2i(16, 16))
 
 func jump():
-	jump_particles.restart()
-	jump_particles.emitting = true
-	short_jump_timer.start()
-	velocity.y = -jump_strength;
-	# velocity.y = -jump_strength
+	if !rewinding && drink_timer.time_left == 0:
+		jump_particles.restart()
+		jump_particles.emitting = true
+		short_jump_timer.start()
+		velocity.y = -jump_strength;
 	
 func remove_oldest_nut():
 	nutted_trees[0].grow()
