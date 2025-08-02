@@ -9,20 +9,17 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_d2pg4")
+}, {
+"duration": 1.0,
 "texture": ExtResource("1_hniy1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_d2pg4")
-}, {
-"duration": 1.0,
 "texture": ExtResource("3_07ujs")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_d2pg4")
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1okyp"]
@@ -76,7 +73,7 @@ anim_player = NodePath("AnimationPlayer")
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_hv7xx")
 autoplay = "default"
-frame_progress = 0.397417
+frame_progress = 0.862359
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 1)
