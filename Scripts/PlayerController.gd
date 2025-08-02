@@ -126,7 +126,38 @@ func _physics_process(delta : float) -> void:
 	# mark brown told me to do this i did the platformer toolkit thingie
 	if Input.is_action_just_released("jump") && short_jump_timer.time_left != 0:
 		velocity.y += jump_strength / 2 # this value can be tweaked
+		
+	# Nut dash
+	if nut_count > 0 && Input.is_action_just_pressed("dash") && !rewinding && drink_timer.time_left == 0:
+		camera.apply_shake(0.2)
+		remove_oldest_nut()
+		dashing = true
+		velocity_before_dash = velocity.x
+		afterimage_particles.emitting = true
+		dash_timer.start()
+		
+		var new_nut : ThrownNutScript = thrown_nut.instantiate()
+		new_nut.global_position = global_position
+		instantiated_nodes.add_child(new_nut)
+		if !my_sprite.flip_h:
+			new_nut.velocity.x = -new_nut.start_fall_speed
+		else:
+			new_nut.velocity.x = new_nut.start_fall_speed
+			
+		if !my_sprite.flip_h:
+			velocity.x = dash_strength
+		else:
+			velocity.x = -dash_strength
 	
+	if dash_timer.time_left == 0 && dashing:
+		velocity.x = velocity_before_dash
+		afterimage_particles.emitting = false
+		dashing = false
+	
+	if dashing:
+		velocity.y = 0
+	
+	# Nut jump
 	if nut_count > 0 && not is_on_floor() && Input.is_action_just_pressed("jump") && !did_coyote:
 		afterimage_particles.emitting = true
 		spin_timer.start()
@@ -143,13 +174,10 @@ func _physics_process(delta : float) -> void:
 	if spin_timer.time_left == 0 && not dashing:
 		afterimage_particles.emitting = false
 	
-	velocity = Vector2(clamp(velocity.x, -1000, 1000), clamp(velocity.y, -5000, 1250))
-	
-	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
 	run_particles.emitting = direction && is_on_floor() # if moving have running particles
-	if direction && pre_rewind_timer.time_left == 0:
+	if direction && pre_rewind_timer.time_left == 0 && !dashing:
 		dir = direction
 		if is_on_floor(): # footstep sounds
 			footsteps_sound.play_sound()
@@ -181,39 +209,6 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_pressed("down") && is_on_floor():
 		position.y += 1
 	
-	# Nut dash
-	if nut_count > 0 && Input.is_action_just_pressed("dash") && !rewinding && drink_timer.time_left == 0:
-		camera.apply_shake(0.2)
-		remove_oldest_nut()
-		dashing = true
-		velocity_before_dash = velocity.x
-		set_process_input(false)
-		set_process_unhandled_input(false)
-		afterimage_particles.emitting = true
-		dash_timer.start()
-		
-		var new_nut : ThrownNutScript = thrown_nut.instantiate()
-		new_nut.global_position = global_position
-		instantiated_nodes.add_child(new_nut)
-		if !my_sprite.flip_h:
-			new_nut.velocity.x = -new_nut.start_fall_speed
-		else:
-			new_nut.velocity.x = new_nut.start_fall_speed
-			
-		if !my_sprite.flip_h:
-			velocity.x = dash_strength
-		else:
-			velocity.x = -dash_strength
-	
-	if dash_timer.time_left == 0 && dashing:
-		velocity.x = velocity_before_dash
-		afterimage_particles.emitting = false
-		enable_inputs()
-		dashing = false
-	
-	if dashing:
-		velocity.y = 0
-	
 	# SQUISH
 	if scale.x > 1.25 && scale.y < 0.75:
 		scale = scale.lerp(Vector2.ONE, delta * 15)
@@ -239,6 +234,8 @@ func _physics_process(delta : float) -> void:
 	
 	last_frame_on_floor = is_on_floor()
 	last_frame_y_velocity = velocity.y
+	
+	velocity = Vector2(clamp(velocity.x, -3000, 3000), clamp(velocity.y, -5000, 1250))
 	
 	move_and_slide()
 	
@@ -274,7 +271,15 @@ func jump():
 	jump_particles.emitting = true
 	short_jump_timer.start()
 	velocity.y = -jump_strength;
-	# velocity.y = -jump_strength
+	
+	if dashing:
+		dashing = false
+		velocity.x *= 1.4
+		print(str(velocity.x))
+		dash_timer.stop()
+		if spin_timer.time_left == 0:
+			afterimage_particles.emitting = true
+			spin_timer.start()
 	
 func remove_oldest_nut():
 	nutted_trees[0].grow()
