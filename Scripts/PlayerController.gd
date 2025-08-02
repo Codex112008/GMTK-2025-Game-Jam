@@ -30,6 +30,7 @@ var last_frame_y_velocity : float
 var dir : int
 
 @export var flash_color : Color
+@export var health_icon_scene : PackedScene
 @export var starting_max_health : int = 6
 var max_health : int
 var current_health : int
@@ -79,9 +80,9 @@ func _ready():
 	
 	max_health = starting_max_health
 	current_health = max_health
-	for i in range(1, starting_max_health):
-		var health_icon : HealthIcon = health_ui_container.get_child(0).duplicate()
-		health_icon.position = Vector2(i * 24, 0)
+	for i in range(0, starting_max_health):
+		var health_icon : HealthIcon = health_icon_scene.instantiate()
+		health_icon.position = Vector2(i * 22, 0)
 		health_icon.z_index = -i
 		health_ui_container.add_child(health_icon)
 
@@ -265,7 +266,7 @@ func _physics_process(delta : float) -> void:
 					take_damage(tile_coords * 32 + Vector2i(16, 16))
 
 	# set audio bus effect
-	audio_manager.bus_effect(crt_canvas_layer.visible)
+	audio_manager.bus_effect(rewinding)
 
 func jump():
 	if !rewinding && drink_timer.time_left == 0:
@@ -296,7 +297,8 @@ func remove_oldest_nut():
 
 func start_rewind():
 	Engine.time_scale = 0.5
-	crt_canvas_layer.visible = true
+	if Settings.crt_on:
+		crt_canvas_layer.visible = true
 	velocity = Vector2.ZERO
 	set_process_input(false)
 	set_process_unhandled_input(false)
@@ -317,26 +319,19 @@ func take_damage(spike_pos : Vector2):
 
 		i_frame_timer.start()
 		current_health -= 1
+		var icon : HealthIcon = health_ui_container.get_child(current_health)
+		icon.is_full = false
 		if current_health <= 0:
-			for i in range(1, health_ui_container.get_children().size()):
-				health_ui_container.get_child(i).queue_free()
-			for i in range(current_health, max_health):
-				var health_icon : TextureRect = health_ui_container.get_child(0).duplicate()
-				health_icon.position = Vector2(i * 24, 0)
-				health_icon.z_index = -i
-				health_ui_container.add_child(health_icon)
 			current_health = max_health
+			for health_icon : HealthIcon in health_ui_container.get_children():
+				health_icon.is_full = true
 			start_rewind()
 		else:
-			var icon : HealthIcon = health_ui_container.get_child(current_health)
-			icon.is_full = false
-
 			var dir_to_spike : Vector2 = -global_position.direction_to(spike_pos)
 			var dir : Vector2i = Vector2i(roundi(dir_to_spike.x), roundi(dir_to_spike.y))
 			velocity = dir * jump_strength
 
 func drink():
-	health_ui_container.get_child(-1).queue_free()
 	drink_timer.start()
 
 func pass_out():

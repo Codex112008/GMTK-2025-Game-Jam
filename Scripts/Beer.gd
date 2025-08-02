@@ -14,12 +14,15 @@ func _on_body_entered(body):
 		player.curve_shader_strength += beer_strength
 		player.camera.offset += Vector2.UP * camera_offset_amount
 		player.max_health -= 1
-		if player.current_health > player.max_health:
-			player.health_ui_container.get_child(-1).queue_free()
-		else:
-			for i in range(player.current_health, player.max_health):
-				var health_icon : TextureRect = player.health_ui_container.get_child(0).duplicate()
-				player.health_ui_container.add_child(health_icon)
+		var reversed_health_ui_container_children = player.health_ui_container.get_children()
+		reversed_health_ui_container_children.reverse()
+		for health_icon : HealthIcon in reversed_health_ui_container_children:
+			if health_icon.is_beer == false:
+				health_icon.is_beer = true
+				break
+		for health_icon : HealthIcon in player.health_ui_container.get_children():
+			health_icon.is_full = true
+			
 		player.current_health = player.max_health
 			
 		player.drink()
