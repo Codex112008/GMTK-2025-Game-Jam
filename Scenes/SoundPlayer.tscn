@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c541fyijs6fkk" path="res://Scripts/SoundPlayer.gd" id="1_kfq4j"]
 
 [node name="SoundPlayer" type="AudioStreamPlayer2D" node_paths=PackedStringArray("wait_play_timer")]
+bus = &"Rewind"
 script = ExtResource("1_kfq4j")
 wait_play_timer = NodePath("WaitPlayTimer")
 

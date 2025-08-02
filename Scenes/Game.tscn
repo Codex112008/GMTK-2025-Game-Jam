@@ -1,16 +1,17 @@
-[gd_scene load_steps=32 format=4 uid="uid://bfn2b364eucoc"]
+[gd_scene load_steps=33 format=4 uid="uid://bfn2b364eucoc"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://Shaders/PlanetCurve.gdshader" id="1_iukft"]
 [ext_resource type="Script" uid="uid://b35p01h4jxnjb" path="res://Scripts/UI/NutUI.gd" id="2_2irst"]
 [ext_resource type="PackedScene" uid="uid://dmrchrx1v38ud" path="res://Scenes/Beer.tscn" id="2_b2bpf"]
 [ext_resource type="TileSet" uid="uid://b5nmyyj2chinl" path="res://BaseTileSet.tres" id="2_gl6un"]
+[ext_resource type="Texture2D" uid="uid://dn4qc4ukoyc05" path="res://Sprites/UI/Rewind.png" id="3_356ba"]
 [ext_resource type="PackedScene" uid="uid://b2yrh30mqxkuc" path="res://Scenes/NutUIElement.tscn" id="3_bf53h"]
 [ext_resource type="Script" uid="uid://ct6kj2yoa2g00" path="res://Scripts/CameraFollow.gd" id="3_fgofq"]
 [ext_resource type="PackedScene" uid="uid://d3mqa3yxkbmot" path="res://Scenes/Player.tscn" id="3_j5yw3"]
 [ext_resource type="PackedScene" uid="uid://ixuxl7rgjg2u" path="res://Scenes/Tree.tscn" id="4_kldst"]
 [ext_resource type="Texture2D" uid="uid://cix5ooltd72bh" path="res://Sprites/UI/Loop_ui.png" id="4_vvhu1"]
 [ext_resource type="Script" uid="uid://b5opwn1b3r0fj" path="res://Scripts/MainTileMap.gd" id="6_7lihs"]
-[ext_resource type="Script" path="res://Scripts/MusicPlayer.gd" id="9_3jf1l"]
+[ext_resource type="Script" uid="uid://b4oty5unh75oy" path="res://Scripts/AudioManager.gd" id="9_3jf1l"]
 [ext_resource type="Texture2D" uid="uid://cp7cxs0ao8pah" path="res://Sprites/BG/BGmain.png" id="10_71axn"]
 [ext_resource type="Script" uid="uid://cxkj141c3q8gk" path="res://Scripts/GenerateStars.gd" id="10_acvyw"]
 [ext_resource type="Texture2D" uid="uid://hs7itxox02mv" path="res://Sprites/BG/Stars/star_large.png" id="11_8r6kd"]
@@ -41,23 +42,23 @@ shader_parameter/distortion_strength = 2.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3jf1l"]
 shader = ExtResource("24_raj38")
 shader_parameter/overlay = true
-shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/resolution = Vector2(320, 180)
 shader_parameter/brightness = 1.4
 shader_parameter/scanlines_opacity = 0.4
 shader_parameter/scanlines_width = 0.25
 shader_parameter/grille_opacity = 0.3
 shader_parameter/roll = true
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 15.0
+shader_parameter/roll_speed = 16.0
+shader_parameter/roll_size = 25.0
 shader_parameter/roll_variation = 1.8
-shader_parameter/distort_intensity = 0.05
-shader_parameter/aberration = 0.03
-shader_parameter/noise_opacity = 0.4
+shader_parameter/distort_intensity = 0.2
+shader_parameter/aberration = 0.01
+shader_parameter/noise_opacity = 0.0
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.06
 shader_parameter/pixelate = true
 shader_parameter/discolor = true
-shader_parameter/warp_amount = 1.0
+shader_parameter/warp_amount = 0.1
 shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
@@ -96,6 +97,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Shaders/crt_layer/crt_effect"]
+offset_left = 568.0
+offset_top = 288.0
+offset_right = 600.0
+offset_bottom = 320.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_356ba")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -140,7 +149,7 @@ target = NodePath("../Player")
 level = NodePath("../Environment/base_tile_map")
 shakeFade = 15.0
 
-[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_text", "crt_canvas_layer") instance=ExtResource("3_j5yw3")]
+[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_text", "crt_canvas_layer", "audio_manager") instance=ExtResource("3_j5yw3")]
 z_index = 1
 position = Vector2(-24, -119)
 safe_margin = 0.1
@@ -149,11 +158,13 @@ camera = NodePath("../camera2d")
 instantiated_nodes = NodePath("../InstantiatedNodes")
 health_ui_text = NodePath("../UI/UI/HealthUI/RichTextLabel")
 crt_canvas_layer = NodePath("../Shaders/crt_layer")
+audio_manager = NodePath("AudioManager")
 
-[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
+[node name="AudioManager" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2(24, 119)
 stream = ExtResource("26_i0vto")
 autoplay = true
+bus = &"Rewind"
 script = ExtResource("9_3jf1l")
 
 [node name="Environment" type="Node2D" parent="."]
@@ -268,4 +279,4 @@ texture = ExtResource("14_alh3a")
 
 [node name="InstantiatedNodes" type="Node2D" parent="."]
 
-[connection signal="finished" from="Player/MusicPlayer" to="Player/MusicPlayer" method="_on_finished"]
+[connection signal="finished" from="Player/AudioManager" to="Player/AudioManager" method="_on_finished"]
