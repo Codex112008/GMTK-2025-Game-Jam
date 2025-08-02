@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=43 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
@@ -6,17 +6,24 @@
 [ext_resource type="Texture2D" uid="uid://c7x3ukwuxcs7o" path="res://Sprites/Particles/drunk_particles.png" id="3_gntrk"]
 [ext_resource type="Script" uid="uid://babpw2llhagpv" path="res://addons/TimeRewinder/rewinder.gd" id="4_5ixxa"]
 [ext_resource type="Texture2D" uid="uid://df76gpbhr5pbd" path="res://Sprites/Player/Air/hamster_air2.png" id="5_i2e8t"]
+[ext_resource type="Texture2D" uid="uid://7lcyd6yw4quc" path="res://Sprites/Player/Drink/hamster_drink1.png" id="5_lyrkg"]
 [ext_resource type="Script" uid="uid://25uq6brcn0fn" path="res://addons/TimeRewinder/rewind_property.gd" id="5_nn08x"]
+[ext_resource type="Texture2D" uid="uid://d2l3syu5cfhmc" path="res://Sprites/Player/Drink/hamster_drink2.png" id="6_c43xd"]
 [ext_resource type="Texture2D" uid="uid://igvw0x0kirar" path="res://Sprites/Player/Spin/hamster_spin1.png" id="6_lslt6"]
 [ext_resource type="Texture2D" uid="uid://mnlxh8a5slfa" path="res://Sprites/Player/Walk/hamster_walk1.png" id="6_megsn"]
+[ext_resource type="Texture2D" uid="uid://clwb6fu0y7mqs" path="res://Sprites/Player/Drink/hamster_drink3.png" id="7_avx33"]
 [ext_resource type="Texture2D" uid="uid://cxqqrjmhla05v" path="res://Sprites/Player/Air/hamster_air1.png" id="7_qidb7"]
 [ext_resource type="Texture2D" uid="uid://c87ic3ueue0a4" path="res://Sprites/Player/Spin/hamster_spin2.png" id="7_ulo2v"]
 [ext_resource type="Texture2D" uid="uid://bqovdvenwlycr" path="res://Sprites/Player/Walk/hamster_walk2.png" id="7_yoq75"]
 [ext_resource type="Texture2D" uid="uid://mp02sd1fj3d4" path="res://Sprites/Player/Spin/hamster_spin3.png" id="8_1iu4k"]
 [ext_resource type="Texture2D" uid="uid://tnn0gkor7klf" path="res://Sprites/Player/Walk/hamster_walk3.png" id="8_ksbbd"]
+[ext_resource type="Texture2D" uid="uid://bls3hclv4kj7o" path="res://Sprites/Player/Drink/hamster_drink4.png" id="8_rxg2u"]
 [ext_resource type="Texture2D" uid="uid://cyyppdj7e3k4" path="res://Sprites/Player/Spin/hamster_spin4.png" id="9_m0x7a"]
+[ext_resource type="Texture2D" uid="uid://ddmdyxepg5r6p" path="res://Sprites/Player/Drink/hamster_drink5.png" id="9_xixlo"]
 [ext_resource type="Script" uid="uid://b6c0hiphk1ohy" path="res://Scripts/AnimationManager.gd" id="9_yoq75"]
 [ext_resource type="Texture2D" uid="uid://cf71ik4tqc4p5" path="res://Sprites/Player/Spin/hamster_spin5.png" id="10_5v66d"]
+[ext_resource type="Texture2D" uid="uid://wuad7nd0k4h3" path="res://Sprites/Player/Drink/hamster_drink6.png" id="10_bfbt0"]
+[ext_resource type="Texture2D" uid="uid://hvld6lgbrdgk" path="res://Sprites/Player/Drink/hamster_drink7.png" id="11_wosd6"]
 [ext_resource type="Texture2D" uid="uid://bm2kysin1c7xe" path="res://Sprites/Player/Spin/hamster_spin6.png" id="11_x63xi"]
 [ext_resource type="Texture2D" uid="uid://bst30fcex8vyg" path="res://Sprites/Player/Spin/hamster_spin7.png" id="12_i2e8t"]
 [ext_resource type="Texture2D" uid="uid://c65634ac06im1" path="res://Sprites/Player/Walk/hamster_walk4.png" id="18_x63xi"]
@@ -36,6 +43,32 @@ size = Vector2(20, 18)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gntrk"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lyrkg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_c43xd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_avx33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rxg2u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xixlo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_bfbt0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_wosd6")
+}],
+"loop": false,
+"name": &"drink",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("5_i2e8t")
@@ -186,7 +219,7 @@ _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0.787398), 0.0, 1.97426, 0, 0, Vector2(0.144068, 1.44348), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "i_frame_timer", "my_sprite", "time_rewinder", "collision_shape", "animation_player", "drunk_particles", "jump_particles", "land_particles", "run_particles", "hit_particles")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "i_frame_timer", "drink_timer", "pre_rewind_timer", "my_sprite", "time_rewinder", "collision_shape", "animation_player", "drunk_particles", "jump_particles", "land_particles", "run_particles", "hit_particles")]
 collision_layer = 2
 script = ExtResource("1_kyqiw")
 speed = 260.0
@@ -199,6 +232,8 @@ jump_buffer_timer = NodePath("Timers/JumpBufferTimer")
 short_jump_timer = NodePath("Timers/ShortJumpTimer")
 spin_timer = NodePath("Timers/SpinTimer")
 i_frame_timer = NodePath("Timers/IFrameTimer")
+drink_timer = NodePath("Timers/DrinkTimer")
+pre_rewind_timer = NodePath("Timers/PreRewindTimer")
 my_sprite = NodePath("AnimatedSprite2D")
 time_rewinder = NodePath("Rewinder")
 collision_shape = NodePath("CollisionShape2D")
@@ -221,7 +256,9 @@ shape = SubResource("RectangleShape2D_kyqiw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player", "cheeks")]
 sprite_frames = SubResource("SpriteFrames_gntrk")
-animation = &"fall"
+animation = &"drink"
+frame = 6
+frame_progress = 1.0
 offset = Vector2(0, -16)
 script = ExtResource("9_yoq75")
 player = NodePath("..")
@@ -256,6 +293,14 @@ one_shot = true
 
 [node name="IFrameTimer" type="Timer" parent="Timers"]
 wait_time = 0.1
+one_shot = true
+
+[node name="DrinkTimer" type="Timer" parent="Timers"]
+wait_time = 0.67
+one_shot = true
+
+[node name="PreRewindTimer" type="Timer" parent="Timers"]
+wait_time = 0.67
 one_shot = true
 
 [node name="Particles" type="Node2D" parent="."]
@@ -345,3 +390,5 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_m0x7a")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
+
+[connection signal="timeout" from="Timers/PreRewindTimer" to="." method="_on_pre_rewind_timeout"]

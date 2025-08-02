@@ -35,6 +35,8 @@ var current_health : int
 @export var short_jump_timer : Timer
 @export var spin_timer : Timer
 @export var i_frame_timer : Timer
+@export var drink_timer : Timer
+@export var pre_rewind_timer : Timer
 @export var my_sprite : AnimatedSprite2D
 @export var time_rewinder : Rewinder
 @export var collision_shape : CollisionShape2D
@@ -130,7 +132,7 @@ func _physics_process(delta : float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
 	run_particles.emitting = direction && is_on_floor() # if moving have running particles
-	if direction:
+	if direction && pre_rewind_timer.time_left == 0:
 		dir = direction
 		velocity.x = lerpf(velocity.x, direction * speed, delta * acceleration)
 	else:
@@ -210,17 +212,11 @@ func remove_oldest_nut():
 	nut_count -= 1
 
 func start_rewind():
+	velocity = Vector2.ZERO
 	set_process_input(false)
 	set_process_unhandled_input(false)
-
-	# reset number of nuts
-	for tree in nutted_trees:
-		var current_tree : TreeNode = tree as TreeNode
-		current_tree.grow()
-	nutted_trees.clear()
-	nut_count = 0
-
-	rewinding = true
+	pre_rewind_timer.start()
+	# go to _on_pre_rewind_timeout() to see rewind code
 	
 func enable_inputs():
 	set_process_input(true)
@@ -244,6 +240,21 @@ func take_damage(spike_pos : Vector2):
 		#print(":player pos: " + str(global_position) + " Spike pos: " + str(spike_pos))
 		velocity = dir * jump_strength
 
+func drink():
+	drink_timer.start()
+
 func pass_out():
 	print("LMAO good job drunkard")
 	# win screen anims
+
+func _on_pre_rewind_timeout() -> void:
+	set_process_input(false)
+	set_process_unhandled_input(false)
+	# reset number of nuts
+	for tree in nutted_trees:
+		var current_tree : TreeNode = tree as TreeNode
+		current_tree.grow()
+	nutted_trees.clear()
+	nut_count = 0
+
+	rewinding = true

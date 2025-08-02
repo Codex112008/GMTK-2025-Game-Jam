@@ -17,5 +17,6 @@ func _on_body_entered(body):
 		if player.current_health > player.max_health:
 			player.current_health = player.max_health
 			player.health_ui_text.text = str(player.current_health)
+		player.drink()
 		player.start_rewind()
 		queue_free()
