@@ -11,7 +11,7 @@ class_name ThrownNutScript
 var do_spin : bool = true
 
 func _ready() -> void:
-	velocity = Vector2.DOWN * start_fall_speed
+	velocity.y = start_fall_speed
 	my_sprite.play("default")
 
 func _process(delta: float) -> void:

@@ -161,21 +161,30 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_pressed("down") && is_on_floor():
 		position.y += 1
 	
-	# Dash
-	if Input.is_action_just_pressed("dash") && !rewinding && drink_timer.time_left == 0:
+	# Nut dash
+	if nut_count > 0 && Input.is_action_just_pressed("dash") && !rewinding && drink_timer.time_left == 0:
+		remove_oldest_nut()
 		dashing = true
 		velocity_before_dash = velocity.x
 		set_process_input(false)
 		set_process_unhandled_input(false)
 		dash_timer.start()
 		
+		var new_nut : ThrownNutScript = thrown_nut.instantiate()
+		new_nut.global_position = global_position
+		instantiated_nodes.add_child(new_nut)
+		if !my_sprite.flip_h:
+			new_nut.velocity.x = -new_nut.start_fall_speed
+		else:
+			new_nut.velocity.x = new_nut.start_fall_speed
+	
 	if dash_timer.time_left == 0 && dashing:
 		velocity.x = velocity_before_dash
 		dashing = false
 	
 	if dashing:
 		enable_inputs()
-		if velocity.x > 0:
+		if !my_sprite.flip_h:
 			velocity.x = dash_strength
 		else:
 			velocity.x = -dash_strength
