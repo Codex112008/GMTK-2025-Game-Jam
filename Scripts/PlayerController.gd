@@ -241,7 +241,8 @@ func take_damage(spike_pos : Vector2):
 		current_health = max_health
 		health_ui_text.text = ": " + str(current_health)
 	else:
-		var dir : Vector2 = -global_position.direction_to(spike_pos)
+		var dir_to_spike : Vector2 = -global_position.direction_to(spike_pos)
+		var dir : Vector2i = Vector2i(roundi(dir_to_spike.x), roundi(dir_to_spike.y))
 		#print(":player pos: " + str(global_position) + " Spike pos: " + str(spike_pos))
 		velocity = dir * jump_strength
 
