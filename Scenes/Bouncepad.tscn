@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://5s4lfwvulyvp"]
+[gd_scene load_steps=8 format=3 uid="uid://5s4lfwvulyvp"]
 
 [ext_resource type="Script" uid="uid://bdg12am1can0j" path="res://Scripts/Bouncepad.gd" id="1_8yv2l"]
 [ext_resource type="Texture2D" uid="uid://j780wl26drlx" path="res://Sprites/Mushroom/mushroom1.png" id="2_07hla"]
 [ext_resource type="Texture2D" uid="uid://dhx6xauykyky2" path="res://Sprites/Mushroom/mushroom2.png" id="3_b2nac"]
 [ext_resource type="Texture2D" uid="uid://0w6vrkdn8ins" path="res://Sprites/Mushroom/mushroom3.png" id="4_nn62f"]
+[ext_resource type="PackedScene" uid="uid://csdut8ytbu0c5" path="res://Scenes/SoundPlayer.tscn" id="5_b2nac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07hla"]
 size = Vector2(32, 32)
@@ -40,5 +41,8 @@ shape = SubResource("RectangleShape2D_07hla")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b2nac")
 animation = &"bounce"
+
+[node name="BounceSound" parent="." instance=ExtResource("5_b2nac")]
+sounds = [null]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

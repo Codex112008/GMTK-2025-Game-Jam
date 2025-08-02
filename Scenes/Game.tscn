@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://bfn2b364eucoc"]
+[gd_scene load_steps=32 format=4 uid="uid://bfn2b364eucoc"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://Shaders/PlanetCurve.gdshader" id="1_iukft"]
 [ext_resource type="Script" uid="uid://b35p01h4jxnjb" path="res://Scripts/UI/NutUI.gd" id="2_2irst"]
@@ -10,11 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://ixuxl7rgjg2u" path="res://Scenes/Tree.tscn" id="4_kldst"]
 [ext_resource type="Texture2D" uid="uid://cix5ooltd72bh" path="res://Sprites/UI/Loop_ui.png" id="4_vvhu1"]
 [ext_resource type="Script" uid="uid://b5opwn1b3r0fj" path="res://Scripts/MainTileMap.gd" id="6_7lihs"]
+[ext_resource type="Script" uid="uid://b4oty5unh75oy" path="res://Scripts/MusicPlayer.gd" id="9_3jf1l"]
 [ext_resource type="Texture2D" uid="uid://cp7cxs0ao8pah" path="res://Sprites/BG/BGmain.png" id="10_71axn"]
 [ext_resource type="Script" uid="uid://cxkj141c3q8gk" path="res://Scripts/GenerateStars.gd" id="10_acvyw"]
 [ext_resource type="Texture2D" uid="uid://hs7itxox02mv" path="res://Sprites/BG/Stars/star_large.png" id="11_8r6kd"]
 [ext_resource type="Texture2D" uid="uid://cdvuue7sxff2w" path="res://Sprites/BG/Planets/planets2.png" id="11_dahhg"]
-[ext_resource type="Script" path="res://Scripts/GrassSpawner.gd" id="11_lbihj"]
+[ext_resource type="Script" uid="uid://debm3ymknypqy" path="res://Scripts/GrassSpawner.gd" id="11_lbihj"]
 [ext_resource type="PackedScene" path="res://Scenes/Grass.tscn" id="12_raj38"]
 [ext_resource type="Texture2D" uid="uid://dmqbmxtq7ceu5" path="res://Sprites/BG/Stars/star_medium.png" id="12_tfod6"]
 [ext_resource type="Texture2D" uid="uid://bkw017d4vnjgw" path="res://Sprites/BG/Planets/planets3.png" id="12_wxwew"]
@@ -25,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://5s4lfwvulyvp" path="res://Scenes/Bouncepad.tscn" id="20_tfod6"]
 [ext_resource type="PackedScene" uid="uid://44epf0df578d" path="res://Scenes/MovingPlatform.tscn" id="22_vvhu1"]
 [ext_resource type="Shader" uid="uid://cevmp4tcq0ml4" path="res://Shaders/CRT.gdshader" id="24_raj38"]
+[ext_resource type="AudioStream" uid="uid://bhfhcgw6elgid" path="res://Audio/music/jumporrun_loop.wav" id="26_i0vto"]
 
 [sub_resource type="Environment" id="Environment_raj38"]
 background_mode = 3
@@ -148,6 +150,12 @@ instantiated_nodes = NodePath("../InstantiatedNodes")
 health_ui_text = NodePath("../UI/UI/HealthUI/RichTextLabel")
 crt_canvas_layer = NodePath("../Shaders/crt_layer")
 
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(24, 119)
+stream = ExtResource("26_i0vto")
+autoplay = true
+script = ExtResource("9_3jf1l")
+
 [node name="Environment" type="Node2D" parent="."]
 
 [node name="Grasses" type="Node2D" parent="Environment" node_paths=PackedStringArray("tilemaps")]
@@ -259,3 +267,5 @@ position = Vector2(207, 26)
 texture = ExtResource("14_alh3a")
 
 [node name="InstantiatedNodes" type="Node2D" parent="."]
+
+[connection signal="finished" from="Player/MusicPlayer" to="Player/MusicPlayer" method="_on_finished"]
