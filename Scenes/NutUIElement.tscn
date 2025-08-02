@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b2yrh30mqxkuc"]
 
-[ext_resource type="Texture2D" uid="uid://dhmisbtpm6b8t" path="res://Sprites/UI/acorn_ui.png" id="1_ddirn"]
+[ext_resource type="Texture2D" uid="uid://bqf61c8lc2tff" path="res://Sprites/UI/acorn_ui.png" id="1_ddirn"]
 
 [node name="TextureRect" type="TextureRect"]
 offset_right = 32.0
