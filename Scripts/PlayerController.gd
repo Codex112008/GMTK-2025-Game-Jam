@@ -65,6 +65,7 @@ var current_health : int
 @export var instantiated_nodes : Node2D
 @export var health_ui_text : RichTextLabel
 @export var crt_canvas_layer : CanvasLayer
+@export var audio_manager : AudioManager
 
 func _ready():
 	curve_shader_strength = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("distortion_strength")
@@ -243,6 +244,9 @@ func _physics_process(delta : float) -> void:
 				var tile_data : TileData = colliding_tilemap.get_cell_tile_data(tile_coords)
 				if tile_data != null && tile_data.get_custom_data("IsSpike") == true:
 					take_damage(tile_coords * 32 + Vector2i(16, 16))
+
+	# set audio bus effect
+	audio_manager.bus_effect(crt_canvas_layer.visible)
 
 func jump():
 	if !rewinding && drink_timer.time_left == 0:
