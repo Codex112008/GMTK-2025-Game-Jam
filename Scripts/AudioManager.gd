@@ -10,11 +10,13 @@ func _ready() -> void:
 	bus_effect(false)
 
 func bus_effect(enable : bool):
-	var current_time : float = get_playback_position()
+	var current_time : float = 0
 	if enable && stream != music_reverse:
+		current_time = stream.get_length() -get_playback_position()
 		stream = music_reverse
 		play(current_time)
 	elif !enable && stream != music_normal:
+		current_time = stream.get_length() -get_playback_position()
 		stream = music_normal
 		play(current_time)
 

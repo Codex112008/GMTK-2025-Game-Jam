@@ -64,7 +64,7 @@ var current_health : int
 @export var curve_effect_rect : CanvasItem
 @export var camera : CameraFollow
 @export var instantiated_nodes : Node2D
-@export var health_ui_container : HBoxContainer
+@export var health_ui_container : Control
 @export var crt_canvas_layer : CanvasLayer
 @export var audio_manager : AudioManager
 
@@ -78,7 +78,9 @@ func _ready():
 	max_health = starting_max_health
 	current_health = max_health
 	for i in range(1, starting_max_health):
-		var health_icon : TextureRect = health_ui_container.get_child(0).duplicate()
+		var health_icon : HealthIcon = health_ui_container.get_child(0).duplicate()
+		health_icon.position = Vector2(i * 24, 0)
+		health_icon.z_index = -i
 		health_ui_container.add_child(health_icon)
 
 func _process(delta : float) -> void:
@@ -302,7 +304,7 @@ func enable_inputs():
 	set_process_unhandled_input(true)
 	
 func take_damage(spike_pos : Vector2):
-	if i_frame_timer.time_left == 0:
+	if i_frame_timer.time_left == 0 && !rewinding:
 		# juice
 		hurt_sound.play_sound()
 		camera.apply_shake(3)
@@ -312,19 +314,25 @@ func take_damage(spike_pos : Vector2):
 		i_frame_timer.start()
 		current_health -= 1
 		if current_health <= 0:
-			for i in range(current_health + 1, max_health):
+			for i in range(1, health_ui_container.get_children().size()):
+				health_ui_container.get_child(i).queue_free()
+			for i in range(current_health, max_health):
 				var health_icon : TextureRect = health_ui_container.get_child(0).duplicate()
+				health_icon.position = Vector2(i * 24, 0)
+				health_icon.z_index = -i
 				health_ui_container.add_child(health_icon)
 			current_health = max_health
 			start_rewind()
 		else:
-			health_ui_container.get_child(-1).queue_free()
+			var icon : HealthIcon = health_ui_container.get_child(current_health)
+			icon.is_full = false
+
 			var dir_to_spike : Vector2 = -global_position.direction_to(spike_pos)
 			var dir : Vector2i = Vector2i(roundi(dir_to_spike.x), roundi(dir_to_spike.y))
-			#print(":player pos: " + str(global_position) + " Spike pos: " + str(spike_pos))
 			velocity = dir * jump_strength
 
 func drink():
+	health_ui_container.get_child(-1).queue_free()
 	drink_timer.start()
 
 func pass_out():
