@@ -92,7 +92,7 @@ point_count = 3
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pqity"]
 particles_animation = true
-particles_anim_h_frames = 8
+particles_anim_h_frames = 7
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
