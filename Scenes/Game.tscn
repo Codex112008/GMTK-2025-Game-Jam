@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ixuxl7rgjg2u" path="res://Scenes/Tree.tscn" id="4_kldst"]
 [ext_resource type="Texture2D" uid="uid://cix5ooltd72bh" path="res://Sprites/UI/Loop_ui.png" id="4_vvhu1"]
 [ext_resource type="Script" uid="uid://b5opwn1b3r0fj" path="res://Scripts/MainTileMap.gd" id="6_7lihs"]
-[ext_resource type="Script" uid="uid://b41a21h255mwp" path="res://Scripts/HealthIcon.gd" id="7_4f4ik"]
+[ext_resource type="Script" path="res://Scripts/HealthIcon.gd" id="7_4f4ik"]
 [ext_resource type="Texture2D" uid="uid://iyeot8p1ue8a" path="res://Sprites/Player/Dash/hamster_dash1.png" id="7_iyesh"]
 [ext_resource type="Texture2D" uid="uid://d0x2o1y4eifh" path="res://Sprites/UI/Loop_ui_empty.png" id="8_khs3t"]
 [ext_resource type="Script" uid="uid://b4oty5unh75oy" path="res://Scripts/AudioManager.gd" id="9_3jf1l"]
@@ -39,7 +39,7 @@
 
 [sub_resource type="Environment" id="Environment_raj38"]
 background_mode = 3
-volumetric_fog_enabled = true
+tonemap_white = 8.94
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
 resource_local_to_scene = true
