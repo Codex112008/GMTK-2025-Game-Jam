@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://csdut8ytbu0c5"]
+
+[ext_resource type="Script" uid="uid://c541fyijs6fkk" path="res://Scripts/SoundPlayer.gd" id="1_kfq4j"]
+
+[node name="SoundPlayer" type="AudioStreamPlayer2D" node_paths=PackedStringArray("wait_play_timer")]
+script = ExtResource("1_kfq4j")
+wait_play_timer = NodePath("WaitPlayTimer")
+
+[node name="WaitPlayTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true

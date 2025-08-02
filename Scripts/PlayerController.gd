@@ -49,6 +49,12 @@ var current_health : int
 @export var run_particles : CPUParticles2D
 @export var hit_particles : CPUParticles2D
 
+@export_subgroup("Sounds")
+@export var footsteps_sound : SoundPlayer
+@export var landing_sound : SoundPlayer
+@export var hurt_sound : SoundPlayer
+@export var jump_sound : SoundPlayer
+
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
 @export var camera : CameraFollow
@@ -135,6 +141,8 @@ func _physics_process(delta : float) -> void:
 	run_particles.emitting = direction && is_on_floor() # if moving have running particles
 	if direction && pre_rewind_timer.time_left == 0:
 		dir = direction
+		if is_on_floor(): # footstep sounds
+			footsteps_sound.play_sound()
 		velocity.x = lerpf(velocity.x, direction * speed, delta * acceleration)
 	else:
 		velocity.x = lerpf(velocity.x, 0, delta * friction)
@@ -165,6 +173,7 @@ func _physics_process(delta : float) -> void:
 	if (!last_frame_on_floor && is_on_floor()):
 		scale = Vector2(1.25, 0.75)
 		land_particles.restart()
+		landing_sound.play_sound()
 		land_particles.emitting = true
 	if (!is_on_floor() && absf(velocity.y) > 500):
 		scale = Vector2(0.75, 1.25)
@@ -203,6 +212,7 @@ func _physics_process(delta : float) -> void:
 					take_damage(tile_coords * 32 + Vector2i(16, 16))
 
 func jump():
+	jump_sound.play_sound()
 	jump_particles.restart()
 	jump_particles.emitting = true
 	short_jump_timer.start()
@@ -229,7 +239,8 @@ func enable_inputs():
 	
 func take_damage(spike_pos : Vector2):
 	# juice
-	camera.apply_shake(1.5)
+	hurt_sound.play_sound()
+	camera.apply_shake(3)
 	hit_particles.restart()
 	hit_particles.emitting = true
 

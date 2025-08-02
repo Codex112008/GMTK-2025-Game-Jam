@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=50 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
@@ -30,6 +30,13 @@
 [ext_resource type="Texture2D" uid="uid://bwykemji501wp" path="res://Sprites/Player/Walk/hamster_walk5.png" id="19_i2e8t"]
 [ext_resource type="Texture2D" uid="uid://bjrltanv0vut6" path="res://Sprites/Player/hamster_cheeks.png" id="19_m0x7a"]
 [ext_resource type="Texture2D" uid="uid://dlg6nqg80rju3" path="res://Sprites/Particles/dustparticles.png" id="23_i2e8t"]
+[ext_resource type="PackedScene" uid="uid://csdut8ytbu0c5" path="res://Scenes/SoundPlayer.tscn" id="31_wosd6"]
+[ext_resource type="AudioStream" uid="uid://cyh5tybdh6kci" path="res://Audio/Player/sfx_step_grass_l.wav" id="32_avx33"]
+[ext_resource type="AudioStream" uid="uid://cbpbg8i5l3oml" path="res://Audio/Player/03_Step_grass_03.wav" id="33_rxg2u"]
+[ext_resource type="AudioStream" uid="uid://cc54x1ws3y0cl" path="res://Audio/Player/45_Landing_01.wav" id="34_xixlo"]
+[ext_resource type="AudioStream" uid="uid://eunun76qccys" path="res://Audio/Player/61_Hit_03.wav" id="35_bfbt0"]
+[ext_resource type="AudioStream" uid="uid://p2t76rfgfwgm" path="res://Audio/Player/30_Jump_03.wav" id="36_hkrn1"]
+[ext_resource type="AudioStream" uid="uid://dqpukigwr1u6s" path="res://Audio/Player/56_Attack_03.wav" id="37_wpo1r"]
 
 [sub_resource type="Resource" id="Resource_52ee3"]
 script = ExtResource("5_nn08x")
@@ -219,7 +226,7 @@ _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0.787398), 0.0, 1.97426, 0, 0, Vector2(0.144068, 1.44348), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "i_frame_timer", "drink_timer", "pre_rewind_timer", "my_sprite", "time_rewinder", "collision_shape", "animation_player", "drunk_particles", "jump_particles", "land_particles", "run_particles", "hit_particles")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "i_frame_timer", "drink_timer", "pre_rewind_timer", "my_sprite", "time_rewinder", "collision_shape", "animation_player", "drunk_particles", "jump_particles", "land_particles", "run_particles", "hit_particles", "footsteps_sound", "landing_sound", "hurt_sound", "jump_sound")]
 collision_layer = 2
 script = ExtResource("1_kyqiw")
 speed = 260.0
@@ -244,6 +251,10 @@ jump_particles = NodePath("Particles/JumpParticles")
 land_particles = NodePath("Particles/LandParticles")
 run_particles = NodePath("Particles/RunParticles")
 hit_particles = NodePath("Particles/HitParticles")
+footsteps_sound = NodePath("Sounds/FootstepSound")
+landing_sound = NodePath("Sounds/LandingSound")
+hurt_sound = NodePath("Sounds/HurtSound")
+jump_sound = NodePath("Sounds/JumpSound")
 
 [node name="Rewinder" type="Node" parent="."]
 script = ExtResource("4_5ixxa")
@@ -391,5 +402,24 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_m0x7a")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="FootstepSound" parent="Sounds" instance=ExtResource("31_wosd6")]
+volume_db = -5.0
+sounds = [ExtResource("32_avx33"), ExtResource("33_rxg2u")]
+sound_wait = 0.3
+
+[node name="LandingSound" parent="Sounds" instance=ExtResource("31_wosd6")]
+volume_db = 2.0
+sounds = [ExtResource("34_xixlo")]
+
+[node name="HurtSound" parent="Sounds" instance=ExtResource("31_wosd6")]
+volume_db = 10.0
+sounds = [ExtResource("35_bfbt0")]
+
+[node name="JumpSound" parent="Sounds" instance=ExtResource("31_wosd6")]
+volume_db = 1.5
+sounds = [ExtResource("36_hkrn1"), ExtResource("37_wpo1r")]
 
 [connection signal="timeout" from="Timers/PreRewindTimer" to="." method="_on_pre_rewind_timeout"]
