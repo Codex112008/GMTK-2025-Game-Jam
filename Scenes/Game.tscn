@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://bfn2b364eucoc"]
+[gd_scene load_steps=30 format=4 uid="uid://bfn2b364eucoc"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://Shaders/PlanetCurve.gdshader" id="1_iukft"]
 [ext_resource type="Script" uid="uid://b35p01h4jxnjb" path="res://Scripts/UI/NutUI.gd" id="2_2irst"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://6w67bm40rsos" path="res://Scenes/Star.tscn" id="14_vvhu1"]
 [ext_resource type="PackedScene" uid="uid://5s4lfwvulyvp" path="res://Scenes/Bouncepad.tscn" id="20_tfod6"]
 [ext_resource type="PackedScene" uid="uid://44epf0df578d" path="res://Scenes/MovingPlatform.tscn" id="22_vvhu1"]
+[ext_resource type="Shader" uid="uid://cevmp4tcq0ml4" path="res://Shaders/CRT.gdshader" id="24_raj38"]
 
 [sub_resource type="Environment" id="Environment_raj38"]
 background_mode = 3
@@ -34,6 +35,30 @@ resource_local_to_scene = true
 shader = ExtResource("1_iukft")
 shader_parameter/radius = 10.0
 shader_parameter/distortion_strength = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3jf1l"]
+shader = ExtResource("24_raj38")
+shader_parameter/overlay = true
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/brightness = 1.4
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/roll = true
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/aberration = 0.03
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/pixelate = true
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
 
 [sub_resource type="Curve2D" id="Curve2D_lbihj"]
 resource_local_to_scene = true
@@ -47,10 +72,23 @@ point_count = 2
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_raj38")
 
-[node name="postproc_layer" type="CanvasLayer" parent="."]
+[node name="Shaders" type="CanvasGroup" parent="."]
 
-[node name="curve_effect" type="ColorRect" parent="postproc_layer"]
+[node name="curve_layer" type="CanvasLayer" parent="Shaders"]
+
+[node name="curve_effect" type="ColorRect" parent="Shaders/curve_layer"]
 material = SubResource("ShaderMaterial_gl6un")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="crt_layer" type="CanvasLayer" parent="Shaders"]
+visible = false
+
+[node name="crt_effect" type="ColorRect" parent="Shaders/crt_layer"]
+material = SubResource("ShaderMaterial_3jf1l")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -100,13 +138,14 @@ target = NodePath("../Player")
 level = NodePath("../Environment/base_tile_map")
 shakeFade = 15.0
 
-[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_text") instance=ExtResource("3_j5yw3")]
+[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_text", "crt_canvas_layer") instance=ExtResource("3_j5yw3")]
 z_index = 1
 position = Vector2(-24, -119)
-curve_effect_rect = NodePath("../postproc_layer/curve_effect")
+curve_effect_rect = NodePath("../Shaders/curve_layer/curve_effect")
 camera = NodePath("../camera2d")
 instantiated_nodes = NodePath("../InstantiatedNodes")
 health_ui_text = NodePath("../UI/UI/HealthUI/RichTextLabel")
+crt_canvas_layer = NodePath("../Shaders/crt_layer")
 
 [node name="Environment" type="Node2D" parent="."]
 

@@ -54,6 +54,7 @@ var current_health : int
 @export var camera : CameraFollow
 @export var instantiated_nodes : Node2D
 @export var health_ui_text : RichTextLabel
+@export var crt_canvas_layer : CanvasLayer
 
 func _ready():
 	curve_shader_strength = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("distortion_strength")
@@ -145,6 +146,8 @@ func _physics_process(delta : float) -> void:
 		motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 		position = lerp(position, starting_point, delta * rewindAcceleration)
 		if position.distance_squared_to(starting_point) < 4.0:
+			Engine.time_scale = 1
+			crt_canvas_layer.visible = false
 			motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
 			collision_shape.disabled = false
 			rewinding = false
@@ -212,6 +215,8 @@ func remove_oldest_nut():
 	nut_count -= 1
 
 func start_rewind():
+	Engine.time_scale = 0.5
+	crt_canvas_layer.visible = true
 	velocity = Vector2.ZERO
 	set_process_input(false)
 	set_process_unhandled_input(false)

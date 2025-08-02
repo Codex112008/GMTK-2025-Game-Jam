@@ -227,6 +227,7 @@ acceleration = 7.0
 friction = 4.0
 max_nut_count = 5
 thrown_nut = ExtResource("2_nn08x")
+rewindAcceleration = 5.0
 coyote_timer = NodePath("Timers/CoyoteTimer")
 jump_buffer_timer = NodePath("Timers/JumpBufferTimer")
 short_jump_timer = NodePath("Timers/ShortJumpTimer")
