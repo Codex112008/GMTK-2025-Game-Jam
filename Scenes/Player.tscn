@@ -383,6 +383,7 @@ position = Vector2(0, -16)
 emitting = false
 amount = 16
 texture = ExtResource("7_wpo1r")
+lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_6hr71")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player", "cheeks")]
@@ -440,23 +441,19 @@ one_shot = true
 
 [node name="FootstepSound" parent="Sounds" instance=ExtResource("31_wosd6")]
 volume_db = -5.0
-bus = &"Master"
 sounds = [ExtResource("32_avx33"), ExtResource("33_rxg2u")]
 sound_wait = 0.3
 
 [node name="LandingSound" parent="Sounds" instance=ExtResource("31_wosd6")]
 volume_db = 2.0
-bus = &"Master"
 sounds = [ExtResource("34_xixlo")]
 
 [node name="HurtSound" parent="Sounds" instance=ExtResource("31_wosd6")]
 volume_db = 10.0
-bus = &"Master"
 sounds = [ExtResource("35_bfbt0")]
 
 [node name="JumpSound" parent="Sounds" instance=ExtResource("31_wosd6")]
 volume_db = 1.5
-bus = &"Master"
 sounds = [ExtResource("36_hkrn1"), ExtResource("37_wpo1r")]
 
 [connection signal="timeout" from="Timers/PreRewindTimer" to="." method="_on_pre_rewind_timeout"]
