@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://bfn2b364eucoc"]
+[gd_scene load_steps=44 format=4 uid="uid://bfn2b364eucoc"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://Shaders/PlanetCurve.gdshader" id="1_iukft"]
 [ext_resource type="Script" uid="uid://b35p01h4jxnjb" path="res://Scripts/UI/NutUI.gd" id="2_2irst"]
@@ -15,13 +15,17 @@
 [ext_resource type="Texture2D" uid="uid://iyeot8p1ue8a" path="res://Sprites/Player/Dash/hamster_dash1.png" id="7_iyesh"]
 [ext_resource type="Texture2D" uid="uid://d0x2o1y4eifh" path="res://Sprites/UI/Loop_ui_empty.png" id="8_khs3t"]
 [ext_resource type="Script" uid="uid://b4oty5unh75oy" path="res://Scripts/AudioManager.gd" id="9_3jf1l"]
+[ext_resource type="Texture2D" uid="uid://bpikh5y7jurw6" path="res://Sprites/UI/Loop_ui_beer.png" id="9_khs3t"]
 [ext_resource type="Texture2D" uid="uid://cp7cxs0ao8pah" path="res://Sprites/BG/BGmain.png" id="10_71axn"]
 [ext_resource type="Script" uid="uid://cxkj141c3q8gk" path="res://Scripts/GenerateStars.gd" id="10_acvyw"]
+[ext_resource type="Texture2D" uid="uid://71pgdgpfn7" path="res://Sprites/UI/mute_button1.png" id="10_umnjm"]
+[ext_resource type="Script" uid="uid://b88tnxmd6bwov" path="res://Scripts/UI/MuteButton.gd" id="11_4eqlp"]
 [ext_resource type="Texture2D" uid="uid://hs7itxox02mv" path="res://Sprites/BG/Stars/star_large.png" id="11_8r6kd"]
 [ext_resource type="Texture2D" uid="uid://cdvuue7sxff2w" path="res://Sprites/BG/Planets/planets2.png" id="11_dahhg"]
 [ext_resource type="AudioStream" uid="uid://boyxc0gw8cug6" path="res://Audio/music/jumporrun_reverse.wav" id="11_i4lct"]
 [ext_resource type="Script" uid="uid://debm3ymknypqy" path="res://Scripts/GrassSpawner.gd" id="11_lbihj"]
-[ext_resource type="PackedScene" uid="uid://cuypo3w6dc0of" path="res://Scenes/Grass.tscn" id="12_raj38"]
+[ext_resource type="Texture2D" uid="uid://dl7gk58g780l7" path="res://Sprites/UI/mute_button2.png" id="12_18uti"]
+[ext_resource type="PackedScene" path="res://Scenes/Grass.tscn" id="12_raj38"]
 [ext_resource type="Texture2D" uid="uid://dmqbmxtq7ceu5" path="res://Sprites/BG/Stars/star_medium.png" id="12_tfod6"]
 [ext_resource type="Texture2D" uid="uid://bkw017d4vnjgw" path="res://Sprites/BG/Planets/planets3.png" id="12_wxwew"]
 [ext_resource type="Texture2D" uid="uid://curwduftwu1u4" path="res://Sprites/BG/Planets/planets4.png" id="13_acvyw"]
@@ -201,6 +205,19 @@ texture = ExtResource("4_vvhu1")
 script = ExtResource("7_4f4ik")
 full = ExtResource("4_vvhu1")
 empty = ExtResource("8_khs3t")
+beer = ExtResource("9_khs3t")
+
+[node name="MuteButton" type="Button" parent="UI/UI"]
+layout_mode = 0
+offset_left = 600.0
+offset_right = 640.0
+offset_bottom = 40.0
+focus_mode = 1
+icon = ExtResource("10_umnjm")
+flat = true
+script = ExtResource("11_4eqlp")
+un_muted_icon = ExtResource("10_umnjm")
+muted_icon = ExtResource("12_18uti")
 
 [node name="FadeIn" type="TextureRect" parent="UI"]
 visible = false
@@ -358,4 +375,5 @@ texture = ExtResource("14_alh3a")
 
 [node name="InstantiatedNodes" type="Node2D" parent="."]
 
+[connection signal="pressed" from="UI/UI/MuteButton" to="UI/UI/MuteButton" method="_on_pressed"]
 [connection signal="finished" from="Player/AudioManager" to="Player/AudioManager" method="_on_finished"]
