@@ -1,16 +1,72 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuypo3w6dc0of"]
+[gd_scene load_steps=12 format=3 uid="uid://cuypo3w6dc0of"]
 
 [ext_resource type="Script" uid="uid://cki48mjud8tmb" path="res://Scripts/grass.gd" id="1_w34vg"]
+[ext_resource type="Shader" uid="uid://c4suo384y1031" path="res://Shaders/GrassShader.gdshader" id="2_xdho2"]
+[ext_resource type="Texture2D" uid="uid://chu5wyr87idok" path="res://Sprites/Grass/grass1.png" id="3_dqaae"]
+[ext_resource type="Texture2D" uid="uid://bmgd8bdxqi0j0" path="res://Sprites/Grass/grass2.png" id="4_iade0"]
+[ext_resource type="Texture2D" uid="uid://c4somgkbydoxu" path="res://Sprites/Grass/grass3.png" id="5_maueu"]
+[ext_resource type="Texture2D" uid="uid://bl6wtla30ei66" path="res://Sprites/Grass/grass4.png" id="6_6va2w"]
+[ext_resource type="Texture2D" uid="uid://cfsu707teh2py" path="res://Sprites/Grass/grass5.png" id="7_gl438"]
+[ext_resource type="Texture2D" uid="uid://bllmdesxks0n0" path="res://Sprites/Grass/grass6.png" id="8_ci85d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tgl3b"]
+resource_local_to_scene = true
+shader = ExtResource("2_xdho2")
+shader_parameter/speed = 1.5
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.05
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+shader_parameter/skew = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8r2ih"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dqaae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iade0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_maueu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6va2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gl438")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ci85d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_543xm"]
+size = Vector2(16, 8)
 
-[node name="Grass" type="Area2D" node_paths=PackedStringArray("anim_sprite")]
+[node name="Grass" type="Area2D" node_paths=PackedStringArray("anim_sprite", "pivot")]
+collision_layer = 255
+collision_mask = 255
 script = ExtResource("1_w34vg")
 anim_sprite = NodePath("Pivot/AnimatedSprite2D")
+pivot = NodePath("Pivot")
 
 [node name="Pivot" type="Marker2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot"]
+material = SubResource("ShaderMaterial_tgl3b")
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_8r2ih")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_543xm")
+
+[connection signal="body_entered" from="." to="." method="_on_Grass_body_entered"]
