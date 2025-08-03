@@ -4,6 +4,7 @@
 
 @export var savepath : String
 @export var mycolor : Color = Color(1, 1, 1, 1)
+@export var spikecolor : Color = Color(1, 1, 1, 1)
 var tilemapimage : Image
 
 var width : int
@@ -36,7 +37,7 @@ func generatetilemap():
 		if tilemap.enabled:
 			for tile : Vector2i in tilemap.get_used_cells():
 				if tilemap.get_cell_tile_data(tile).get_custom_data("IsSpike"):
-					tilemapimage.set_pixel(tile.x + (offsetx * -1), tile.y + (offsety * -1), Color.RED)
+					tilemapimage.set_pixel(tile.x + (offsetx * -1), tile.y + (offsety * -1), spikecolor)
 				else:
 					tilemapimage.set_pixel(tile.x + (offsetx * -1), tile.y + (offsety * -1), mycolor)
 	
