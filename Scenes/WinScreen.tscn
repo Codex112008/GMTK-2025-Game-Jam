@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7i727m7ojwil"]
+[gd_scene load_steps=12 format=3 uid="uid://qbxyvf6gilb4"]
 
 [ext_resource type="Texture2D" uid="uid://bhetjug8e6s0v" path="res://Sprites/UI/WinScreen.png" id="1_yqulb"]
-[ext_resource type="Texture2D" uid="uid://b32fn7fetjlah" path="res://Sprites/UI/play_button1.png" id="2_br8cr"]
-[ext_resource type="Texture2D" uid="uid://lx0y53nmwk14" path="res://Sprites/UI/play_button3.png" id="3_3gwxl"]
-[ext_resource type="Texture2D" uid="uid://cpbvkeflrlkne" path="res://Sprites/UI/play_button2.png" id="4_r0kpl"]
+[ext_resource type="Texture2D" uid="uid://juiqjoqaxldg" path="res://Sprites/UI/menu_button1.png" id="2_mbyi4"]
+[ext_resource type="Texture2D" uid="uid://ydduixr41ntu" path="res://Sprites/UI/menu_button3.png" id="3_auqbb"]
+[ext_resource type="Texture2D" uid="uid://curvkebp0qmip" path="res://Sprites/UI/menu_button2.png" id="4_c6q05"]
 [ext_resource type="Script" uid="uid://cim13e7wed3et" path="res://Scripts/TutorialLevelChangeText.gd" id="5_yqulb"]
 [ext_resource type="PackedScene" uid="uid://csdut8ytbu0c5" path="res://Scenes/SoundPlayer.tscn" id="7_0imix"]
 [ext_resource type="AudioStream" uid="uid://vsu3h72joahw" path="res://Audio/UI/ding_deep.wav" id="8_jhli6"]
@@ -103,9 +103,9 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(2, 2)
 pivot_offset = Vector2(32, 32)
-texture_normal = ExtResource("2_br8cr")
-texture_pressed = ExtResource("3_3gwxl")
-texture_hover = ExtResource("4_r0kpl")
+texture_normal = ExtResource("2_mbyi4")
+texture_pressed = ExtResource("3_auqbb")
+texture_hover = ExtResource("4_c6q05")
 script = ExtResource("5_yqulb")
 circle_transition = NodePath("../Circle/AnimationPlayer")
 is_tutorial = false

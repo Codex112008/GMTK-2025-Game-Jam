@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://beijge10s31sm"]
+[gd_scene load_steps=44 format=4 uid="uid://beijge10s31sm"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://Shaders/PlanetCurve.gdshader" id="1_anpm4"]
 [ext_resource type="Shader" uid="uid://cevmp4tcq0ml4" path="res://Shaders/CRT.gdshader" id="2_dut48"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://b35p01h4jxnjb" path="res://Scripts/UI/NutUI.gd" id="4_mceqy"]
 [ext_resource type="PackedScene" uid="uid://b2yrh30mqxkuc" path="res://Scenes/NutUIElement.tscn" id="5_p8xjf"]
 [ext_resource type="Texture2D" uid="uid://71pgdgpfn7" path="res://Sprites/UI/mute_button1.png" id="6_fouuw"]
-[ext_resource type="Script" path="res://Scripts/UI/MuteButton.gd" id="7_ppni0"]
+[ext_resource type="Script" uid="uid://b88tnxmd6bwov" path="res://Scripts/UI/MuteButton.gd" id="7_ppni0"]
 [ext_resource type="Texture2D" uid="uid://dl7gk58g780l7" path="res://Sprites/UI/mute_button2.png" id="8_1xisj"]
 [ext_resource type="Texture2D" uid="uid://clgaxuuqqwl87" path="res://Sprites/transition.png" id="9_ila5h"]
 [ext_resource type="Script" uid="uid://ct6kj2yoa2g00" path="res://Scripts/CameraFollow.gd" id="10_3st2x"]
@@ -16,12 +16,11 @@
 [ext_resource type="Script" uid="uid://b4oty5unh75oy" path="res://Scripts/AudioManager.gd" id="14_nsnw8"]
 [ext_resource type="AudioStream" uid="uid://boyxc0gw8cug6" path="res://Audio/music/jumporrun_reverse.wav" id="15_7btw3"]
 [ext_resource type="Script" uid="uid://debm3ymknypqy" path="res://Scripts/GrassSpawner.gd" id="16_bihrv"]
-[ext_resource type="PackedScene" uid="uid://cuypo3w6dc0of" path="res://Scenes/Grass.tscn" id="17_oq7l7"]
+[ext_resource type="PackedScene" path="res://Scenes/Grass.tscn" id="17_oq7l7"]
 [ext_resource type="PackedScene" uid="uid://ixuxl7rgjg2u" path="res://Scenes/Tree.tscn" id="18_emhi4"]
-[ext_resource type="PackedScene" uid="uid://44epf0df578d" path="res://Scenes/MovingPlatform.tscn" id="19_t7ysk"]
 [ext_resource type="PackedScene" uid="uid://5s4lfwvulyvp" path="res://Scenes/Bouncepad.tscn" id="20_84vcq"]
 [ext_resource type="PackedScene" uid="uid://dmrchrx1v38ud" path="res://Scenes/Beer.tscn" id="21_b0w1x"]
-[ext_resource type="Script" uid="uid://ocxdtpn24lj7" path="res://Scripts/TilemapsParent.gd" id="22_ndl8n"]
+[ext_resource type="Script" path="res://Scripts/TilemapsParent.gd" id="22_ndl8n"]
 [ext_resource type="TileSet" uid="uid://b5nmyyj2chinl" path="res://BaseTileSet.tres" id="23_3vnur"]
 [ext_resource type="Script" uid="uid://b5opwn1b3r0fj" path="res://Scripts/MainTileMap.gd" id="24_ktq20"]
 [ext_resource type="Script" uid="uid://cxkj141c3q8gk" path="res://Scripts/GenerateStars.gd" id="25_fdjc6"]
@@ -190,13 +189,6 @@ _data = {
 &"RESET": SubResource("Animation_xim88"),
 &"scale_up": SubResource("Animation_8um5k")
 }
-
-[sub_resource type="Curve2D" id="Curve2D_v6u8i"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -160.507, -57, 0, 0, 0, 0, -160.507, -234)
-}
-point_count = 2
 
 [node name="Game2" type="Node2D"]
 
@@ -506,11 +498,6 @@ player = NodePath("../../../../Player")
 tile_map_data = PackedByteArray("AAD///3/AAAAAAQAAAAAAP3/AAAAAAQAAAABAP3/AAAAAAQAAAD///7/AAAAAAQAAAAAAP7/AAAAAAQAAAABAP7/AAAAAAQAAAACAP7/AAAAAAQAAAADAP7/AAAAAAQAAAAEAP7/AAAAAAQAAAAFAP7/AAAAAAQAAAAGAP7/AAAAAAQAAAAHAP7/AAAAAAQAAAAHAP3/AAAAAAQAAAAGAP3/AAAAAAQAAAAFAP3/AAAAAAQAAAAEAP3/AAAAAAQAAAADAP3/AAAAAAQAAAACAP3/AAAAAAQAAADy/wMAAAABAAQAAADy/wIAAAADAAEAAADx/wMAAAACAAQAAADx/wIAAAABAAEAAADy/wEAAAADAAAAAADx/wEAAAABAAAAAAA=")
 enabled = false
 tile_set = ExtResource("23_3vnur")
-
-[node name="MovingPlatform" parent="Environment" instance=ExtResource("19_t7ysk")]
-position = Vector2(545.721, 14)
-scale = Vector2(0.995098, 1)
-curve = SubResource("Curve2D_v6u8i")
 
 [node name="Bouncepad" parent="Environment" instance=ExtResource("20_84vcq")]
 position = Vector2(387, 80)
