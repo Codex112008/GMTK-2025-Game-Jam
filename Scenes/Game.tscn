@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://debm3ymknypqy" path="res://Scripts/GrassSpawner.gd" id="11_lbihj"]
 [ext_resource type="Texture2D" uid="uid://dl7gk58g780l7" path="res://Sprites/UI/mute_button2.png" id="12_18uti"]
 [ext_resource type="PackedScene" uid="uid://1e7r6tjgcuy7" path="res://Scenes/HealthIcon.tscn" id="12_khs3t"]
-[ext_resource type="Texture2D" uid="uid://ctgjoplr3snvf" path="res://icon.svg" id="12_lmarx"]
+[ext_resource type="Texture2D" uid="uid://ct1sdvnx3xgrk" path="res://Sprites/UI/player_icon.png" id="12_lmarx"]
 [ext_resource type="Script" path="res://Scenes/PlayerIcon.gd" id="12_pti6k"]
 [ext_resource type="PackedScene" path="res://Scenes/Grass.tscn" id="12_raj38"]
 [ext_resource type="Texture2D" uid="uid://dmqbmxtq7ceu5" path="res://Sprites/BG/Stars/star_medium.png" id="12_tfod6"]
@@ -291,7 +291,7 @@ texture = ExtResource("11_khy6b")
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
-scale = Vector2(0.025, 0.025)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("12_lmarx")
 script = ExtResource("12_pti6k")
 tilemap = NodePath("../../../../Environment/Tilemaps (in order)/MainTilemapParent/base_tile_map")
