@@ -77,7 +77,6 @@ shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6okg5"]
-load_path = "res://.godot/imported/map.png-9eea34967fae34f4388f4a32a16da936.ctex"
 
 [sub_resource type="Animation" id="Animation_4f4ik"]
 length = 0.001
