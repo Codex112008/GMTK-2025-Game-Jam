@@ -35,6 +35,8 @@ var dir : int
 var max_health : int
 var current_health : int
 
+var next_tilemap_index : int = 1
+
 @export_group("References")
 @export var coyote_timer : Timer
 @export var jump_buffer_timer : Timer
@@ -70,6 +72,7 @@ var current_health : int
 @export var health_ui_container : Control
 @export var crt_canvas_layer : CanvasLayer
 @export var audio_manager : AudioManager
+@export var tilemaps_parent : Node2D
 
 func _ready():
 	curve_shader_strength = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("distortion_strength")
@@ -332,6 +335,10 @@ func take_damage(spike_pos : Vector2):
 			velocity = dir * jump_strength
 
 func drink():
+	if next_tilemap_index < tilemaps_parent.get_child_count():
+		for tilemap in tilemaps_parent.get_child(next_tilemap_index).get_children():
+			tilemap.enabled = true
+		next_tilemap_index += 1
 	drink_timer.start()
 
 func pass_out():
