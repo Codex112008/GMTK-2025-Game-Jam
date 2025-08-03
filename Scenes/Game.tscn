@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://cxkj141c3q8gk" path="res://Scripts/GenerateStars.gd" id="10_acvyw"]
 [ext_resource type="PackedScene" uid="uid://qbxyvf6gilb4" path="res://Scenes/WinScreen.tscn" id="10_jn8rg"]
 [ext_resource type="Texture2D" uid="uid://71pgdgpfn7" path="res://Sprites/UI/mute_button1.png" id="10_umnjm"]
-[ext_resource type="Script" uid="uid://b88tnxmd6bwov" path="res://Scripts/UI/MuteButton.gd" id="11_4eqlp"]
+[ext_resource type="Script" path="res://Scripts/UI/MuteButton.gd" id="11_4eqlp"]
 [ext_resource type="Texture2D" uid="uid://hs7itxox02mv" path="res://Sprites/BG/Stars/star_large.png" id="11_8r6kd"]
 [ext_resource type="Texture2D" uid="uid://cdvuue7sxff2w" path="res://Sprites/BG/Planets/planets2.png" id="11_dahhg"]
 [ext_resource type="AudioStream" uid="uid://boyxc0gw8cug6" path="res://Audio/music/jumporrun_reverse.wav" id="11_i4lct"]
@@ -330,7 +330,7 @@ target = NodePath("../Player")
 level = NodePath("../Environment/Tilemaps (in order)/MainTilemapParent/base_tile_map")
 shakeFade = 15.0
 
-[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_container", "crt_canvas_layer", "audio_manager", "tilemaps_parent", "win_screen") instance=ExtResource("3_j5yw3")]
+[node name="Player" parent="." node_paths=PackedStringArray("curve_effect_rect", "camera", "instantiated_nodes", "health_ui_container", "crt_canvas_layer", "audio_manager", "tilemaps_parent", "win_screen", "map_generator", "map") instance=ExtResource("3_j5yw3")]
 z_index = 1
 position = Vector2(0, 63)
 safe_margin = 0.1
@@ -343,6 +343,8 @@ crt_canvas_layer = NodePath("../Shaders/crt_layer")
 audio_manager = NodePath("AudioManager")
 tilemaps_parent = NodePath("../Environment/Tilemaps (in order)")
 win_screen = NodePath("../UI/WinScreen")
+map_generator = NodePath("..")
+map = NodePath("../UI/UI/Map")
 
 [node name="AudioManager" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("26_i0vto")
@@ -509,7 +511,7 @@ position = Vector2(-1080, -808)
 position = Vector2(272, -1352)
 
 [node name="Beer8" parent="Environment/Beers" instance=ExtResource("2_b2bpf")]
-position = Vector2(1015, -396)
+position = Vector2(1063, -404)
 
 [node name="Beer9" parent="Environment/Beers" instance=ExtResource("2_b2bpf")]
 position = Vector2(-1080, -1360)

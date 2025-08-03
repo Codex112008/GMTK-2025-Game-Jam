@@ -76,6 +76,8 @@ var next_tilemap_index : int = 1
 @export var audio_manager : AudioManager
 @export var tilemaps_parent : TilemapsParent
 @export var win_screen : Control
+@export var map_generator : MapGenerator
+@export var map : TextureRect
 
 func _ready():
 	Engine.time_scale = 1
@@ -90,6 +92,8 @@ func _ready():
 		health_icon.position = Vector2(i * 42, 0)
 		health_icon.z_index = -i
 		health_ui_container.add_child(health_icon)
+	
+	map.texture = map_generator.generatetilemap()
 
 func _process(delta : float) -> void:
 	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
@@ -346,6 +350,7 @@ func drink():
 			tilemap.enabled = true
 		next_tilemap_index += 1
 	tilemaps_parent.grass_spawner.GenerateGrass()
+	map.texture = map_generator.generatetilemap()
 	drink_timer.start()
 
 func pass_out():

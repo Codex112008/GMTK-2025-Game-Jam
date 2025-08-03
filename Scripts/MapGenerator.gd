@@ -1,4 +1,5 @@
 @tool extends Node
+class_name MapGenerator
 
 @export_tool_button("generatemap", "Callable") var map_action = generatetilemap
 
@@ -15,7 +16,7 @@ var height : int
 var offsetx : int = 0 # also functions as minx
 var offsety : int = 0 # also functions as miny
 
-func generatetilemap():
+func generatetilemap() -> ImageTexture:
 	for i in tilemaps[0].get_used_cells():
 		if i.x < offsetx:
 			offsetx = i.x
@@ -44,3 +45,4 @@ func generatetilemap():
 	# save image
 	tilemapimage.save_png(savepath + "map.png")
 	print("done generating " + savepath + "map.png")
+	return ImageTexture.create_from_image(tilemapimage)
