@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="GMTK 2025"
+config/name="Drunk Hamsters In Space - GMTK 2025"
 run/main_scene="uid://ds7chbrhs4ppq"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bq2mj3ko1y131"
+config/macos_native_icon="res://Sprites/icon.icns"
+config/windows_native_icon="res://Sprites/icon.ico"
 
 [autoload]
 
