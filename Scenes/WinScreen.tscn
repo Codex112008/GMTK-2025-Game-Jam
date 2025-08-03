@@ -76,6 +76,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(960, 540)
 
 [node name="WinSprite" type="TextureRect" parent="."]
 layout_mode = 1
@@ -84,7 +85,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(320, 180)
+pivot_offset = Vector2(960, 540)
 texture = ExtResource("1_yqulb")
 
 [node name="MainMenu" type="TextureButton" parent="." node_paths=PackedStringArray("circle_transition", "sound_player")]

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://lx0y53nmwk14" path="res://Sprites/UI/play_button3.png" id="2_riqfo"]
 [ext_resource type="PackedScene" uid="uid://bfn2b364eucoc" path="res://Scenes/Game.tscn" id="3_ghw46"]
 [ext_resource type="Texture2D" uid="uid://clgaxuuqqwl87" path="res://Sprites/transition.png" id="4_ghw46"]
-[ext_resource type="Script" path="res://Scripts/StartButton.gd" id="4_yxkem"]
+[ext_resource type="Script" uid="uid://ctyc1hmqlcrsc" path="res://Scripts/StartButton.gd" id="4_yxkem"]
 [ext_resource type="PackedScene" uid="uid://csdut8ytbu0c5" path="res://Scenes/SoundPlayer.tscn" id="5_xim88"]
 [ext_resource type="AudioStream" uid="uid://vsu3h72joahw" path="res://Audio/UI/ding_deep.wav" id="6_xim88"]
 [ext_resource type="PackedScene" uid="uid://beijge10s31sm" path="res://Scenes/Tutorial.tscn" id="7_8e205"]
