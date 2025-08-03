@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0yyrubdcdt1o"]
+
+[ext_resource type="Texture2D" uid="uid://ds0q6gapp184w" path="res://Sprites/UI/bubble1.png" id="1_xlgdi"]
+[ext_resource type="Script" uid="uid://c0naunk6iylgk" path="res://Scripts/UI/Bubble.gd" id="2_xlgdi"]
+
+[node name="Bubble" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("1_xlgdi")
+script = ExtResource("2_xlgdi")

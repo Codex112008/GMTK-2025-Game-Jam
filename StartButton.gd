@@ -2,20 +2,45 @@ extends TextureButton
 
 @export var main_scene : PackedScene
 @export var circle_transition : AnimationPlayer
+@export var sound_player : SoundPlayer
 
-# Called when the node enters the scene tree for the first time.
+var starting_pos : Vector2
+
 func _ready():
-	pass # Replace with function body.
+	starting_pos = position
 
+# shake
+@export var rngStrength : float= 30;
+@export var shakeFade : float = 5;
+var shakeStrength : float = 0;
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+var rng : RandomNumberGenerator = RandomNumberGenerator.new();
+
 func _process(delta):
-	pass
+	if (shakeStrength > 0): # actual shake
+		shakeStrength = lerp(shakeStrength, 0.0, shakeFade * delta);
+		position = starting_pos + rng_offset()
+
+	if (shakeStrength <= 1): # stop at really small values
+		shakeStrength = 0;
+		position = starting_pos
+
+
+func apply_shake(multiplier : float) -> void:
+	shakeStrength += rngStrength * multiplier
+
+func reset_shake() -> void:
+	shakeStrength = 0;
+
+func rng_offset() -> Vector2:
+	return Vector2(rng.randf_range(-shakeStrength, shakeStrength), rng.randf_range(-shakeStrength, shakeStrength))
 
 
 func _on_pressed():
 	(circle_transition.get_parent() as TextureRect).set_global_position(get_global_mouse_position() + Vector2(24, 24))
 	circle_transition.play("scale_up")
+	apply_shake(0.5)
+	sound_player.play_sound()
 
 
 func _on_animation_player_animation_finished(anim_name):
