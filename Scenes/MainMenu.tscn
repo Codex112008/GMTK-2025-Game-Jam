@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://ds7chbrhs4ppq"]
+[gd_scene load_steps=27 format=3 uid="uid://ds7chbrhs4ppq"]
 
 [ext_resource type="Texture2D" uid="uid://b32fn7fetjlah" path="res://Sprites/UI/play_button1.png" id="1_df05h"]
-[ext_resource type="Environment" uid="uid://bojgl2c1l2isi" path="res://Scenes/Environment.tres" id="1_m7n2d"]
 [ext_resource type="Texture2D" uid="uid://cpbvkeflrlkne" path="res://Sprites/UI/play_button2.png" id="2_8um5k"]
 [ext_resource type="Texture2D" uid="uid://lx0y53nmwk14" path="res://Sprites/UI/play_button3.png" id="2_riqfo"]
 [ext_resource type="PackedScene" uid="uid://bfn2b364eucoc" path="res://Scenes/Game.tscn" id="3_ghw46"]
@@ -21,6 +20,16 @@
 [ext_resource type="PackedScene" uid="uid://dqlgiiyq53q3x" path="res://Scenes/WhiteBubble.tscn" id="13_fh7cp"]
 [ext_resource type="AudioStream" uid="uid://hicsicfivyvy" path="res://Audio/music/nightsky.wav" id="19_pjscj"]
 [ext_resource type="Script" uid="uid://bm3bj5ud87kb2" path="res://Scripts/UI/TitleMusicPlayer.gd" id="20_m7n2d"]
+
+[sub_resource type="Gradient" id="Gradient_pjscj"]
+colors = PackedColorArray(0, 0, 0, 1, 0.82279, 0.780665, 0.805106, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m7n2d"]
+gradient = SubResource("Gradient_pjscj")
+
+[sub_resource type="Environment" id="Environment_65hh5"]
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture1D_m7n2d")
 
 [sub_resource type="Animation" id="Animation_xim88"]
 length = 0.001
@@ -94,7 +103,7 @@ grow_vertical = 2
 scale = Vector2(3, 3)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_m7n2d")
+environment = SubResource("Environment_65hh5")
 
 [node name="Buttons" type="Control" parent="."]
 layout_mode = 1
