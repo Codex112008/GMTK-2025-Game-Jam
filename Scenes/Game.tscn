@@ -44,7 +44,7 @@
 [ext_resource type="Texture2D" uid="uid://cxqthbligaevg" path="res://Sprites/Sign.png" id="24_umnjm"]
 [ext_resource type="PackedScene" uid="uid://44epf0df578d" path="res://Scenes/MovingPlatform.tscn" id="25_jn8rg"]
 [ext_resource type="AudioStream" uid="uid://bhfhcgw6elgid" path="res://Audio/music/jumporrun_loop.wav" id="26_i0vto"]
-[ext_resource type="Script" uid="uid://o5j0sdvp3q7v" path="res://Scripts/Sign.gd" id="33_t2joc"]
+[ext_resource type="Script" path="res://Scripts/Sign.gd" id="33_t2joc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gl6un"]
 resource_local_to_scene = true

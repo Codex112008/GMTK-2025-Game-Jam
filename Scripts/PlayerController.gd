@@ -357,8 +357,9 @@ func drink():
 
 func pass_out():
 	win_sound.play_sound()
-	var win_animplayer : AnimationPlayer = win_screen.get_child(-1) as AnimationPlayer
-	win_animplayer.play("win_anim")
+	if starting_max_health == 6:
+		var win_animplayer : AnimationPlayer = win_screen.get_child(-1) as AnimationPlayer
+		win_animplayer.play("win_anim")
 
 func _on_pre_rewind_timeout() -> void:
 	set_process_input(false)

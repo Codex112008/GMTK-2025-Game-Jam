@@ -380,6 +380,34 @@ theme_override_constants/line_separation = 3
 theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "The level \"loops\" around"
 
+[node name="WinCondition" type="RichTextLabel" parent="WorldUI"]
+layout_mode = 0
+offset_left = 488.0
+offset_top = -48.0
+offset_right = 638.0
+offset_bottom = 37.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
+text = "Collecting a beer reduces your number of loops by 1,
+
+lose all your loops to win"
+scroll_active = false
+
+[node name="WinCondition2" type="RichTextLabel" parent="WorldUI"]
+layout_mode = 0
+offset_left = -1400.0
+offset_top = -48.0
+offset_right = -1250.0
+offset_bottom = 37.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
+text = "Collecting a beer reduces your number of loops by 1,
+
+lose all your loops to win"
+scroll_active = false
+
 [node name="Dash" type="RichTextLabel" parent="WorldUI"]
 layout_mode = 0
 offset_left = -40.0
@@ -421,6 +449,7 @@ z_index = 1
 position = Vector2(-684, 42)
 safe_margin = 0.1
 health_icon_scene = ExtResource("12_d4stk")
+starting_max_health = 2
 curve_effect_rect = NodePath("../Shaders/curve_layer/curve_effect")
 camera = NodePath("../Camera2d")
 instantiated_nodes = NodePath("../InstantiatedNodes")
@@ -526,7 +555,7 @@ player = NodePath("../../../../Player")
 [node name="Node2D" type="Node2D" parent="Environment/Tilemaps (in order)"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Environment/Tilemaps (in order)/Node2D"]
-tile_map_data = PackedByteArray("AAD///3/AAAAAAQAAAAAAP3/AAAAAAQAAAABAP3/AAAAAAQAAAD///7/AAAAAAQAAAAAAP7/AAAAAAQAAAABAP7/AAAAAAQAAAACAP7/AAAAAAQAAAADAP7/AAAAAAQAAAAEAP7/AAAAAAQAAAAFAP7/AAAAAAQAAAAGAP7/AAAAAAQAAAAHAP7/AAAAAAQAAAAHAP3/AAAAAAQAAAAGAP3/AAAAAAQAAAAFAP3/AAAAAAQAAAAEAP3/AAAAAAQAAAADAP3/AAAAAAQAAAACAP3/AAAAAAQAAADy/wMAAAABAAQAAADy/wIAAAADAAEAAADx/wMAAAACAAQAAADx/wIAAAABAAEAAADy/wEAAAADAAAAAADx/wEAAAABAAAAAAARAP3/AAAAAAQAAAARAP7/AAAAAAQAAAARAP//AAAAAAQAAAARAAAAAAAAAAQAAAARAAEAAAAAAAQAAAARAAIAAAAAAAQAAAASAP3/AAAAAAQAAAASAP7/AAAAAAQAAAASAP//AAAAAAQAAAASAAAAAAAAAAQAAAASAAEAAAAAAAQAAAASAAIAAAAAAAQAAAA=")
+tile_map_data = PackedByteArray("AAD///3/AAAAAAQAAAAAAP3/AAAAAAQAAAABAP3/AAAAAAQAAAD///7/AAAAAAQAAAAAAP7/AAAAAAQAAAABAP7/AAAAAAQAAAACAP7/AAAAAAQAAAADAP7/AAAAAAQAAAAEAP7/AAAAAAQAAAAFAP7/AAAAAAQAAAAGAP7/AAAAAAQAAAAHAP7/AAAAAAQAAAAHAP3/AAAAAAQAAAAGAP3/AAAAAAQAAAAFAP3/AAAAAAQAAAAEAP3/AAAAAAQAAAADAP3/AAAAAAQAAAACAP3/AAAAAAQAAADy/wMAAAABAAQAAADy/wIAAAADAAEAAADx/wMAAAACAAQAAADx/wIAAAABAAEAAADy/wEAAAADAAAAAADx/wEAAAABAAAAAAAWAP3/AAAAAAQAAAAWAP7/AAAAAAQAAAAWAP//AAAAAAQAAAAWAAAAAAAAAAQAAAAWAAEAAAAAAAQAAAAWAAIAAAAAAAQAAAA=")
 enabled = false
 tile_set = ExtResource("23_3vnur")
 

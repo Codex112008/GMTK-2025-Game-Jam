@@ -13,9 +13,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if is_tutorial && player.max_health != 6:
+	if is_tutorial && player.max_health != 2:
 		visible = true
-		if player.max_health < 5 && !player.rewinding:
+		if player.max_health <= 0 && !player.rewinding:
 			circle_transition.play("scale_up")
 	elif !is_tutorial:
 		if (shakeStrength > 0): # actual shake
