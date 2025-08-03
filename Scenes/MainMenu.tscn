@@ -2,13 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://b32fn7fetjlah" path="res://Sprites/UI/play_button1.png" id="1_df05h"]
 [ext_resource type="Texture2D" uid="uid://cpbvkeflrlkne" path="res://Sprites/UI/play_button2.png" id="2_8um5k"]
-[ext_resource type="Script" uid="uid://ctyc1hmqlcrsc" path="res://Scripts/StartButton.gd" id="2_ghw46"]
 [ext_resource type="Texture2D" uid="uid://lx0y53nmwk14" path="res://Sprites/UI/play_button3.png" id="2_riqfo"]
 [ext_resource type="PackedScene" uid="uid://bfn2b364eucoc" path="res://Scenes/Game.tscn" id="3_ghw46"]
 [ext_resource type="Texture2D" uid="uid://clgaxuuqqwl87" path="res://Sprites/transition.png" id="4_ghw46"]
+[ext_resource type="Script" path="res://Scripts/StartButton.gd" id="4_yxkem"]
 [ext_resource type="PackedScene" uid="uid://csdut8ytbu0c5" path="res://Scenes/SoundPlayer.tscn" id="5_xim88"]
 [ext_resource type="AudioStream" uid="uid://vsu3h72joahw" path="res://Audio/UI/ding_deep.wav" id="6_xim88"]
-[ext_resource type="PackedScene" uid="uid://63gnnnwdj376" path="res://Scenes/Tutorial.tscn" id="7_8e205"]
+[ext_resource type="PackedScene" uid="uid://beijge10s31sm" path="res://Scenes/Tutorial.tscn" id="7_8e205"]
 [ext_resource type="Texture2D" uid="uid://bndbqq2a1vpln" path="res://Sprites/UI/Title.png" id="8_koqhg"]
 [ext_resource type="Texture2D" uid="uid://b4daru7124krw" path="res://Sprites/UI/tutorial_button1.png" id="8_yxkem"]
 [ext_resource type="Texture2D" uid="uid://duy5cl2ek2lw0" path="res://Sprites/UI/tutorial_button3.png" id="9_7v4os"]
@@ -84,8 +84,11 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(3, 3)
 
 [node name="Buttons" type="Control" parent="."]
 layout_mode = 1
@@ -115,7 +118,7 @@ pivot_offset = Vector2(32, 32)
 texture_normal = ExtResource("1_df05h")
 texture_pressed = ExtResource("2_riqfo")
 texture_hover = ExtResource("2_8um5k")
-script = ExtResource("2_ghw46")
+script = ExtResource("4_yxkem")
 level_scene = ExtResource("3_ghw46")
 circle_transition = NodePath("../../Circle/AnimationPlayer")
 sound_player = NodePath("PressSound")
@@ -143,7 +146,7 @@ pivot_offset = Vector2(32, 32)
 texture_normal = ExtResource("8_yxkem")
 texture_pressed = ExtResource("9_7v4os")
 texture_hover = ExtResource("10_pjscj")
-script = ExtResource("2_ghw46")
+script = ExtResource("4_yxkem")
 level_scene = ExtResource("7_8e205")
 circle_transition = NodePath("../../Circle/AnimationPlayer")
 sound_player = NodePath("PressSound")
