@@ -177,3 +177,4 @@ one_way_collision = true
 libraries = {
 &"": SubResource("AnimationLibrary_1s7xt")
 }
+autoplay = "swing"
