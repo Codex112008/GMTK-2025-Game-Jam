@@ -363,7 +363,7 @@ offset_bottom = 10.0
 scale = Vector2(1.5, 1.5)
 theme_override_constants/line_separation = 3
 theme_override_fonts/normal_font = ExtResource("10_dut48")
-text = "The level wraps around"
+text = "The level \"loops\" around"
 
 [node name="Screenwrap2" type="RichTextLabel" parent="WorldUI"]
 layout_mode = 0
@@ -490,6 +490,18 @@ tutorial = true
 position = Vector2(608, -256)
 tutorial = true
 
+[node name="Tree8" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
+position = Vector2(-1408, -256)
+tutorial = true
+
+[node name="Tree9" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
+position = Vector2(-1344, -256)
+tutorial = true
+
+[node name="Tree10" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
+position = Vector2(-1280, -256)
+tutorial = true
+
 [node name="Tree4" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
 position = Vector2(288, 64)
 tutorial = true
@@ -569,7 +581,7 @@ texture = ExtResource("30_hqado")
 z_index = 1
 scroll_scale = Vector2(0.8, 0.8)
 repeat_size = Vector2(754.675, 0)
-repeat_times = 4
+repeat_times = 8
 follow_viewport = false
 
 [node name="Planet1" type="Sprite2D" parent="ParallaxBackground/Frontmost"]
@@ -583,7 +595,7 @@ texture = ExtResource("32_4quph")
 [node name="Midground" type="Parallax2D" parent="ParallaxBackground"]
 scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(566.21, 0)
-repeat_times = 4
+repeat_times = 8
 follow_viewport = false
 
 [node name="Planets3" type="Sprite2D" parent="ParallaxBackground/Midground"]
