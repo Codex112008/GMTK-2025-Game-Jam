@@ -29,7 +29,7 @@ func _process(delta):
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "scale_up":
 		get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
-		
+
 @export var sound_player : SoundPlayer
 
 var starting_pos : Vector2

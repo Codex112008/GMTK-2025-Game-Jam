@@ -475,6 +475,7 @@ texture = ExtResource("10_71axn")
 
 [node name="Frontmost" type="Parallax2D" parent="ParallaxBackground"]
 z_index = 1
+scale = Vector2(3, 3)
 scroll_scale = Vector2(0.8, 0.8)
 repeat_size = Vector2(922.31, 0)
 repeat_times = 8
@@ -489,6 +490,7 @@ position = Vector2(-94, -60)
 texture = ExtResource("13_acvyw")
 
 [node name="Midground" type="Parallax2D" parent="ParallaxBackground"]
+scale = Vector2(3, 3)
 scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(461.45, 0)
 repeat_times = 8

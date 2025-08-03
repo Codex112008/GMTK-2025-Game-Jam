@@ -266,7 +266,7 @@ func _physics_process(delta : float) -> void:
 			nutted_trees.append(collidingTree)
 		
 		if i_frame_timer.time_left == 0:
-			var colliding_tilemap : MainTliemap = get_slide_collision(i).get_collider() as MainTliemap
+			var colliding_tilemap : TileMapLayer = get_slide_collision(i).get_collider() as TileMapLayer
 			if colliding_tilemap != null:
 				var collision_point : Vector2 = get_slide_collision(i).get_position()
 				var tile_coords : Vector2i = colliding_tilemap.local_to_map(colliding_tilemap.to_local(collision_point))
