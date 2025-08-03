@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://b0yyrubdcdt1o" path="res://Scenes/Bubble.tscn" id="12_rrcx7"]
 [ext_resource type="PackedScene" uid="uid://dqlgiiyq53q3x" path="res://Scenes/WhiteBubble.tscn" id="13_fh7cp"]
 [ext_resource type="AudioStream" uid="uid://hicsicfivyvy" path="res://Audio/music/nightsky.wav" id="19_pjscj"]
-[ext_resource type="Script" path="res://Scripts/UI/TitleMusicPlayer.gd" id="20_m7n2d"]
+[ext_resource type="Script" uid="uid://bm3bj5ud87kb2" path="res://Scripts/UI/TitleMusicPlayer.gd" id="20_m7n2d"]
 
 [sub_resource type="Animation" id="Animation_xim88"]
 length = 0.001
