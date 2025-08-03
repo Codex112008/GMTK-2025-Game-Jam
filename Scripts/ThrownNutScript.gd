@@ -7,6 +7,7 @@ class_name ThrownNutScript
 
 @export_group("references")
 @export var my_sprite : AnimatedSprite2D
+@export var break_sound : SoundPlayer
 
 var do_spin : bool = true
 
@@ -31,7 +32,7 @@ func _process(delta: float) -> void:
 		my_sprite.rotation = 0
 		my_sprite.play("destroy")
 		
-	
+		break_sound.play_sound()
 
 
 func _on_alive_timer_timeout() -> void:

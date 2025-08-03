@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://de5all3ajrwck"]
+[gd_scene load_steps=15 format=3 uid="uid://de5all3ajrwck"]
 
 [ext_resource type="Script" uid="uid://cbporc1gpyevb" path="res://Scripts/ThrownNutScript.gd" id="1_hc5b4"]
 [ext_resource type="Texture2D" uid="uid://bmiiqcw3hcgfp" path="res://Sprites/Acorn/acorn.png" id="2_g5xty"]
@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://01xgn37b27te" path="res://Sprites/Acorn/acorn_break4.png" id="6_bi4gb"]
 [ext_resource type="Texture2D" uid="uid://dwc3qxsdnjg52" path="res://Sprites/Acorn/acorn_break5.png" id="7_o8n40"]
 [ext_resource type="Texture2D" uid="uid://b1c8i5tndvu4y" path="res://Sprites/Acorn/acorn_break6.png" id="8_vyogi"]
+[ext_resource type="PackedScene" uid="uid://csdut8ytbu0c5" path="res://Scenes/SoundPlayer.tscn" id="9_o8n40"]
+[ext_resource type="AudioStream" uid="uid://crpo8beaef45p" path="res://Audio/Player/impactPlank_medium_004.ogg" id="10_vyogi"]
+[ext_resource type="AudioStream" uid="uid://b5ieysyve2uoy" path="res://Audio/Player/impactPlate_heavy_000.ogg" id="11_bkue4"]
+[ext_resource type="AudioStream" uid="uid://dlm60he2uurma" path="res://Audio/Player/impactPlate_heavy_001.ogg" id="12_x6ili"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hs7na"]
 radius = 3.0
@@ -46,13 +50,14 @@ animations = [{
 "speed": 24.0
 }]
 
-[node name="ThrownNut" type="CharacterBody2D" node_paths=PackedStringArray("my_sprite") groups=["ThrownNut"]]
+[node name="ThrownNut" type="CharacterBody2D" node_paths=PackedStringArray("my_sprite", "break_sound") groups=["ThrownNut"]]
 collision_layer = 0
 script = ExtResource("1_hc5b4")
 spin_speed = 20.0
-gravity = 650.0
+gravity = 1600.0
 start_fall_speed = 200.0
 my_sprite = NodePath("AnimatedSprite2D")
+break_sound = NodePath("BreakSound")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hs7na")
@@ -65,5 +70,10 @@ animation = &"destroy"
 [node name="AliveTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="BreakSound" parent="." instance=ExtResource("9_o8n40")]
+volume_db = -7.0
+sounds = [ExtResource("10_vyogi"), ExtResource("11_bkue4"), ExtResource("12_x6ili")]
+base_pitch = 1.5
 
 [connection signal="timeout" from="AliveTimer" to="." method="_on_alive_timer_timeout"]

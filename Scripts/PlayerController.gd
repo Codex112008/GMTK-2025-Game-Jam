@@ -64,6 +64,8 @@ var next_tilemap_index : int = 1
 @export var landing_sound : SoundPlayer
 @export var hurt_sound : SoundPlayer
 @export var jump_sound : SoundPlayer
+@export var collect_sound : SoundPlayer
+@export var win_sound : SoundPlayer
 
 @export_group("OOC References")
 @export var curve_effect_rect : CanvasItem
@@ -139,6 +141,8 @@ func _physics_process(delta : float) -> void:
 		
 	# Nut dash
 	if nut_count > 0 && Input.is_action_just_pressed("dash") && !rewinding && drink_timer.time_left == 0:
+		jump_sound.play_sound()
+		
 		camera.apply_shake(0.2)
 		remove_oldest_nut()
 		dashing = true
@@ -254,6 +258,7 @@ func _physics_process(delta : float) -> void:
 	for i in get_slide_collision_count():
 		var collidingTree : TreeNode = get_slide_collision(i).get_collider() as TreeNode
 		if collidingTree != null && collidingTree.has_nut && nutted_trees.size() < max_nut_count:
+			collect_sound.play_sound()
 			nut_count = mini(nut_count + 1, max_nut_count)
 			collidingTree.has_nut = false
 			collidingTree.empty = true
@@ -342,6 +347,7 @@ func drink():
 	drink_timer.start()
 
 func pass_out():
+	win_sound.play_sound()
 	print("LMAO good job drunkard")
 	# win screen anims
 

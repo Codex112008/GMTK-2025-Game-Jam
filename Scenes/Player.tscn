@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=66 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
@@ -47,6 +47,8 @@
 [ext_resource type="AudioStream" uid="uid://eunun76qccys" path="res://Audio/Player/61_Hit_03.wav" id="35_bfbt0"]
 [ext_resource type="AudioStream" uid="uid://p2t76rfgfwgm" path="res://Audio/Player/30_Jump_03.wav" id="36_hkrn1"]
 [ext_resource type="AudioStream" uid="uid://dqpukigwr1u6s" path="res://Audio/Player/56_Attack_03.wav" id="37_wpo1r"]
+[ext_resource type="AudioStream" uid="uid://b2xg4cbo2r4jb" path="res://Audio/Player/click_1.wav" id="48_yf17c"]
+[ext_resource type="AudioStream" uid="uid://broany71vvr60" path="res://Audio/UI/winfretless.ogg" id="49_awd2i"]
 
 [sub_resource type="Resource" id="Resource_52ee3"]
 script = ExtResource("5_nn08x")
@@ -285,7 +287,7 @@ _data = {
 &"damage_flash": SubResource("Animation_i2e8t")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "i_frame_timer", "drink_timer", "pre_rewind_timer", "dash_timer", "my_sprite", "time_rewinder", "collision_shape", "animation_player", "drunk_particles", "jump_particles", "land_particles", "run_particles", "hit_particles", "afterimage_particles", "footsteps_sound", "landing_sound", "hurt_sound", "jump_sound")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "i_frame_timer", "drink_timer", "pre_rewind_timer", "dash_timer", "my_sprite", "time_rewinder", "collision_shape", "animation_player", "drunk_particles", "jump_particles", "land_particles", "run_particles", "hit_particles", "afterimage_particles", "footsteps_sound", "landing_sound", "hurt_sound", "jump_sound", "collect_sound", "win_sound")]
 collision_layer = 2
 script = ExtResource("1_kyqiw")
 speed = 260.0
@@ -318,6 +320,8 @@ footsteps_sound = NodePath("Sounds/FootstepSound")
 landing_sound = NodePath("Sounds/LandingSound")
 hurt_sound = NodePath("Sounds/HurtSound")
 jump_sound = NodePath("Sounds/JumpSound")
+collect_sound = NodePath("Sounds/CollectSound")
+win_sound = NodePath("Sounds/WinSound")
 
 [node name="Rewinder" type="Node" parent="."]
 script = ExtResource("4_5ixxa")
@@ -497,5 +501,13 @@ sounds = [ExtResource("35_bfbt0")]
 [node name="JumpSound" parent="Sounds" instance=ExtResource("31_wosd6")]
 volume_db = 1.5
 sounds = [ExtResource("36_hkrn1"), ExtResource("37_wpo1r")]
+
+[node name="CollectSound" parent="Sounds" instance=ExtResource("31_wosd6")]
+volume_db = -2.0
+sounds = [ExtResource("48_yf17c")]
+base_pitch = 1.1
+
+[node name="WinSound" parent="Sounds" instance=ExtResource("31_wosd6")]
+sounds = [ExtResource("49_awd2i")]
 
 [connection signal="timeout" from="Timers/PreRewindTimer" to="." method="_on_pre_rewind_timeout"]
