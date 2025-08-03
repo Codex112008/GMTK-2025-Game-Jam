@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://cxkj141c3q8gk" path="res://Scripts/GenerateStars.gd" id="10_acvyw"]
 [ext_resource type="PackedScene" uid="uid://qbxyvf6gilb4" path="res://Scenes/WinScreen.tscn" id="10_jn8rg"]
 [ext_resource type="Texture2D" uid="uid://71pgdgpfn7" path="res://Sprites/UI/mute_button1.png" id="10_umnjm"]
-[ext_resource type="Script" path="res://Scripts/UI/MuteButton.gd" id="11_4eqlp"]
+[ext_resource type="Script" uid="uid://b88tnxmd6bwov" path="res://Scripts/UI/MuteButton.gd" id="11_4eqlp"]
 [ext_resource type="Texture2D" uid="uid://hs7itxox02mv" path="res://Sprites/BG/Stars/star_large.png" id="11_8r6kd"]
 [ext_resource type="Texture2D" uid="uid://cdvuue7sxff2w" path="res://Sprites/BG/Planets/planets2.png" id="11_dahhg"]
 [ext_resource type="AudioStream" uid="uid://boyxc0gw8cug6" path="res://Audio/music/jumporrun_reverse.wav" id="11_i4lct"]
@@ -296,6 +296,13 @@ texture = ExtResource("12_lmarx")
 script = ExtResource("12_pti6k")
 tilemap = NodePath("../../../../Environment/Tilemaps (in order)/MainTilemapParent/base_tile_map")
 player = NodePath("../../../../Player")
+
+[node name="BG" type="ColorRect" parent="UI/UI/Map"]
+z_index = -1
+layout_mode = 0
+offset_right = 72.0
+offset_bottom = 107.0
+color = Color(0.0627451, 0.0470588, 0.113725, 0.796078)
 
 [node name="FadeIn" type="TextureRect" parent="UI"]
 visible = false
