@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://44epf0df578d"]
 
-[ext_resource type="Script" uid="uid://b03a7qus0f1tv" path="res://Scripts/MovingPlatform.gd" id="1_5olv3"]
+[ext_resource type="Script" path="res://Scripts/MovingPlatform.gd" id="1_cbc1i"]
 [ext_resource type="Texture2D" uid="uid://cgufb1yjxivi" path="res://Sprites/Mushroom/movingmushroom.png" id="2_5olv3"]
 [ext_resource type="PackedScene" uid="uid://csdut8ytbu0c5" path="res://Scenes/SoundPlayer.tscn" id="3_cbc1i"]
 [ext_resource type="AudioStream" uid="uid://vfuwh4t7mo7j" path="res://Audio/Things/sfx_push_boulder.wav" id="4_fl5gg"]
@@ -20,7 +20,7 @@ size = Vector2(128, 8)
 
 [node name="MovingPlatform" type="Path2D" node_paths=PackedStringArray("path_follow", "move_sound")]
 curve = SubResource("Curve2D_cbc1i")
-script = ExtResource("1_5olv3")
+script = ExtResource("1_cbc1i")
 path_follow = NodePath("PathFollow2D")
 move_sound = NodePath("MoveSound")
 
@@ -50,8 +50,9 @@ loop = false
 remote_path = NodePath("../../AnimatableBody2D")
 
 [node name="MoveSound" parent="." instance=ExtResource("3_cbc1i")]
-volume_db = -2.0
+max_distance = 1000.0
 sounds = [ExtResource("4_fl5gg")]
 sound_wait = 0.5
+base_pitch = 0.5
 
 [connection signal="body_entered" from="AnimatableBody2D/PlayerCheck" to="." method="_on_player_check_body_entered"]

@@ -34,6 +34,7 @@ animations = [{
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_8yv2l")
+strength = 1000.0
 my_sprite = NodePath("AnimatedSprite2D")
 bounce_sound = NodePath("BounceSound")
 
@@ -45,6 +46,7 @@ sprite_frames = SubResource("SpriteFrames_b2nac")
 animation = &"bounce"
 
 [node name="BounceSound" parent="." instance=ExtResource("5_b2nac")]
+volume_db = 10.0
 sounds = [ExtResource("6_nn62f")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
