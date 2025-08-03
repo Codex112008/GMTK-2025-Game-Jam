@@ -7,21 +7,23 @@ extends Area2D
 @export var drink_sound : SoundPlayer
 @export var wait_delete : Timer
 
+@export var tutorial = false
+
 func _ready():
 	anim_player.play("sine")
-	
-	var tilemap : MainTliemap = get_tree().get_nodes_in_group("MainTileMap")[0]
-	var dupe = duplicate()
-	dupe.set_script(null)
-	add_child(dupe)
-	dupe.position.x = tilemap.get_rect_world_pos_x()
-	dupe.get_child(2).play("sine")
-	
-	dupe = duplicate()
-	dupe.set_script(null)
-	add_child(dupe)
-	dupe.position.x = -tilemap.get_rect_world_pos_x()
-	dupe.get_child(2).play("sine")
+	if !tutorial:
+		var tilemap : MainTliemap = get_tree().get_nodes_in_group("MainTileMap")[0]
+		var dupe = duplicate()
+		dupe.set_script(null)
+		add_child(dupe)
+		dupe.position.x = tilemap.get_rect_world_pos_x()
+		dupe.get_child(2).play("sine")
+		
+		dupe = duplicate()
+		dupe.set_script(null)
+		add_child(dupe)
+		dupe.position.x = -tilemap.get_rect_world_pos_x()
+		dupe.get_child(2).play("sine")
 
 func _on_body_entered(body):
 	var player : PlayerController = body as PlayerController

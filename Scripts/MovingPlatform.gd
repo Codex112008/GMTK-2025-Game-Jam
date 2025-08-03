@@ -3,6 +3,8 @@ extends Path2D
 @export var move_speed : float = 1
 @export var move_on_touch : bool = false
 
+@export var tutorial = false
+
 @export_group("References")
 @export var path_follow : PathFollow2D
 @export var move_sound : SoundPlayer
@@ -13,18 +15,17 @@ func _ready():
 	if move_on_touch:
 		moving = false
 	
-	var tilemap : MainTliemap = get_tree().get_nodes_in_group("MainTileMap")[0]
-	var dupe = duplicate()
-	dupe.set_script(null)
-	add_child(dupe)
-	dupe.position.x = tilemap.get_rect_world_pos_x()
-	dupe.get_child(2).play("sine")
-	
-	dupe = duplicate()
-	dupe.set_script(null)
-	add_child(dupe)
-	dupe.position.x = -tilemap.get_rect_world_pos_x()
-	dupe.get_child(2).play("sine")
+	if !tutorial:
+		var tilemap : MainTliemap = get_tree().get_nodes_in_group("MainTileMap")[0]
+		var dupe = duplicate()
+		dupe.set_script(null)
+		add_child(dupe)
+		dupe.position.x = tilemap.get_rect_world_pos_x()
+		
+		dupe = duplicate()
+		dupe.set_script(null)
+		add_child(dupe)
+		dupe.position.x = -tilemap.get_rect_world_pos_x()
 
 func _process(delta):
 	if moving:

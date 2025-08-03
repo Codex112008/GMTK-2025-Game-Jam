@@ -4,21 +4,21 @@ class_name TreeNode
 var has_nut : bool = true
 var empty : bool = false
 
+@export var tutorial = false
 @export var anim_player : AnimationPlayer
 
 func _ready():
-	var tilemap : MainTliemap = get_tree().get_nodes_in_group("MainTileMap")[0]
-	var dupe = duplicate()
-	dupe.set_script(null)
-	add_child(dupe)
-	dupe.position.x = tilemap.get_rect_world_pos_x()
-	dupe.get_child(2).play("sine")
-	
-	dupe = duplicate()
-	dupe.set_script(null)
-	add_child(dupe)
-	dupe.position.x = -tilemap.get_rect_world_pos_x()
-	dupe.get_child(2).play("sine")
+	if !tutorial:
+		var tilemap : MainTliemap = get_tree().get_nodes_in_group("MainTileMap")[0]
+		var dupe = duplicate()
+		dupe.set_script(null)
+		add_child(dupe)
+		dupe.position.x = tilemap.get_rect_world_pos_x()
+		
+		dupe = duplicate()
+		dupe.set_script(null)
+		add_child(dupe)
+		dupe.position.x = -tilemap.get_rect_world_pos_x()
 
 func _process(delta):
 	# Omega band aid tb changed

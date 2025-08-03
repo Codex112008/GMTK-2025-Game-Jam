@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://beijge10s31sm"]
+[gd_scene load_steps=45 format=4 uid="uid://beijge10s31sm"]
 
 [ext_resource type="Shader" uid="uid://dcs1wxhti4py4" path="res://Shaders/PlanetCurve.gdshader" id="1_anpm4"]
 [ext_resource type="Shader" uid="uid://cevmp4tcq0ml4" path="res://Shaders/CRT.gdshader" id="2_dut48"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dl7gk58g780l7" path="res://Sprites/UI/mute_button2.png" id="8_1xisj"]
 [ext_resource type="Texture2D" uid="uid://clgaxuuqqwl87" path="res://Sprites/transition.png" id="9_ila5h"]
 [ext_resource type="Script" uid="uid://ct6kj2yoa2g00" path="res://Scripts/CameraFollow.gd" id="10_3st2x"]
+[ext_resource type="FontFile" uid="uid://dc25j1dbb6ug0" path="res://cc.yal.7w7.block.otf" id="10_dut48"]
 [ext_resource type="PackedScene" uid="uid://d3mqa3yxkbmot" path="res://Scenes/Player.tscn" id="11_333q5"]
 [ext_resource type="PackedScene" uid="uid://1e7r6tjgcuy7" path="res://Scenes/HealthIcon.tscn" id="12_d4stk"]
 [ext_resource type="AudioStream" uid="uid://bhfhcgw6elgid" path="res://Audio/music/jumporrun_loop.wav" id="13_r3kit"]
@@ -311,6 +312,9 @@ offset_left = -696.0
 offset_top = -72.0
 offset_right = -546.0
 offset_bottom = -17.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "A & D to move
 space to jump"
 
@@ -320,6 +324,9 @@ offset_left = 1192.0
 offset_top = -72.0
 offset_right = 1342.0
 offset_bottom = -17.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "A & D to move
 space to jump"
 
@@ -329,6 +336,9 @@ offset_left = -157.0
 offset_top = 41.0
 offset_right = -7.0
 offset_bottom = 89.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "Trees give nuts!
 S to drop down"
 
@@ -338,6 +348,9 @@ offset_left = 32.0
 offset_top = -40.0
 offset_right = 182.0
 offset_bottom = 10.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "Use nuts to double jump
 "
 
@@ -347,6 +360,9 @@ offset_left = 751.0
 offset_top = -40.0
 offset_right = 901.0
 offset_bottom = 10.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "The level wraps around"
 
 [node name="Screenwrap2" type="RichTextLabel" parent="WorldUI"]
@@ -355,6 +371,9 @@ offset_left = -1137.0
 offset_top = -40.0
 offset_right = -987.0
 offset_bottom = 10.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "The level \"loops\" around"
 
 [node name="Dash" type="RichTextLabel" parent="WorldUI"]
@@ -363,6 +382,9 @@ offset_left = -40.0
 offset_top = -344.0
 offset_right = 110.0
 offset_bottom = -294.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "Left Shift to dash using nuts"
 
 [node name="Dash2" type="RichTextLabel" parent="WorldUI"]
@@ -371,6 +393,9 @@ offset_left = -712.0
 offset_top = -384.0
 offset_right = -562.0
 offset_bottom = -334.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "Jump while dashing"
 
 [node name="Dash4" type="RichTextLabel" parent="WorldUI"]
@@ -379,6 +404,9 @@ offset_left = -362.0
 offset_top = -365.0
 offset_right = -212.0
 offset_bottom = -293.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "Advanced things that way
 <----"
 
@@ -388,6 +416,9 @@ offset_left = -454.0
 offset_top = -87.0
 offset_right = -304.0
 offset_bottom = -14.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "The level changes when you collect beer"
 script = ExtResource("35_dut48")
 player = NodePath("../../Player")
@@ -399,6 +430,9 @@ offset_left = 32.0
 offset_top = 16.0
 offset_right = 182.0
 offset_bottom = 89.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/line_separation = 3
+theme_override_fonts/normal_font = ExtResource("10_dut48")
 text = "Left Shift to dash"
 script = ExtResource("35_dut48")
 player = NodePath("../../Player")
@@ -446,38 +480,49 @@ grass_scene = ExtResource("17_oq7l7")
 
 [node name="Tree" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
 position = Vector2(480, -256)
+tutorial = true
 
 [node name="Tree2" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
 position = Vector2(544, -256)
+tutorial = true
 
 [node name="Tree3" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
 position = Vector2(608, -256)
+tutorial = true
 
 [node name="Tree4" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
 position = Vector2(288, 64)
+tutorial = true
 
 [node name="Tree5" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
 position = Vector2(-191, 64)
+tutorial = true
 
 [node name="Tree6" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
 position = Vector2(-255, 64)
+tutorial = true
 
 [node name="Tree7" parent="Environment/Trees" instance=ExtResource("18_emhi4")]
 position = Vector2(-512, -256)
+tutorial = true
 
 [node name="Beers" type="Node2D" parent="Environment"]
 
 [node name="Beer" parent="Environment/Beers" instance=ExtResource("21_b0w1x")]
 position = Vector2(-890, 51)
+tutorial = true
 
 [node name="Beer3" parent="Environment/Beers/Beer" instance=ExtResource("21_b0w1x")]
 position = Vector2(1888, 0)
+tutorial = true
 
 [node name="Beer2" parent="Environment/Beers" instance=ExtResource("21_b0w1x")]
 position = Vector2(-890, -29)
+tutorial = true
 
 [node name="Beer4" parent="Environment/Beers/Beer2" instance=ExtResource("21_b0w1x")]
 position = Vector2(1888, 0)
+tutorial = true
 
 [node name="Tilemaps (in order)" type="Node2D" parent="Environment" node_paths=PackedStringArray("main_tile_map", "grass_spawner")]
 script = ExtResource("22_ndl8n")
@@ -503,6 +548,7 @@ tile_set = ExtResource("23_3vnur")
 [node name="Bouncepad" parent="Environment" instance=ExtResource("20_84vcq")]
 position = Vector2(387, 80)
 strength = 800.0
+tutorial = true
 
 [node name="ParallaxBackground" type="CanvasLayer" parent="." node_paths=PackedStringArray("frontmost", "midground")]
 layer = -1
