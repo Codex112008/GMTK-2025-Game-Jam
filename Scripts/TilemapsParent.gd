@@ -1,4 +1,5 @@
 extends Node2D
+class_name TilemapsParent
 
 @export var main_tile_map : MainTliemap
 @export var grass_spawner : GrassSpawner

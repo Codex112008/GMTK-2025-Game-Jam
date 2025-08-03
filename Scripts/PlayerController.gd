@@ -74,7 +74,7 @@ var next_tilemap_index : int = 1
 @export var health_ui_container : Control
 @export var crt_canvas_layer : CanvasLayer
 @export var audio_manager : AudioManager
-@export var tilemaps_parent : Node2D
+@export var tilemaps_parent : TilemapsParent
 @export var win_screen : Control
 
 func _ready():
@@ -345,6 +345,7 @@ func drink():
 		for tilemap in tilemaps_parent.get_child(next_tilemap_index).get_children():
 			tilemap.enabled = true
 		next_tilemap_index += 1
+	tilemaps_parent.grass_spawner.GenerateGrass()
 	drink_timer.start()
 
 func pass_out():
