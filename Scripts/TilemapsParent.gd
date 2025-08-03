@@ -22,6 +22,5 @@ func _ready():
 			child.add_child(tilemap_clone)
 			tilemap_clone.global_position.x += main_tile_map.get_rect_world_pos_x()
 			grass_spawner.tilemaps.append(tilemap_clone)
-			print("duped!")
 	
 	grass_spawner.GenerateGrass()
