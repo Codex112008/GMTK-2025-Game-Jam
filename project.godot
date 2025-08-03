@@ -41,6 +41,7 @@ enabled=PackedStringArray()
 Tree=""
 Beer=""
 ThrownNut=""
+MainTileMap=""
 
 [input]
 
