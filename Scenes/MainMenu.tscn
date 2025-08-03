@@ -232,7 +232,7 @@ script = ExtResource("11_if7li")
 bubble = ExtResource("12_rrcx7")
 
 [node name="SpawnTimer" type="Timer" parent="BubbleSpawner"]
-wait_time = 0.2
+wait_time = 0.35
 autostart = true
 
 [node name="TopBubbleSpawner" type="Control" parent="."]
