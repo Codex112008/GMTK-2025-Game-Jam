@@ -433,7 +433,7 @@ position = Vector2(88, 32)
 position = Vector2(112, -736)
 
 [node name="Tree33" parent="Environment/Trees" instance=ExtResource("4_kldst")]
-position = Vector2(16, -640)
+position = Vector2(128, -800)
 
 [node name="Tree34" parent="Environment/Trees" instance=ExtResource("4_kldst")]
 position = Vector2(-120, -1216)
