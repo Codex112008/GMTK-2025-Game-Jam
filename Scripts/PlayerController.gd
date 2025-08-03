@@ -352,7 +352,7 @@ func drink():
 		for tilemap in tilemaps_parent.get_child(next_tilemap_index).get_children():
 			tilemap.enabled = true
 		next_tilemap_index += 1
-	tilemaps_parent.grass_spawner.GenerateGrass()
+	#tilemaps_parent.grass_spawner.GenerateGrass()
 	drink_timer.start()
 
 func pass_out():
