@@ -26,14 +26,14 @@ func GenerateGrass():
 						grass_instance.global_position = Vector2(tile * 32 + Vector2i(8, 0)) + tilemap.global_position
 						grass_instance.anim_sprite.frame = sprite_frame[0]
 						grass_instance.anim_sprite.material.set("shader_parameter/offset", wind_offset[0])
-						add_child(grass_instance)
+						call_deferred("add_child", grass_instance)
 						
 						grass_instance = grass_scene.instantiate()
 						grass_instance.global_position = Vector2(tile * 32 + Vector2i(24, 0)) + tilemap.global_position
 						grass_instance.anim_sprite.frame = sprite_frame[1]
 						grass_instance.anim_sprite.material.set("shader_parameter/offset", wind_offset[1])
-						add_child(grass_instance)
-		
+						call_deferred("add_child", grass_instance)
+
 
 func RemoveGrass():
 	for child in get_children():
