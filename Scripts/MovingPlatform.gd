@@ -12,6 +12,19 @@ var moving : bool = true
 func _ready():
 	if move_on_touch:
 		moving = false
+	
+	var tilemap : MainTliemap = get_tree().get_nodes_in_group("MainTileMap")[0]
+	var dupe = duplicate()
+	dupe.set_script(null)
+	add_child(dupe)
+	dupe.position.x = tilemap.get_rect_world_pos_x()
+	dupe.get_child(2).play("sine")
+	
+	dupe = duplicate()
+	dupe.set_script(null)
+	add_child(dupe)
+	dupe.position.x = -tilemap.get_rect_world_pos_x()
+	dupe.get_child(2).play("sine")
 
 func _process(delta):
 	if moving:
