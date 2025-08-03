@@ -27,8 +27,8 @@
 [ext_resource type="Texture2D" uid="uid://dl7gk58g780l7" path="res://Sprites/UI/mute_button2.png" id="12_18uti"]
 [ext_resource type="PackedScene" uid="uid://1e7r6tjgcuy7" path="res://Scenes/HealthIcon.tscn" id="12_khs3t"]
 [ext_resource type="Texture2D" uid="uid://ctgjoplr3snvf" path="res://icon.svg" id="12_lmarx"]
-[ext_resource type="Script" uid="uid://bylwi8imv16na" path="res://Scenes/PlayerIcon.gd" id="12_pti6k"]
-[ext_resource type="PackedScene" uid="uid://cuypo3w6dc0of" path="res://Scenes/Grass.tscn" id="12_raj38"]
+[ext_resource type="Script" path="res://Scenes/PlayerIcon.gd" id="12_pti6k"]
+[ext_resource type="PackedScene" path="res://Scenes/Grass.tscn" id="12_raj38"]
 [ext_resource type="Texture2D" uid="uid://dmqbmxtq7ceu5" path="res://Sprites/BG/Stars/star_medium.png" id="12_tfod6"]
 [ext_resource type="Texture2D" uid="uid://bkw017d4vnjgw" path="res://Sprites/BG/Planets/planets3.png" id="12_wxwew"]
 [ext_resource type="Texture2D" uid="uid://curwduftwu1u4" path="res://Sprites/BG/Planets/planets4.png" id="13_acvyw"]
@@ -203,7 +203,7 @@ point_count = 2
 script = ExtResource("1_18uti")
 savepath = "res://"
 mycolor = Color(0.243137, 0.537255, 0.282353, 1)
-spikecolor = Color(0.0941176, 0.0784314, 0.145098, 1)
+spikecolor = Color(0.635294, 0.14902, 0.2, 1)
 tilemaps = [NodePath("Environment/Tilemaps (in order)/MainTilemapParent/base_tile_map"), NodePath("Environment/Tilemaps (in order)/Node2D/TileMapLayer"), NodePath("Environment/Tilemaps (in order)/Node2D2/TileMapLayer"), NodePath("Environment/Tilemaps (in order)/Node2D3/TileMapLayer")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
