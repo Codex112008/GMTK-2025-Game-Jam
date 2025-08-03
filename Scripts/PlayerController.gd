@@ -23,6 +23,7 @@ var curve_shader_strength : float = 1
 var rewinding : bool = false
 @export var rewindAcceleration : float = 10
 var starting_point : Vector2
+var passed_out : bool = false
 
 var last_frame_on_floor : bool
 var last_frame_y_velocity : float
@@ -74,6 +75,7 @@ var next_tilemap_index : int = 1
 @export var crt_canvas_layer : CanvasLayer
 @export var audio_manager : AudioManager
 @export var tilemaps_parent : Node2D
+@export var win_screen : Control
 
 func _ready():
 	Engine.time_scale = 1
@@ -94,7 +96,8 @@ func _process(delta : float) -> void:
 	if shader_material != null:
 		shader_material.set_shader_parameter("distortion_strength", max(0, lerpf(shader_material.get_shader_parameter("distortion_strength"), curve_shader_strength, curve_speed * delta)))
 	
-	if max_health <= 0:
+	if max_health <= 0 && !passed_out:
+		passed_out = true
 		pass_out()
 
 	# drunk particles
@@ -346,8 +349,8 @@ func drink():
 
 func pass_out():
 	win_sound.play_sound()
-	print("LMAO good job drunkard")
-	# win screen anims
+	var win_animplayer : AnimationPlayer = win_screen.get_child(-1) as AnimationPlayer
+	win_animplayer.play("win_anim")
 
 func _on_pre_rewind_timeout() -> void:
 	set_process_input(false)

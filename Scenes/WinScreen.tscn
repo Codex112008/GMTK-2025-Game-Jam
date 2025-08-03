@@ -1,0 +1,142 @@
+[gd_scene load_steps=12 format=3 uid="uid://c7i727m7ojwil"]
+
+[ext_resource type="Texture2D" uid="uid://bhetjug8e6s0v" path="res://Sprites/UI/WinScreen.png" id="1_yqulb"]
+[ext_resource type="Texture2D" uid="uid://b32fn7fetjlah" path="res://Sprites/UI/play_button1.png" id="2_br8cr"]
+[ext_resource type="Texture2D" uid="uid://lx0y53nmwk14" path="res://Sprites/UI/play_button3.png" id="3_3gwxl"]
+[ext_resource type="Texture2D" uid="uid://cpbvkeflrlkne" path="res://Sprites/UI/play_button2.png" id="4_r0kpl"]
+[ext_resource type="Script" uid="uid://cim13e7wed3et" path="res://Scripts/TutorialLevelChangeText.gd" id="5_yqulb"]
+[ext_resource type="PackedScene" uid="uid://csdut8ytbu0c5" path="res://Scenes/SoundPlayer.tscn" id="7_0imix"]
+[ext_resource type="AudioStream" uid="uid://vsu3h72joahw" path="res://Audio/UI/ding_deep.wav" id="8_jhli6"]
+[ext_resource type="Texture2D" uid="uid://clgaxuuqqwl87" path="res://Sprites/transition.png" id="13_br8cr"]
+
+[sub_resource type="Animation" id="Animation_xim88"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_8um5k"]
+resource_name = "scale_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(100, 100)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_koqhg"]
+_data = {
+&"RESET": SubResource("Animation_xim88"),
+&"scale_up": SubResource("Animation_8um5k")
+}
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WinSprite" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 180)
+texture = ExtResource("1_yqulb")
+
+[node name="MainMenu" type="TextureButton" parent="." node_paths=PackedStringArray("circle_transition", "sound_player")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -136.0
+offset_top = -88.0
+offset_right = -72.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(32, 32)
+texture_normal = ExtResource("2_br8cr")
+texture_pressed = ExtResource("3_3gwxl")
+texture_hover = ExtResource("4_r0kpl")
+script = ExtResource("5_yqulb")
+circle_transition = NodePath("../Circle/AnimationPlayer")
+is_tutorial = false
+sound_player = NodePath("PressSound")
+
+[node name="PressSound" parent="MainMenu" instance=ExtResource("7_0imix")]
+position = Vector2(449.017, -449.953)
+volume_db = 5.0
+sounds = [ExtResource("8_jhli6")]
+
+[node name="Circle" type="TextureRect" parent="."]
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(24, 24)
+texture = ExtResource("13_br8cr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Circle"]
+libraries = {
+&"": SubResource("AnimationLibrary_koqhg")
+}
+
+[connection signal="pressed" from="MainMenu" to="MainMenu" method="_on_pressed"]
+[connection signal="animation_finished" from="Circle/AnimationPlayer" to="MainMenu" method="_on_animation_player_animation_finished"]
