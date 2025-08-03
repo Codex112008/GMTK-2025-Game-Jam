@@ -47,7 +47,6 @@ var next_tilemap_index : int = 1
 @export var pre_rewind_timer : Timer
 @export var dash_timer : Timer
 @export var my_sprite : AnimatedSprite2D
-@export var time_rewinder : Rewinder
 @export var collision_shape : CollisionShape2D
 @export var animation_player : AnimationPlayer
 
@@ -77,9 +76,8 @@ var next_tilemap_index : int = 1
 @export var tilemaps_parent : Node2D
 
 func _ready():
+	Engine.time_scale = 1
 	curve_shader_strength = (curve_effect_rect.material as ShaderMaterial).get_shader_parameter("distortion_strength")
-	
-	time_rewinder.done_rewinding.connect(enable_inputs)
 	
 	starting_point = position
 	

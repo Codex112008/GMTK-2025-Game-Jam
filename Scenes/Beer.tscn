@@ -63,13 +63,15 @@ _data = {
 &"sine": SubResource("Animation_d2pg4")
 }
 
-[node name="Beer" type="Area2D" node_paths=PackedStringArray("anim_player") groups=["Beer"]]
+[node name="Beer" type="Area2D" node_paths=PackedStringArray("anim_player", "drink_sound", "wait_delete") groups=["Beer"]]
 collision_layer = 255
 collision_mask = 255
 script = ExtResource("1_d2pg4")
 beer_strength = 5.0
 camera_offset_amount = 3.0
 anim_player = NodePath("AnimationPlayer")
+drink_sound = NodePath("DrinkSound")
+wait_delete = NodePath("WaitDelete")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)

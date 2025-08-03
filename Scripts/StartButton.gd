@@ -1,12 +1,14 @@
 extends TextureButton
 
-@export var main_scene : PackedScene
+@export var level_scene : PackedScene
 @export var circle_transition : AnimationPlayer
 @export var sound_player : SoundPlayer
 
 var starting_pos : Vector2
+var was_pressed : bool = false
 
 func _ready():
+	Engine.time_scale = 1
 	starting_pos = position
 
 # shake
@@ -41,8 +43,9 @@ func _on_pressed():
 	circle_transition.play("scale_up")
 	apply_shake(0.5)
 	sound_player.play_sound()
+	was_pressed = true
 
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "scale_up":
-		get_tree().change_scene_to_packed(main_scene)
+	if anim_name == "scale_up" && was_pressed:
+		get_tree().change_scene_to_packed(level_scene)

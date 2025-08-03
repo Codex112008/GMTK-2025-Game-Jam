@@ -1,13 +1,11 @@
-[gd_scene load_steps=68 format=3 uid="uid://d3mqa3yxkbmot"]
+[gd_scene load_steps=65 format=3 uid="uid://d3mqa3yxkbmot"]
 
 [ext_resource type="Script" uid="uid://8xaa7lu46t4g" path="res://Scripts/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://0i7ikncgmjds" path="res://Sprites/Player/hamster.png" id="2_kyqiw"]
 [ext_resource type="PackedScene" uid="uid://de5all3ajrwck" path="res://Scenes/ThrownNut.tscn" id="2_nn08x"]
 [ext_resource type="Texture2D" uid="uid://c7x3ukwuxcs7o" path="res://Sprites/Particles/drunk_particles.png" id="3_gntrk"]
-[ext_resource type="Script" uid="uid://babpw2llhagpv" path="res://addons/TimeRewinder/rewinder.gd" id="4_5ixxa"]
 [ext_resource type="Texture2D" uid="uid://df76gpbhr5pbd" path="res://Sprites/Player/Air/hamster_air2.png" id="5_i2e8t"]
 [ext_resource type="Texture2D" uid="uid://7lcyd6yw4quc" path="res://Sprites/Player/Drink/hamster_drink1.png" id="5_lyrkg"]
-[ext_resource type="Script" uid="uid://25uq6brcn0fn" path="res://addons/TimeRewinder/rewind_property.gd" id="5_nn08x"]
 [ext_resource type="Texture2D" uid="uid://d2l3syu5cfhmc" path="res://Sprites/Player/Drink/hamster_drink2.png" id="6_c43xd"]
 [ext_resource type="Texture2D" uid="uid://igvw0x0kirar" path="res://Sprites/Player/Spin/hamster_spin1.png" id="6_lslt6"]
 [ext_resource type="Texture2D" uid="uid://mnlxh8a5slfa" path="res://Sprites/Player/Walk/hamster_walk1.png" id="6_megsn"]
@@ -51,13 +49,6 @@
 [ext_resource type="AudioStream" uid="uid://broany71vvr60" path="res://Audio/UI/winfretless.ogg" id="49_awd2i"]
 [ext_resource type="AudioStream" uid="uid://bnkobikgnml6a" path="res://Audio/Player/click_2.wav" id="49_o2sks"]
 [ext_resource type="AudioStream" uid="uid://dbw5bsht8x3pf" path="res://Audio/Player/click_3.wav" id="50_3rw25"]
-
-[sub_resource type="Resource" id="Resource_52ee3"]
-script = ExtResource("5_nn08x")
-node_path = NodePath("..")
-property_name = "position"
-time_saved = 15.0
-metadata/_custom_type_script = "uid://25uq6brcn0fn"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
 size = Vector2(20, 18)
@@ -289,7 +280,7 @@ _data = {
 &"damage_flash": SubResource("Animation_i2e8t")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "i_frame_timer", "drink_timer", "pre_rewind_timer", "dash_timer", "my_sprite", "time_rewinder", "collision_shape", "animation_player", "drunk_particles", "jump_particles", "land_particles", "run_particles", "hit_particles", "afterimage_particles", "footsteps_sound", "landing_sound", "hurt_sound", "jump_sound", "collect_sound", "win_sound")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "short_jump_timer", "spin_timer", "i_frame_timer", "drink_timer", "pre_rewind_timer", "dash_timer", "my_sprite", "collision_shape", "animation_player", "drunk_particles", "jump_particles", "land_particles", "run_particles", "hit_particles", "afterimage_particles", "footsteps_sound", "landing_sound", "hurt_sound", "jump_sound", "collect_sound", "win_sound")]
 collision_layer = 2
 script = ExtResource("1_kyqiw")
 speed = 260.0
@@ -309,7 +300,6 @@ drink_timer = NodePath("Timers/DrinkTimer")
 pre_rewind_timer = NodePath("Timers/PreRewindTimer")
 dash_timer = NodePath("Timers/DashTimer")
 my_sprite = NodePath("AnimatedSprite2D")
-time_rewinder = NodePath("Rewinder")
 collision_shape = NodePath("CollisionShape2D")
 animation_player = NodePath("AnimatedSprite2D/AnimationPlayer")
 drunk_particles = NodePath("Particles/DrunkParticles")
@@ -324,12 +314,6 @@ hurt_sound = NodePath("Sounds/HurtSound")
 jump_sound = NodePath("Sounds/JumpSound")
 collect_sound = NodePath("Sounds/CollectSound")
 win_sound = NodePath("Sounds/WinSound")
-
-[node name="Rewinder" type="Node" parent="."]
-script = ExtResource("4_5ixxa")
-rewind_resources = Array[ExtResource("5_nn08x")]([SubResource("Resource_52ee3")])
-speed_scale = 4.0
-metadata/_custom_type_script = "uid://babpw2llhagpv"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)

@@ -1,20 +1,16 @@
-[gd_scene load_steps=22 format=3 uid="uid://ds7chbrhs4ppq"]
+[gd_scene load_steps=18 format=3 uid="uid://ds7chbrhs4ppq"]
 
 [ext_resource type="Texture2D" uid="uid://b32fn7fetjlah" path="res://Sprites/UI/play_button1.png" id="1_df05h"]
 [ext_resource type="Texture2D" uid="uid://cpbvkeflrlkne" path="res://Sprites/UI/play_button2.png" id="2_8um5k"]
-[ext_resource type="Script" uid="uid://ctyc1hmqlcrsc" path="res://Scripts/StartButton.gd" id="2_ghw46"]
-[ext_resource type="Texture2D" uid="uid://lx0y53nmwk14" path="res://Sprites/UI/play_button3.png" id="2_riqfo"]
+[ext_resource type="Script" uid="uid://ctyc1hmqlcrsc" path="res://StartButton.gd" id="2_ghw46"]
 [ext_resource type="PackedScene" uid="uid://bfn2b364eucoc" path="res://Scenes/Game.tscn" id="3_ghw46"]
 [ext_resource type="Texture2D" uid="uid://clgaxuuqqwl87" path="res://Sprites/transition.png" id="4_ghw46"]
 [ext_resource type="PackedScene" uid="uid://csdut8ytbu0c5" path="res://Scenes/SoundPlayer.tscn" id="5_xim88"]
 [ext_resource type="AudioStream" uid="uid://vsu3h72joahw" path="res://Audio/UI/ding_deep.wav" id="6_xim88"]
-[ext_resource type="PackedScene" uid="uid://63gnnnwdj376" path="res://Scenes/Tutorial.tscn" id="7_8e205"]
+[ext_resource type="PackedScene" uid="uid://df67wruuvwmmv" path="res://Scenes/Tutorial.tscn" id="7_8e205"]
 [ext_resource type="Texture2D" uid="uid://bndbqq2a1vpln" path="res://Sprites/UI/Title.png" id="8_koqhg"]
-[ext_resource type="Texture2D" uid="uid://b4daru7124krw" path="res://Sprites/UI/tutorial_button1.png" id="8_yxkem"]
-[ext_resource type="Texture2D" uid="uid://duy5cl2ek2lw0" path="res://Sprites/UI/tutorial_button3.png" id="9_7v4os"]
 [ext_resource type="Script" uid="uid://dmbywmirsvdye" path="res://Scripts/UI/Title.gd" id="9_cmrfp"]
 [ext_resource type="Texture2D" uid="uid://c28j5epc8xytf" path="res://Sprites/UI/Title_bg.png" id="10_loo7a"]
-[ext_resource type="Texture2D" uid="uid://dbcw3wqfcyu0d" path="res://Sprites/UI/tutorial_button2.png" id="10_pjscj"]
 [ext_resource type="Script" uid="uid://b5nx3rk17a1ka" path="res://Scripts/UI/BubbleSpawner.gd" id="11_if7li"]
 [ext_resource type="PackedScene" uid="uid://b0yyrubdcdt1o" path="res://Scenes/Bubble.tscn" id="12_rrcx7"]
 [ext_resource type="PackedScene" uid="uid://dqlgiiyq53q3x" path="res://Scenes/WhiteBubble.tscn" id="13_fh7cp"]
@@ -113,8 +109,6 @@ grow_vertical = 0
 scale = Vector2(2, 2)
 pivot_offset = Vector2(32, 32)
 texture_normal = ExtResource("1_df05h")
-texture_pressed = ExtResource("2_riqfo")
-texture_hover = ExtResource("2_8um5k")
 script = ExtResource("2_ghw46")
 level_scene = ExtResource("3_ghw46")
 circle_transition = NodePath("../../Circle/AnimationPlayer")
@@ -140,9 +134,7 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(2, 2)
 pivot_offset = Vector2(32, 32)
-texture_normal = ExtResource("8_yxkem")
-texture_pressed = ExtResource("9_7v4os")
-texture_hover = ExtResource("10_pjscj")
+texture_normal = ExtResource("2_8um5k")
 script = ExtResource("2_ghw46")
 level_scene = ExtResource("7_8e205")
 circle_transition = NodePath("../../Circle/AnimationPlayer")
@@ -253,6 +245,5 @@ autostart = true
 [connection signal="pressed" from="Buttons/PlayButton" to="Buttons/PlayButton" method="_on_pressed"]
 [connection signal="pressed" from="Buttons/TutorialButton" to="Buttons/TutorialButton" method="_on_pressed"]
 [connection signal="animation_finished" from="Circle/AnimationPlayer" to="Buttons/PlayButton" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="Circle/AnimationPlayer" to="Buttons/TutorialButton" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="BubbleSpawner/SpawnTimer" to="BubbleSpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="TopBubbleSpawner/SpawnTimer" to="TopBubbleSpawner" method="_on_spawn_timer_timeout"]

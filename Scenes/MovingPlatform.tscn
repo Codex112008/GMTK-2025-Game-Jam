@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://44epf0df578d"]
 
-[ext_resource type="Script" uid="uid://b03a7qus0f1tv" path="res://MovingPlatform.gd" id="1_5olv3"]
+[ext_resource type="Script" uid="uid://b03a7qus0f1tv" path="res://Scripts/MovingPlatform.gd" id="1_5olv3"]
 [ext_resource type="Texture2D" uid="uid://cgufb1yjxivi" path="res://Sprites/Mushroom/movingmushroom.png" id="2_5olv3"]
 [ext_resource type="PackedScene" uid="uid://csdut8ytbu0c5" path="res://Scenes/SoundPlayer.tscn" id="3_cbc1i"]
 [ext_resource type="AudioStream" uid="uid://vfuwh4t7mo7j" path="res://Audio/Things/sfx_push_boulder.wav" id="4_fl5gg"]
