@@ -4,6 +4,8 @@ extends Area2D
 @export var camera_offset_amount : float = 1
 
 @export var anim_player : AnimationPlayer
+@export var drink_sound : SoundPlayer
+@export var wait_delete : Timer
 
 func _ready():
 	anim_player.play("sine")
@@ -24,7 +26,18 @@ func _on_body_entered(body):
 			health_icon.is_full = true
 			
 		player.current_health = player.max_health
+		
+		position = Vector2(100000, 0)
+
+		drink_sound.global_position = player.global_position
+
+		drink_sound.play_sound()
 			
 		player.drink()
 		player.start_rewind()
-		queue_free()
+		
+		wait_delete.start()
+
+
+func _on_wait_delete_timeout() -> void:
+	queue_free()
