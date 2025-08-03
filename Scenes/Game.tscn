@@ -16,14 +16,14 @@
 [ext_resource type="Script" uid="uid://cxkj141c3q8gk" path="res://Scripts/GenerateStars.gd" id="10_acvyw"]
 [ext_resource type="PackedScene" uid="uid://qbxyvf6gilb4" path="res://Scenes/WinScreen.tscn" id="10_jn8rg"]
 [ext_resource type="Texture2D" uid="uid://71pgdgpfn7" path="res://Sprites/UI/mute_button1.png" id="10_umnjm"]
-[ext_resource type="Script" path="res://Scripts/UI/MuteButton.gd" id="11_4eqlp"]
+[ext_resource type="Script" uid="uid://b88tnxmd6bwov" path="res://Scripts/UI/MuteButton.gd" id="11_4eqlp"]
 [ext_resource type="Texture2D" uid="uid://hs7itxox02mv" path="res://Sprites/BG/Stars/star_large.png" id="11_8r6kd"]
 [ext_resource type="Texture2D" uid="uid://cdvuue7sxff2w" path="res://Sprites/BG/Planets/planets2.png" id="11_dahhg"]
 [ext_resource type="AudioStream" uid="uid://boyxc0gw8cug6" path="res://Audio/music/jumporrun_reverse.wav" id="11_i4lct"]
 [ext_resource type="Script" uid="uid://debm3ymknypqy" path="res://Scripts/GrassSpawner.gd" id="11_lbihj"]
 [ext_resource type="Texture2D" uid="uid://dl7gk58g780l7" path="res://Sprites/UI/mute_button2.png" id="12_18uti"]
 [ext_resource type="PackedScene" uid="uid://1e7r6tjgcuy7" path="res://Scenes/HealthIcon.tscn" id="12_khs3t"]
-[ext_resource type="PackedScene" uid="uid://cuypo3w6dc0of" path="res://Scenes/Grass.tscn" id="12_raj38"]
+[ext_resource type="PackedScene" path="res://Scenes/Grass.tscn" id="12_raj38"]
 [ext_resource type="Texture2D" uid="uid://dmqbmxtq7ceu5" path="res://Sprites/BG/Stars/star_medium.png" id="12_tfod6"]
 [ext_resource type="Texture2D" uid="uid://bkw017d4vnjgw" path="res://Sprites/BG/Planets/planets3.png" id="12_wxwew"]
 [ext_resource type="Texture2D" uid="uid://curwduftwu1u4" path="res://Sprites/BG/Planets/planets4.png" id="13_acvyw"]
@@ -31,7 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://cedc8lmp8c2ay" path="res://Sprites/BG/Planets/planets1.png" id="14_alh3a"]
 [ext_resource type="PackedScene" uid="uid://6w67bm40rsos" path="res://Scenes/Star.tscn" id="14_vvhu1"]
 [ext_resource type="PackedScene" uid="uid://5s4lfwvulyvp" path="res://Scenes/Bouncepad.tscn" id="20_khs3t"]
-[ext_resource type="Script" uid="uid://ocxdtpn24lj7" path="res://Scripts/TilemapsParent.gd" id="22_0iyqm"]
+[ext_resource type="Script" path="res://Scripts/TilemapsParent.gd" id="22_0iyqm"]
 [ext_resource type="Shader" uid="uid://cevmp4tcq0ml4" path="res://Shaders/CRT.gdshader" id="24_raj38"]
 [ext_resource type="AudioStream" uid="uid://bhfhcgw6elgid" path="res://Audio/music/jumporrun_loop.wav" id="26_i0vto"]
 
@@ -220,11 +220,11 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="Shaders/crt_layer/crt_effect"]
 layout_mode = 0
-offset_left = 568.0
-offset_top = 288.0
-offset_right = 600.0
-offset_bottom = 320.0
-scale = Vector2(2, 2)
+offset_left = 1728.0
+offset_top = 888.0
+offset_right = 1760.0
+offset_bottom = 920.0
+scale = Vector2(6, 6)
 texture = ExtResource("3_356ba")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -252,9 +252,10 @@ scale = Vector2(3, 3)
 
 [node name="MuteButton" type="Button" parent="UI/UI"]
 layout_mode = 0
-offset_left = 600.0
-offset_right = 640.0
+offset_left = 1800.0
+offset_right = 1840.0
 offset_bottom = 40.0
+scale = Vector2(3, 3)
 focus_mode = 1
 icon = ExtResource("10_umnjm")
 flat = true
@@ -311,6 +312,7 @@ win_screen = NodePath("../UI/WinScreen")
 
 [node name="AudioManager" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("26_i0vto")
+volume_db = -3.0
 autoplay = true
 bus = &"Rewind"
 script = ExtResource("9_3jf1l")
