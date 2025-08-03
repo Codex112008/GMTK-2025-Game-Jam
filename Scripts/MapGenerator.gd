@@ -12,11 +12,12 @@ var width : int
 var height : int
 
 @export var tilemaps : Array[TileMapLayer]
+@export var file_name : String
 
 var offsetx : int = 0 # also functions as minx
 var offsety : int = 0 # also functions as miny
 
-func generatetilemap() -> ImageTexture:
+func generatetilemap():
 	for i in tilemaps[0].get_used_cells():
 		if i.x < offsetx:
 			offsetx = i.x
@@ -43,6 +44,5 @@ func generatetilemap() -> ImageTexture:
 					tilemapimage.set_pixel(tile.x + (offsetx * -1), tile.y + (offsety * -1), mycolor)
 	
 	# save image
-	tilemapimage.save_png(savepath + "map.png")
-	print("done generating " + savepath + "map.png")
-	return ImageTexture.create_from_image(tilemapimage)
+	tilemapimage.save_png(savepath + file_name + ".png")
+	print("done generating " + savepath + file_name + ".png")
