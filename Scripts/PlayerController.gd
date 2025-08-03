@@ -87,7 +87,7 @@ func _ready():
 	current_health = max_health
 	for i in range(0, starting_max_health):
 		var health_icon : HealthIcon = health_icon_scene.instantiate()
-		health_icon.position = Vector2(i * 22, 0)
+		health_icon.position = Vector2(i * 42, 0)
 		health_icon.z_index = -i
 		health_ui_container.add_child(health_icon)
 

@@ -1,8 +1,7 @@
 [gd_resource type="Environment" load_steps=3 format=3 uid="uid://bojgl2c1l2isi"]
 
 [sub_resource type="Gradient" id="Gradient_umnjm"]
-offsets = PackedFloat32Array(0, 0.977612, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.913725, 0.823529, 0.921569, 1, 0.805613, 0.726089, 0.812528, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.843137, 0.764706, 0.85098, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4eqlp"]
 gradient = SubResource("Gradient_umnjm")
@@ -14,5 +13,4 @@ tonemap_white = 8.94
 glow_enabled = true
 glow_intensity = 0.0
 adjustment_enabled = true
-adjustment_brightness = 1.2
 adjustment_color_correction = SubResource("GradientTexture1D_4eqlp")

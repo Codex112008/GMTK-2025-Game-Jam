@@ -48,5 +48,6 @@ animation = &"bounce"
 [node name="BounceSound" parent="." instance=ExtResource("5_b2nac")]
 volume_db = 10.0
 sounds = [ExtResource("6_nn62f")]
+base_pitch = 1.3
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
