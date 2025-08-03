@@ -93,7 +93,8 @@ func _ready():
 		health_icon.z_index = -i
 		health_ui_container.add_child(health_icon)
 	
-	map.texture = map_icons[0]
+	if map != null:
+		map.texture = map_icons[0]
 
 func _process(delta : float) -> void:
 	var shader_material : ShaderMaterial = curve_effect_rect.material as ShaderMaterial
@@ -345,7 +346,7 @@ func take_damage(spike_pos : Vector2):
 			velocity = dir * jump_strength
 
 func drink():
-	if next_tilemap_index < map_icons.size():
+	if map != null and next_tilemap_index < map_icons.size():
 		map.texture = map_icons[next_tilemap_index]
 	if next_tilemap_index < tilemaps_parent.get_child_count():
 		for tilemap in tilemaps_parent.get_child(next_tilemap_index).get_children():
